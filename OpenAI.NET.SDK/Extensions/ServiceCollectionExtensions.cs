@@ -6,7 +6,7 @@ namespace OpenAI.NET.SDK.Extensions;
 
 public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection AddCledevOpenAI(this IServiceCollection services)
+    public static IServiceCollection AddOpenAIService(this IServiceCollection services)
     {
         var configuration = services.BuildServiceProvider().GetRequiredService<IConfiguration>();
         services.Configure<OpenAISettings>(configuration.GetSection("OpenAI"));
@@ -15,7 +15,7 @@ public static class ServiceCollectionExtensions
         return services;
     }
 
-    public static IServiceCollection AddCledevOpenAI(this IServiceCollection services, Action<OpenAISettings> setupAction)
+    public static IServiceCollection AddOpenAIService(this IServiceCollection services, Action<OpenAISettings> setupAction)
     {
         services.AddOptions<OpenAISettings>().Configure(setupAction);
         services.AddHttpClient<IOpenAIService, OpenAIService>();
