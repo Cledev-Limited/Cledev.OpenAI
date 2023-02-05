@@ -21,7 +21,7 @@ public interface IOpenAIService
     /// </summary>
     /// <param name="request">The create completion request.</param>
     /// <returns>The create completion response or failure.</returns>
-    Task<Result<CreateCompletionResponse?>> CreateCompletion(CreateCompletionRequest request);
+    Task<CreateCompletionResponse?> CreateCompletion(CreateCompletionRequest request);
 
     /// <summary>
     /// Creates a completion for the provided prompt and parameters.
@@ -36,7 +36,7 @@ public interface IOpenAIService
     /// <para>The token count of your prompt plus max_tokens cannot exceed the model's context length. Most models have a context length of 2048 tokens (except for the newest models, which support 4096).</para>
     /// </param>
     /// <returns>The create completion response or failure.</returns>
-    Task<Result<CreateCompletionResponse?>> CreateCompletion(CompletionsModel model, string? prompt = null, int? maxTokens = null);
+    Task<CreateCompletionResponse?> CreateCompletion(CompletionsModel model, string? prompt = null, int? maxTokens = null);
 
     /// <summary>
     /// Creates a new edit for the provided input, instruction, and parameters.
