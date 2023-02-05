@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFramework>net7.0</TargetFramework>
@@ -13,7 +13,7 @@
 		<RepositoryUrl>https://github.com/lucabriguglia/OpenAI.NET.SDK</RepositoryUrl>
 		<PackageTags>.net;.net core;utilities;extensions;openai</PackageTags>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<Version>1.0.0-preview-2023-02-05-1</Version>
+		<Version>1.0.0-preview-2023-02-05-2</Version>
 	</PropertyGroup>
 
 	<ItemGroup>
