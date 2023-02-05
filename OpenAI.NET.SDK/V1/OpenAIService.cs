@@ -85,8 +85,8 @@ public class OpenAIService : IOpenAIService
         return await CreateImage(new CreateImageRequest
         {
             Prompt = prompt,
-            NumberOfImagesToGenerate = numberOfImagesToGenerate ?? 1,
-            ImageSize = (size ?? ImageSize.Size1024x1024).ToStringSize(),
+            N = numberOfImagesToGenerate ?? 1,
+            Size = (size ?? ImageSize.Size1024x1024).ToStringSize(),
             ResponseFormat = (responseFormat ?? ImageResponseFormat.Url).ToStringFormat()
         });
     }
