@@ -1,27 +1,6 @@
 using OneOf;
 
-namespace OpenAI.NET.SDK.Results;
-
-public sealed class Result : OneOfBase<Success, Failure>
-{
-    private Result(OneOf<Success, Failure> input) : base(input) { }
-
-    public static implicit operator Result(Success success) => new(success);
-    public static implicit operator Result(Failure failure) => new(failure);
-
-    public bool IsSuccess => IsT0;
-    public bool IsFailure => IsT1;
-
-    public Success Success => AsT0;
-    public Failure Failure => AsT1;
-
-    public static Result Ok() => new(new Success());
-    public static Result Ok(Success success) => new(success);
-    public static Result Fail(string errorCode = ErrorCodes.Error, string? title = null, string? description = null) => new(new Failure(errorCode, title, description));
-
-    public bool TryPickSuccess(out Success success, out Failure failure) => TryPickT0(out success, out failure);
-    public bool TryPickFailure(out Failure failure, out Success success) => TryPickT1(out failure, out success);
-}
+namespace OpenAI.NET.SDK.Models;
 
 public sealed class Result<TResult> : OneOfBase<Success<TResult>, Failure>
 {
@@ -36,7 +15,7 @@ public sealed class Result<TResult> : OneOfBase<Success<TResult>, Failure>
 
     public Success<TResult> Success => AsT0;
     public Failure Failure => AsT1;
-    
+
     public new TResult? Value => AsT0.Result;
 
     public static Result<TResult> Ok(TResult result) => new(new Success<TResult>(result));
