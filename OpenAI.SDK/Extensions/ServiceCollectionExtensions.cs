@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using OpenAI.SDK.V1;
+using OpenAI.NET.SDK.V1;
 
-namespace OpenAI.SDK.Extensions;
+namespace OpenAI.NET.SDK.Extensions;
 
 public static class ServiceCollectionExtensions
 {

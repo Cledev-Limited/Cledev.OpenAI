@@ -1,4 +1,4 @@
-﻿namespace OpenAI.SDK.Results;
+﻿namespace OpenAI.NET.SDK.Results;
 
 public record Success;
 

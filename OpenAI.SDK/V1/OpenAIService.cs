@@ -2,9 +2,9 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Microsoft.Extensions.Options;
-using OpenAI.SDK.V1.Contracts;
+using OpenAI.NET.SDK.V1.Contracts;
 
-namespace OpenAI.SDK.V1;
+namespace OpenAI.NET.SDK.V1;
 
 public interface IOpenAIService
 {

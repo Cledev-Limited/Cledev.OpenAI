@@ -1,6 +1,6 @@
 using OneOf;
 
-namespace OpenAI.SDK.Results;
+namespace OpenAI.NET.SDK.Results;
 
 public sealed class Result : OneOfBase<Success, Failure>
 {

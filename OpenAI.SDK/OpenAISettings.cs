@@ -1,4 +1,4 @@
-﻿namespace OpenAI.SDK;
+﻿namespace OpenAI.NET.SDK;
 
 public class OpenAISettings
 {

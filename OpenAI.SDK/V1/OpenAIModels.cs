@@ -1,4 +1,4 @@
-﻿namespace OpenAI.SDK.V1;
+﻿namespace OpenAI.NET.SDK.V1;
 
 public enum CompletionsModel
 {

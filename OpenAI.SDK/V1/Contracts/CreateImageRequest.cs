@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace OpenAI.SDK.V1.Contracts;
+namespace OpenAI.NET.SDK.V1.Contracts;
 
 public class CreateImageRequest
 {
