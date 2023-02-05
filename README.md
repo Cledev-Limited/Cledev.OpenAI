@@ -1,5 +1,5 @@
 # OpenAI.NET (Preview)
-.NET SDK for OpenAI
+.NET SDK for OpenAI with a Blazor Web Assembly playground (available soon)
 
 [![Main](https://github.com/lucabriguglia/OpenAI.NET/actions/workflows/main.yml/badge.svg)](https://github.com/lucabriguglia/OpenAI.NET/actions/workflows/main.yml)
 
