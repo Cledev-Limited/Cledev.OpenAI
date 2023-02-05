@@ -52,4 +52,4 @@ services.AddOpenAIService(options =>
 
 Inject `IOpenAIService` interface into your service
 
-_(complete guide coming very soon)_
+_(complete guide coming soon)_
