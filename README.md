@@ -8,3 +8,6 @@
 | Package | Latest Preview |
 | --- | --- |
 | [OpenAI.NET.SDK (Preview)](https://www.nuget.org/packages/OpenAI.NET.SDK) | [![Nuget Package](https://img.shields.io/badge/nuget-1.0.0-blue.svg)](https://www.nuget.org/packages/OpenAI.NET.SDK)
+```
+Install-Package OpenAI.NET.SDK
+```
