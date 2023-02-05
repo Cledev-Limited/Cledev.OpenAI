@@ -2,6 +2,9 @@
 
 namespace OpenAI.NET.SDK.V1.Contracts;
 
+/// <summary>
+/// Creates a completion for the provided prompt and parameters.
+/// </summary>
 public class CreateCompletionRequest
 {
     /// <summary>
