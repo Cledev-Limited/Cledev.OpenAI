@@ -1,2 +1,2 @@
-# OpenAI.NET
+# OpenAI.SDK
 .NET SDK for OpenAI
