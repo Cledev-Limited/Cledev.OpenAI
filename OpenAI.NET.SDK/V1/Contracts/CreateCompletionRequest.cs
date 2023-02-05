@@ -81,7 +81,7 @@ public class CreateCompletionRequest
     /// <para>Echo back the prompt in addition to the completion.</para>
     /// </summary>
     [JsonPropertyName("echo")]
-    public int? Echo { get; set; }
+    public bool? Echo { get; set; }
 
     /// <summary>
     /// <para>Optional (Defaults to null).</para>
@@ -95,14 +95,14 @@ public class CreateCompletionRequest
     /// <para>Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear in the text so far, increasing the model's likelihood to talk about new topics.</para>
     /// </summary>
     [JsonPropertyName("presence_penalty")]
-    public string? PresencePenalty { get; set; }
+    public int? PresencePenalty { get; set; }
 
     /// <summary>
     /// <para>Optional (Defaults to 0).</para>
     /// <para>Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the text so far, decreasing the model's likelihood to repeat the same line verbatim.</para>
     /// </summary>
     [JsonPropertyName("frequency_penalty")]
-    public string? FrequencyPenalty { get; set; }
+    public int? FrequencyPenalty { get; set; }
 
     /// <summary>
     /// <para>Optional (Defaults to 1).</para>
@@ -111,7 +111,7 @@ public class CreateCompletionRequest
     /// <para>Note: Because this parameter generates many completions, it can quickly consume your token quota. Use carefully and ensure that you have reasonable settings for max_tokens and stop.</para>
     /// </summary>
     [JsonPropertyName("best_of")]
-    public string? BestOf { get; set; }
+    public int? BestOf { get; set; }
 
     /// <summary>
     /// <para>Optional (Defaults to null).</para>
