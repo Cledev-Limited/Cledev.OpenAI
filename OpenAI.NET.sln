@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenAI.NET.SDK", "OpenAI.NE
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenAI.NET.Playground.Console", "OpenAI.NET.Playground.Console\OpenAI.NET.Playground.Console.csproj", "{46A265A7-5B9B-4D4A-B95C-024619009A0F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenAI.NET.Playground.Web", "OpenAI.NET.Playground.Web\OpenAI.NET.Playground.Web.csproj", "{72325730-A106-456E-AD18-1671CC2112A8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenAI.NET.Playground.Web", "OpenAI.NET.Playground.Web\OpenAI.NET.Playground.Web.csproj", "{72325730-A106-456E-AD18-1671CC2112A8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

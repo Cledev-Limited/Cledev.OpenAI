@@ -1,7 +1,6 @@
 ﻿using System.Net.Http.Json;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using OpenAI.NET.SDK.V1.Contracts;
 
@@ -13,19 +12,14 @@ public class OpenAIService : IOpenAIService
 
     private readonly HttpClient _httpClient;
 
-    [ActivatorUtilitiesConstructor]
-    public OpenAIService(HttpClient httpClient, IOptions<OpenAISettings> options) : this(options.Value, httpClient)
+    public OpenAIService(HttpClient httpClient, IOptions<OpenAISettings> options)
     {
-    }
-
-    public OpenAIService(OpenAISettings settings, HttpClient? httpClient = null)
-    {
-        _httpClient = httpClient ?? HttpClientFactory.Create();
+        _httpClient = httpClient;
         _httpClient.BaseAddress = new Uri("https://api.openai.com/");
-        _httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {settings.ApiKey}");
-        if (string.IsNullOrEmpty(settings.Organization) is false)
+        _httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {options.Value.ApiKey}");
+        if (string.IsNullOrEmpty(options.Value.Organization) is false)
         {
-            _httpClient.DefaultRequestHeaders.Add("OpenAI-Organization", $"{settings.Organization}");
+            _httpClient.DefaultRequestHeaders.Add("OpenAI-Organization", $"{options.Value.Organization}");
         }
     }
 
