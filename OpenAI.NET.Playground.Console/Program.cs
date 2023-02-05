@@ -9,7 +9,7 @@ var jsonSerializerOptions = new JsonSerializerOptions
     WriteIndented = true
 };
 
-Console.WriteLine("Cledev OpenAI Example");
+Console.WriteLine("OpenAI.NET Example");
 
 var builder = new ConfigurationBuilder()
     .AddJsonFile("appsettings.json")
@@ -31,8 +31,10 @@ var response = await service.CreateCompletion(CompletionsModel.Ada, "Say somethi
 //var response = await service.CreateEdit(input: "What day of the wek is it?", instruction: "Fix the spelling mistakes");
 //var response = await service.CreateImage(prompt: "A cute baby sea otter");
 
-Console.WriteLine(response.IsSuccess
-    ? $"{JsonSerializer.Serialize(response.Value, jsonSerializerOptions)}"
-    : $"{JsonSerializer.Serialize(response.Failure, jsonSerializerOptions)}");
+//Console.WriteLine(response.IsSuccess
+//    ? $"{JsonSerializer.Serialize(response.Value, jsonSerializerOptions)}"
+//    : $"{JsonSerializer.Serialize(response.Failure, jsonSerializerOptions)}");
+
+Console.WriteLine($"{JsonSerializer.Serialize(response, jsonSerializerOptions)}");
 
 Console.ReadKey();
