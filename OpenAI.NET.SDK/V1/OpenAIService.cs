@@ -1,7 +1,9 @@
 ﻿using System.Net.Http.Json;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using OpenAI.NET.SDK.Models;
 using OpenAI.NET.SDK.V1.Contracts;
 
 namespace OpenAI.NET.SDK.V1;
@@ -12,14 +14,20 @@ public class OpenAIService : IOpenAIService
 
     private readonly HttpClient _httpClient;
 
-    public OpenAIService(HttpClient httpClient, IOptions<OpenAISettings> settings)
+    [ActivatorUtilitiesConstructor]
+    public OpenAIService(HttpClient httpClient, IOptions<OpenAISettings> options)
+        : this(options.Value, httpClient)
     {
-        _httpClient = httpClient;
+    }
+
+    public OpenAIService(OpenAISettings settings, HttpClient? httpClient = null)
+    {
+        _httpClient = httpClient ?? HttpClientFactory.Create();
         _httpClient.BaseAddress = new Uri("https://api.openai.com/");
-        _httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {settings.Value.ApiKey}");
-        if (string.IsNullOrEmpty(settings.Value.Organization) is false)
+        _httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {settings.ApiKey}");
+        if (string.IsNullOrEmpty(settings.Organization) is false)
         {
-            _httpClient.DefaultRequestHeaders.Add("OpenAI-Organization", $"{settings.Value.Organization}");
+            _httpClient.DefaultRequestHeaders.Add("OpenAI-Organization", $"{settings.Organization}");
         }
     }
 
@@ -36,14 +44,18 @@ public class OpenAIService : IOpenAIService
     }
 
     /// <inheritdoc />
-    public async Task<CreateCompletionResponse?> CreateCompletion(CreateCompletionRequest request)
+    public async Task<Result<CreateCompletionResponse?>> CreateCompletion(CreateCompletionRequest request)
     {
         var response = await _httpClient.PostAsJsonAsync($"/{ApiVersion}/completions", request);
-        return await response.Content.ReadFromJsonAsync<CreateCompletionResponse?>();
+        if (response.IsSuccessStatusCode)
+        {
+            return await response.Content.ReadFromJsonAsync<CreateCompletionResponse?>();
+        }
+        return new Failure();
     }
 
     /// <inheritdoc />
-    public async Task<CreateCompletionResponse?> CreateCompletion(CompletionsModel model, string? prompt = null, int? maxTokens = null)
+    public async Task<Result<CreateCompletionResponse?>> CreateCompletion(CompletionsModel model, string? prompt = null, int? maxTokens = null)
     {
         return await CreateCompletion(new CreateCompletionRequest
         {
