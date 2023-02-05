@@ -1,6 +1,6 @@
 {
-  "name": "OpenAI.NET.Playground",
-  "short_name": "OpenAI.NET.Playground",
+  "name": "OpenAI.NET.Playground.Web",
+  "short_name": "OpenAI.NET.Playground.Web",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#ffffff",
