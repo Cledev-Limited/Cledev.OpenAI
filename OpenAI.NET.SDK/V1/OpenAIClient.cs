@@ -1,7 +1,6 @@
 ﻿using System.Net.Http.Json;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 using Microsoft.Extensions.Options;
+using OpenAI.NET.SDK.Extensions;
 using OpenAI.NET.SDK.V1.Contracts;
 
 namespace OpenAI.NET.SDK.V1;
@@ -36,14 +35,6 @@ public class OpenAIClient : IOpenAIClient
     }
 
     /// <inheritdoc />
-    public async Task<CreateCompletionResponse?> CreateCompletion(CreateCompletionRequest request)
-    {
-        var jsonSerializerOptions = new JsonSerializerOptions { DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault };
-        var response = await _httpClient.PostAsJsonAsync($"/{ApiVersion}/completions", request, jsonSerializerOptions);
-        return await response.Content.ReadFromJsonAsync<CreateCompletionResponse?>();
-    }
-
-    /// <inheritdoc />
     public async Task<CreateCompletionResponse?> CreateCompletion(CompletionsModel model, string? prompt = null, int? maxTokens = null)
     {
         return await CreateCompletion(new CreateCompletionRequest
@@ -55,10 +46,9 @@ public class OpenAIClient : IOpenAIClient
     }
 
     /// <inheritdoc />
-    public async Task<CreateEditResponse?> CreateEdit(CreateEditRequest request)
+    public async Task<CreateCompletionResponse?> CreateCompletion(CreateCompletionRequest request)
     {
-        var response = await _httpClient.PostAsJsonAsync($"/{ApiVersion}/edits", request);
-        return await response.Content.ReadFromJsonAsync<CreateEditResponse?>();
+        return await _httpClient.Create<CreateCompletionResponse>($"/{ApiVersion}/completions", request);
     }
 
     /// <inheritdoc />
@@ -73,11 +63,9 @@ public class OpenAIClient : IOpenAIClient
     }
 
     /// <inheritdoc />
-    public async Task<CreateImageResponse?> CreateImage(CreateImageRequest request)
+    public async Task<CreateEditResponse?> CreateEdit(CreateEditRequest request)
     {
-        var jsonSerializerOptions = new JsonSerializerOptions { DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault };
-        var response = await _httpClient.PostAsJsonAsync($"/{ApiVersion}/images/generations", request, jsonSerializerOptions);
-        return await response.Content.ReadFromJsonAsync<CreateImageResponse?>();
+        return await _httpClient.Create<CreateEditResponse>($"/{ApiVersion}/edits", request);
     }
 
     /// <inheritdoc />
@@ -93,18 +81,20 @@ public class OpenAIClient : IOpenAIClient
     }
 
     /// <inheritdoc />
+    public async Task<CreateImageResponse?> CreateImage(CreateImageRequest request)
+    {
+        return await _httpClient.Create<CreateImageResponse>($"/{ApiVersion}/images/generations", request);
+    }
+
+    /// <inheritdoc />
     public async Task<CreateImageResponse?> CreateImageEdit(CreateImageEditRequest request)
     {
-        var jsonSerializerOptions = new JsonSerializerOptions { DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault };
-        var response = await _httpClient.PostAsJsonAsync($"/{ApiVersion}/images/edits", request, jsonSerializerOptions);
-        return await response.Content.ReadFromJsonAsync<CreateImageResponse?>();
+        return await _httpClient.Create<CreateImageResponse>($"/{ApiVersion}/images/edits", request);
     }
 
     /// <inheritdoc />
     public async Task<CreateImageResponse?> CreateImageVariation(CreateImageVariationRequest request)
     {
-        var jsonSerializerOptions = new JsonSerializerOptions { DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault };
-        var response = await _httpClient.PostAsJsonAsync($"/{ApiVersion}/images/variations", request, jsonSerializerOptions);
-        return await response.Content.ReadFromJsonAsync<CreateImageResponse?>();
+        return await _httpClient.Create<CreateImageResponse>($"/{ApiVersion}/images/variations", request);
     }
 }
