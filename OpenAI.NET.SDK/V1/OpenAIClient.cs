@@ -103,4 +103,9 @@ public class OpenAIClient : IOpenAIClient
     {
         return await _httpClient.Create<CreateEmbeddingsResponse>($"/{ApiVersion}/embeddings", request);
     }
+
+    public async Task<ListFilesResponse?> ListFiles()
+    {
+        return await _httpClient.GetFromJsonAsync<ListFilesResponse?>($"/{ApiVersion}/files");
+    }
 }

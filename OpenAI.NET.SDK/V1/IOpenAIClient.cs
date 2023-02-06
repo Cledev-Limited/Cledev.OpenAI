@@ -90,4 +90,9 @@ public interface IOpenAIClient
     /// <param name="request">The create embeddings request.</param>
     /// <returns>The create embeddings response.</returns>
     Task<CreateEmbeddingsResponse?> CreateEmbeddings(CreateEmbeddingsRequest request);
+
+    /// <summary>
+    /// Returns a list of files that belong to the user's organization.
+    /// </summary>
+    Task<ListFilesResponse?> ListFiles();
 }
