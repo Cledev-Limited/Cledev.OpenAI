@@ -13,7 +13,7 @@ public interface IOpenAIClient
     /// Retrieves a model instance, providing basic information about the model such as the owner and permissioning.
     /// </summary>
     /// <param name="id">The id of the model (e.g. text-davinci-003)</param>
-    Task<ListModelsResponse.ListModelsResponseData?> RetrieveModel(string id);
+    Task<RetrieveModelResponse?> RetrieveModel(string id);
 
     /// <summary>
     /// Creates a completion for the provided prompt and parameters.

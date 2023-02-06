@@ -11,7 +11,7 @@
 		<Copyright>Luca Briguglia</Copyright>
 		<PackageProjectUrl>https://github.com/lucabriguglia/OpenAI.NET</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/lucabriguglia/OpenAI.NET</RepositoryUrl>
-		<PackageTags>.net;.net core;utilities;extensions;openai</PackageTags>
+		<PackageTags>.net;.net core;utilities;extensions;openai;client;</PackageTags>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<Version>1.0.0-preview-2023-02-06-3</Version>
 	</PropertyGroup>

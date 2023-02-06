@@ -29,9 +29,9 @@ public class OpenAIClient : IOpenAIClient
     }
 
     /// <inheritdoc />
-    public async Task<ListModelsResponse.ListModelsResponseData?> RetrieveModel(string id)
+    public async Task<RetrieveModelResponse?> RetrieveModel(string id)
     {
-        return await _httpClient.GetFromJsonAsync<ListModelsResponse.ListModelsResponseData?>($"/{ApiVersion}/models/{id}");
+        return await _httpClient.GetFromJsonAsync<RetrieveModelResponse?>($"/{ApiVersion}/models/{id}");
     }
 
     /// <inheritdoc />
