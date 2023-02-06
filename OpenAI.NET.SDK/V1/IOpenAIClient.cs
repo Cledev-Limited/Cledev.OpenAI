@@ -83,4 +83,11 @@ public interface IOpenAIClient
     /// <param name="request">The create image variation request.</param>
     /// <returns>The create image response.</returns>
     Task<CreateImageResponse?> CreateImageVariation(CreateImageVariationRequest request);
+
+    /// <summary>
+    /// Creates an embedding vector representing the input text.
+    /// </summary>
+    /// <param name="request">The create embeddings request.</param>
+    /// <returns>The create embeddings response.</returns>
+    Task<CreateEmbeddingsResponse?> CreateEmbeddings(CreateEmbeddingsRequest request);
 }

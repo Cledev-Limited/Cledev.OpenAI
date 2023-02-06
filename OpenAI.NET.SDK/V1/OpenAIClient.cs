@@ -97,4 +97,10 @@ public class OpenAIClient : IOpenAIClient
     {
         return await _httpClient.Create<CreateImageResponse>($"/{ApiVersion}/images/variations", request);
     }
+
+    /// <inheritdoc />
+    public async Task<CreateEmbeddingsResponse?> CreateEmbeddings(CreateEmbeddingsRequest request)
+    {
+        return await _httpClient.Create<CreateEmbeddingsResponse>($"/{ApiVersion}/embeddings", request);
+    }
 }
