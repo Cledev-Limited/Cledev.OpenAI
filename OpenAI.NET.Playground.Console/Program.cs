@@ -19,10 +19,10 @@ IConfiguration configuration = builder.Build();
 var serviceCollection = new ServiceCollection();
 serviceCollection.AddScoped(_ => configuration);
 
-serviceCollection.AddOpenAIService();
+serviceCollection.AddOpenAIClient();
 
 var serviceProvider = serviceCollection.BuildServiceProvider();
-var service = serviceProvider.GetRequiredService<IOpenAIService>();
+var service = serviceProvider.GetRequiredService<IOpenAIClient>();
 
 //var response = await service.RetrieveModels();
 //var response = await service.RetrieveModel("text-davinci-003");

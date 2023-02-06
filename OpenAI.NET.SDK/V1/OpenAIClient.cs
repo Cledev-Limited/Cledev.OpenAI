@@ -6,13 +6,13 @@ using OpenAI.NET.SDK.V1.Contracts;
 
 namespace OpenAI.NET.SDK.V1;
 
-public class OpenAIService : IOpenAIService
+public class OpenAIClient : IOpenAIClient
 {
     private const string ApiVersion = "v1";
 
     private readonly HttpClient _httpClient;
 
-    public OpenAIService(HttpClient httpClient, IOptions<OpenAISettings> options)
+    public OpenAIClient(HttpClient httpClient, IOptions<OpenAISettings> options)
     {
         _httpClient = httpClient;
         _httpClient.BaseAddress = new Uri("https://api.openai.com/");

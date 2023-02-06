@@ -1,9 +1,8 @@
-﻿using OpenAI.NET.SDK.Models;
-using OpenAI.NET.SDK.V1.Contracts;
+﻿using OpenAI.NET.SDK.V1.Contracts;
 
 namespace OpenAI.NET.SDK.V1;
 
-public interface IOpenAIService
+public interface IOpenAIClient
 {
     /// <summary>
     /// Lists the currently available models, and provides basic information about each one such as the owner and availability.

@@ -16,9 +16,9 @@ builder.Services.AddOptions<OpenAISettings>().Configure(options =>
     options.ApiKey = builder.Configuration["OpenAI:ApiKey"];
     options.Organization = builder.Configuration["OpenAI:Organization"];
 });
-builder.Services.AddHttpClient<IOpenAIService, OpenAIService>();
+builder.Services.AddHttpClient<IOpenAIClient, OpenAIClient>();
 
-//builder.Services.AddOpenAIService(options =>
+//builder.Services.AddOpenAIClient(options =>
 //{
 //    options.ApiKey = builder.Configuration["OpenAI:ApiKey"];
 //    options.ApiKey = builder.Configuration["OpenAI:Organization"];

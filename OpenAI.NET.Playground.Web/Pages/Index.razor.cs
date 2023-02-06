@@ -5,11 +5,11 @@ namespace OpenAI.NET.Playground.Web.Pages
 {
     public class IndexPage : ComponentBase
     {
-        [Inject] public IOpenAIService OpenAIService { get; set; } = null!;
+        [Inject] public IOpenAIClient OpenAIClient { get; set; } = null!;
 
         protected override async Task OnInitializedAsync()
         {
-            var test = await OpenAIService.CreateCompletion(CompletionsModel.Ada, "Say something nice");
+            var test = await OpenAIClient.CreateCompletion(CompletionsModel.Ada, "Say something nice");
         }
     }
 }

@@ -24,7 +24,7 @@ Install-Package OpenAI.NET.SDK
 ### Option 1
 
 ```C#
-services.AddOpenAIService();
+services.AddOpenAIClient();
 ```
 
 This option requires an appsettings.json file
@@ -41,7 +41,7 @@ This option requires an appsettings.json file
 ### Option 2
 
 ```C#
-services.AddOpenAIService(options =>
+services.AddOpenAIClient(options =>
 {
      options.ApiKey = "YOUR_API_KEY";
      options.Organization = "YOUR_ORGANIZATION";
@@ -50,6 +50,6 @@ services.AddOpenAIService(options =>
 
 ## Usage
 
-Inject `IOpenAIService` interface into your service
+Inject `IOpenAIClient` interface into your service
 
 _(complete guide coming soon)_

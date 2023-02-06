@@ -6,19 +6,19 @@ namespace OpenAI.NET.SDK.Extensions;
 
 public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection AddOpenAIService(this IServiceCollection services)
+    public static IServiceCollection AddOpenAIClient(this IServiceCollection services)
     {
         var configuration = services.BuildServiceProvider().GetRequiredService<IConfiguration>();
         services.Configure<OpenAISettings>(configuration.GetSection("OpenAI"));
         services.AddOptions<OpenAISettings>();
-        services.AddHttpClient<IOpenAIService, OpenAIService>();
+        services.AddHttpClient<IOpenAIClient, OpenAIClient>();
         return services;
     }
 
-    public static IServiceCollection AddOpenAIService(this IServiceCollection services, Action<OpenAISettings> setupAction)
+    public static IServiceCollection AddOpenAIClient(this IServiceCollection services, Action<OpenAISettings> setupAction)
     {
         services.AddOptions<OpenAISettings>().Configure(setupAction);
-        services.AddHttpClient<IOpenAIService, OpenAIService>();
+        services.AddHttpClient<IOpenAIClient, OpenAIClient>();
         return services;
     }
 }
