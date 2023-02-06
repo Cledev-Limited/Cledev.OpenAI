@@ -25,7 +25,7 @@ serviceCollection.AddOpenAIClient();
 var serviceProvider = serviceCollection.BuildServiceProvider();
 var client = serviceProvider.GetRequiredService<IOpenAIClient>();
 
-//var response = await client.RetrieveModels();
+//var response = await client.ListModels();
 //var response = await client.RetrieveModel("text-davinci-003");
 //var response = await client.CreateCompletion(CompletionsModel.Ada, "Say something nice");
 //var response = await client.CreateCompletion("What is MOB programming?", OpenAIModels.TextDavinciV3, maxTokens: 100);

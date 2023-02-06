@@ -23,15 +23,15 @@ public class OpenAIClient : IOpenAIClient
     }
 
     /// <inheritdoc />
-    public async Task<RetrieveModelsResponse?> RetrieveModels()
+    public async Task<ListModelsResponse?> ListModels()
     {
-        return await _httpClient.GetFromJsonAsync<RetrieveModelsResponse?>($"/{ApiVersion}/models");
+        return await _httpClient.GetFromJsonAsync<ListModelsResponse?>($"/{ApiVersion}/models");
     }
 
     /// <inheritdoc />
-    public async Task<RetrieveModelsResponse.RetrieveModelsResponseData?> RetrieveModel(string id)
+    public async Task<ListModelsResponse.ListModelsResponseData?> RetrieveModel(string id)
     {
-        return await _httpClient.GetFromJsonAsync<RetrieveModelsResponse.RetrieveModelsResponseData?>($"/{ApiVersion}/models/{id}");
+        return await _httpClient.GetFromJsonAsync<ListModelsResponse.ListModelsResponseData?>($"/{ApiVersion}/models/{id}");
     }
 
     /// <inheritdoc />
