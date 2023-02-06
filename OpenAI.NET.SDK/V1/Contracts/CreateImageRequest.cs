@@ -26,7 +26,7 @@ public class CreateImageRequest
     /// <para>The number of images to generate. Must be between 1 and 10.</para>
     /// </summary>
     [JsonPropertyName("size")]
-    public required string? Size { get; set; }
+    public string? Size { get; set; }
 
     /// <summary>
     /// <para>Optional (Defaults to url).</para>

@@ -95,4 +95,13 @@ public interface IOpenAIClient
     /// Returns a list of files that belong to the user's organization.
     /// </summary>
     Task<ListFilesResponse?> ListFiles();
+
+    /// <summary>
+    /// Upload a file that contains document(s) to be used across various endpoints/features. Currently, the size of all the files uploaded by one organization can be up to 1 GB. Please contact us if you need to increase the storage limit.
+    /// </summary>
+    /// <param name="file">The file.</param>
+    /// <param name="fileName">The name of the file.</param>
+    /// <param name="purpose">The purpose of the file.</param>
+    /// <returns>The upload file response.</returns>
+    Task<UploadFileResponse?> UploadFile(byte[] file, string fileName, string purpose);
 }

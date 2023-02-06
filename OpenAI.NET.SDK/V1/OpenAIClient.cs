@@ -104,8 +104,19 @@ public class OpenAIClient : IOpenAIClient
         return await _httpClient.Post<CreateEmbeddingsResponse>($"/{ApiVersion}/embeddings", request);
     }
 
+    /// <inheritdoc />
     public async Task<ListFilesResponse?> ListFiles()
     {
         return await _httpClient.GetFromJsonAsync<ListFilesResponse?>($"/{ApiVersion}/files");
+    }
+
+    /// <inheritdoc />
+    public async Task<UploadFileResponse?> UploadFile(byte[] file, string fileName, string purpose)
+    {
+        var multipartFormDataContent = new MultipartFormDataContent();
+        multipartFormDataContent.Add(new ByteArrayContent(file), "file", fileName);
+        multipartFormDataContent.Add(new StringContent(purpose), "purpose");
+
+        return await _httpClient.Post<UploadFileResponse?>($"/{ApiVersion}/files", multipartFormDataContent);
     }
 }
