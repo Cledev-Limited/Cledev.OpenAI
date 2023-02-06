@@ -48,7 +48,7 @@ public class OpenAIClient : IOpenAIClient
     /// <inheritdoc />
     public async Task<CreateCompletionResponse?> CreateCompletion(CreateCompletionRequest request)
     {
-        return await _httpClient.Create<CreateCompletionResponse>($"/{ApiVersion}/completions", request);
+        return await _httpClient.Post<CreateCompletionResponse>($"/{ApiVersion}/completions", request);
     }
 
     /// <inheritdoc />
@@ -65,7 +65,7 @@ public class OpenAIClient : IOpenAIClient
     /// <inheritdoc />
     public async Task<CreateEditResponse?> CreateEdit(CreateEditRequest request)
     {
-        return await _httpClient.Create<CreateEditResponse>($"/{ApiVersion}/edits", request);
+        return await _httpClient.Post<CreateEditResponse>($"/{ApiVersion}/edits", request);
     }
 
     /// <inheritdoc />
@@ -83,25 +83,25 @@ public class OpenAIClient : IOpenAIClient
     /// <inheritdoc />
     public async Task<CreateImageResponse?> CreateImage(CreateImageRequest request)
     {
-        return await _httpClient.Create<CreateImageResponse>($"/{ApiVersion}/images/generations", request);
+        return await _httpClient.Post<CreateImageResponse>($"/{ApiVersion}/images/generations", request);
     }
 
     /// <inheritdoc />
     public async Task<CreateImageResponse?> CreateImageEdit(CreateImageEditRequest request)
     {
-        return await _httpClient.Create<CreateImageResponse>($"/{ApiVersion}/images/edits", request);
+        return await _httpClient.Post<CreateImageResponse>($"/{ApiVersion}/images/edits", request);
     }
 
     /// <inheritdoc />
     public async Task<CreateImageResponse?> CreateImageVariation(CreateImageVariationRequest request)
     {
-        return await _httpClient.Create<CreateImageResponse>($"/{ApiVersion}/images/variations", request);
+        return await _httpClient.Post<CreateImageResponse>($"/{ApiVersion}/images/variations", request);
     }
 
     /// <inheritdoc />
     public async Task<CreateEmbeddingsResponse?> CreateEmbeddings(CreateEmbeddingsRequest request)
     {
-        return await _httpClient.Create<CreateEmbeddingsResponse>($"/{ApiVersion}/embeddings", request);
+        return await _httpClient.Post<CreateEmbeddingsResponse>($"/{ApiVersion}/embeddings", request);
     }
 
     public async Task<ListFilesResponse?> ListFiles()

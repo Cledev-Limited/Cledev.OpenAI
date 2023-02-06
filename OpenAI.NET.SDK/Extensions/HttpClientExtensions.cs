@@ -6,7 +6,7 @@ namespace OpenAI.NET.SDK.Extensions;
 
 internal static class HttpClientExtensions
 {
-    internal static async Task<T?> Create<T>(this HttpClient httpClient, string requestUri, object request)
+    internal static async Task<T?> Post<T>(this HttpClient httpClient, string requestUri, object request)
     {
         var jsonSerializerOptions = new JsonSerializerOptions { DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault };
         var response = await httpClient.PostAsJsonAsync(requestUri, request, jsonSerializerOptions);
