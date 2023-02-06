@@ -113,9 +113,11 @@ public class OpenAIClient : IOpenAIClient
     /// <inheritdoc />
     public async Task<UploadFileResponse?> UploadFile(byte[] file, string fileName, string purpose)
     {
-        var multipartFormDataContent = new MultipartFormDataContent();
-        multipartFormDataContent.Add(new ByteArrayContent(file), "file", fileName);
-        multipartFormDataContent.Add(new StringContent(purpose), "purpose");
+        var multipartFormDataContent = new MultipartFormDataContent
+        {
+            { new ByteArrayContent(file), "file", fileName },
+            { new StringContent(purpose), "purpose" }
+        };
 
         return await _httpClient.Post<UploadFileResponse?>($"/{ApiVersion}/files", multipartFormDataContent);
     }
