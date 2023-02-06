@@ -38,7 +38,8 @@ public class OpenAIService : IOpenAIService
     /// <inheritdoc />
     public async Task<CreateCompletionResponse?> CreateCompletion(CreateCompletionRequest request)
     {
-        var response = await _httpClient.PostAsJsonAsync($"/{ApiVersion}/completions", request);
+        var jsonSerializerOptions = new JsonSerializerOptions { DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault };
+        var response = await _httpClient.PostAsJsonAsync($"/{ApiVersion}/completions", request, jsonSerializerOptions);
         return await response.Content.ReadFromJsonAsync<CreateCompletionResponse?>();
     }
 
