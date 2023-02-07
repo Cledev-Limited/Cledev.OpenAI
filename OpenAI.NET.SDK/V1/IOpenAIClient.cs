@@ -104,4 +104,11 @@ public interface IOpenAIClient
     /// <param name="purpose">The purpose of the file.</param>
     /// <returns>The upload file response.</returns>
     Task<UploadFileResponse?> UploadFile(byte[] file, string fileName, string purpose);
+
+    /// <summary>
+    /// Delete a file.
+    /// </summary>
+    /// <param name="fileId">The ID of the file to use for this request.</param>
+    /// <returns>The delete file response.</returns>
+    Task<DeleteFileResponse?> DeleteFile(string fileId);
 }

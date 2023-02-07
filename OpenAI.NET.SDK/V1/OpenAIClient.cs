@@ -1,4 +1,5 @@
-﻿using System.Net.Http.Json;
+﻿using System.Net.Http;
+using System.Net.Http.Json;
 using Microsoft.Extensions.Options;
 using OpenAI.NET.SDK.Extensions;
 using OpenAI.NET.SDK.V1.Contracts;
@@ -120,5 +121,11 @@ public class OpenAIClient : IOpenAIClient
         };
 
         return await _httpClient.Post<UploadFileResponse?>($"/{ApiVersion}/files", multipartFormDataContent);
+    }
+
+    /// <inheritdoc />
+    public async Task<DeleteFileResponse?> DeleteFile(string fileId)
+    {
+        return await _httpClient.Delete<DeleteFileResponse?>($"/{ApiVersion}/files/{fileId}");
     }
 }

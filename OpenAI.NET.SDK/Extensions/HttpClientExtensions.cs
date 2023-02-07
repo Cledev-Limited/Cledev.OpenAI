@@ -18,4 +18,10 @@ internal static class HttpClientExtensions
         var response = await httpClient.PostAsync(requestUri, content);
         return await response.Content.ReadFromJsonAsync<T?>();
     }
+
+    internal static async Task<T?> Delete<T>(this HttpClient httpClient, string requestUri)
+    {
+        var response = await httpClient.DeleteAsync(requestUri);
+        return await response.Content.ReadFromJsonAsync<T?>();
+    }
 }
