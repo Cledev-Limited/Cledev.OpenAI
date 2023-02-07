@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace OpenAI.NET.SDK.V1.Contracts;
+namespace OpenAI.NET.SDK.V1.Contracts.Images;
 
 public class CreateImageResponse
 {
@@ -15,7 +15,7 @@ public class CreateImageResponse
         [JsonPropertyName("url")]
         public string? Url { get; set; }
 
-        [JsonPropertyName("b64_json")] 
+        [JsonPropertyName("b64_json")]
         public string? B64Json { get; set; }
     }
 }

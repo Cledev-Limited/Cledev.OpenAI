@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace OpenAI.NET.SDK.V1.Contracts;
+namespace OpenAI.NET.SDK.V1.Contracts.Edits;
 
 /// <summary>
 /// Creates a new edit for the provided input, instruction, and parameters.

@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using OpenAI.NET.SDK.Extensions;
 using OpenAI.NET.SDK.V1;
 using OpenAI.NET.SDK.V1.Contracts;
+using OpenAI.NET.SDK.V1.Contracts.Embeddings;
 
 var jsonSerializerOptions = new JsonSerializerOptions
 {

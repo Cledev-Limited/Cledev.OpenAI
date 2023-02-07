@@ -1,4 +1,9 @@
-﻿using OpenAI.NET.SDK.V1.Contracts;
+﻿using OpenAI.NET.SDK.V1.Contracts.Completions;
+using OpenAI.NET.SDK.V1.Contracts.Edits;
+using OpenAI.NET.SDK.V1.Contracts.Embeddings;
+using OpenAI.NET.SDK.V1.Contracts.Files;
+using OpenAI.NET.SDK.V1.Contracts.Images;
+using OpenAI.NET.SDK.V1.Contracts.Models;
 
 namespace OpenAI.NET.SDK.V1;
 

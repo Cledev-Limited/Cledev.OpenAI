@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace OpenAI.NET.SDK.V1.Contracts;
+namespace OpenAI.NET.SDK.V1.Contracts.Completions;
 
 /// <summary>
 /// Creates a completion for the provided prompt and parameters.
