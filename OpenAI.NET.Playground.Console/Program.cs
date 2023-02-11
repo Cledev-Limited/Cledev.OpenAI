@@ -5,6 +5,7 @@ using OpenAI.NET.SDK.Extensions;
 using OpenAI.NET.SDK.V1;
 using OpenAI.NET.SDK.V1.Contracts;
 using OpenAI.NET.SDK.V1.Contracts.Embeddings;
+using OpenAI.NET.SDK.V1.Models;
 
 var jsonSerializerOptions = new JsonSerializerOptions
 {

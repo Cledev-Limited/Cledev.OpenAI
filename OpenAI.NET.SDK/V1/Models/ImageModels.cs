@@ -1,4 +1,4 @@
-﻿namespace OpenAI.NET.SDK.V1;
+﻿namespace OpenAI.NET.SDK.V1.Models;
 
 public enum ImageSize
 {

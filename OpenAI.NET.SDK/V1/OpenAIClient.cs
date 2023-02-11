@@ -7,6 +7,7 @@ using OpenAI.NET.SDK.V1.Contracts.Embeddings;
 using OpenAI.NET.SDK.V1.Contracts.Files;
 using OpenAI.NET.SDK.V1.Contracts.Images;
 using OpenAI.NET.SDK.V1.Contracts.Models;
+using OpenAI.NET.SDK.V1.Models;
 
 namespace OpenAI.NET.SDK.V1;
 
@@ -40,49 +41,15 @@ public class OpenAIClient : IOpenAIClient
     }
 
     /// <inheritdoc />
-    public async Task<CreateCompletionResponse?> CreateCompletion(CompletionsModel model, string? prompt = null, int? maxTokens = null)
-    {
-        return await CreateCompletion(new CreateCompletionRequest
-        {
-            Model = model.ToStringModel(),
-            Prompt = prompt,
-            MaxTokens = maxTokens ?? 16
-        });
-    }
-
-    /// <inheritdoc />
     public async Task<CreateCompletionResponse?> CreateCompletion(CreateCompletionRequest request)
     {
         return await _httpClient.Post<CreateCompletionResponse>($"/{ApiVersion}/completions", request);
     }
 
     /// <inheritdoc />
-    public async Task<CreateEditResponse?> CreateEdit(EditsModel model, string? input = null, string? instruction = null)
-    {
-        return await CreateEdit(new CreateEditRequest
-        {
-            Model = model.ToStringModel(),
-            Input = input,
-            Instruction = instruction
-        });
-    }
-
-    /// <inheritdoc />
     public async Task<CreateEditResponse?> CreateEdit(CreateEditRequest request)
     {
         return await _httpClient.Post<CreateEditResponse>($"/{ApiVersion}/edits", request);
-    }
-
-    /// <inheritdoc />
-    public async Task<CreateImageResponse?> CreateImage(string prompt, int? numberOfImagesToGenerate = null, ImageSize? size = null, ImageResponseFormat? responseFormat = null)
-    {
-        return await CreateImage(new CreateImageRequest
-        {
-            Prompt = prompt,
-            N = numberOfImagesToGenerate ?? 1,
-            Size = (size ?? ImageSize.Size1024x1024).ToStringSize(),
-            ResponseFormat = (responseFormat ?? ImageResponseFormat.Url).ToStringFormat()
-        });
     }
 
     /// <inheritdoc />
