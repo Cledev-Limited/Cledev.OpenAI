@@ -4,6 +4,8 @@ on:
   push:
     branches: 
         - "*"
+    paths-ignore:
+      - 'OpenAI.NET.Playground**'
   pull_request:
     branches:
         - "*"
