@@ -82,4 +82,11 @@ public interface IOpenAIClient
     /// <param name="fileId">The ID of the file to use for this request.</param>
     /// <returns>The delete file response.</returns>
     Task<DeleteFileResponse?> DeleteFile(string fileId);
+
+    /// <summary>
+    /// Returns information about a specific file.
+    /// </summary>
+    /// <param name="fileId">The ID of the file to use for this request.</param>
+    /// <returns>The retrieve file response.</returns>
+    Task<RetrieveFileResponse?> RetrieveFile(string fileId);
 }

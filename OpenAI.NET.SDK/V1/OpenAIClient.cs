@@ -7,7 +7,6 @@ using OpenAI.NET.SDK.V1.Contracts.Embeddings;
 using OpenAI.NET.SDK.V1.Contracts.Files;
 using OpenAI.NET.SDK.V1.Contracts.Images;
 using OpenAI.NET.SDK.V1.Contracts.Models;
-using OpenAI.NET.SDK.V1.Models;
 
 namespace OpenAI.NET.SDK.V1;
 
@@ -31,13 +30,13 @@ public class OpenAIClient : IOpenAIClient
     /// <inheritdoc />
     public async Task<ListModelsResponse?> ListModels()
     {
-        return await _httpClient.GetFromJsonAsync<ListModelsResponse?>($"/{ApiVersion}/models");
+        return await _httpClient.Get<ListModelsResponse?>($"/{ApiVersion}/models");
     }
 
     /// <inheritdoc />
     public async Task<RetrieveModelResponse?> RetrieveModel(string id)
     {
-        return await _httpClient.GetFromJsonAsync<RetrieveModelResponse?>($"/{ApiVersion}/models/{id}");
+        return await _httpClient.Get<RetrieveModelResponse?>($"/{ApiVersion}/models/{id}");
     }
 
     /// <inheritdoc />
@@ -98,5 +97,11 @@ public class OpenAIClient : IOpenAIClient
     public async Task<DeleteFileResponse?> DeleteFile(string fileId)
     {
         return await _httpClient.Delete<DeleteFileResponse?>($"/{ApiVersion}/files/{fileId}");
+    }
+
+    /// <inheritdoc />
+    public async Task<RetrieveFileResponse?> RetrieveFile(string fileId)
+    {
+        return await _httpClient.Get<RetrieveFileResponse?>($"/{ApiVersion}/files/{fileId}");
     }
 }
