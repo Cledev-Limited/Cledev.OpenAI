@@ -40,7 +40,7 @@ public record CreateFineTuneResponse
     [JsonPropertyName("updated_at")] 
     public int? UpdatedAt { get; set; }
 
-    public class CreateFineTuneResponseEvent
+    public record CreateFineTuneResponseEvent
     {
         [JsonPropertyName("object")]
         public string Object { get; set; } = null!;
