@@ -4,8 +4,6 @@ on:
   push:
     branches: 
         - "*"
-    paths-ignore:
-      - 'OpenAI.NET.Playground**'
   pull_request:
     branches:
         - "*"
@@ -21,6 +19,8 @@ jobs:
       uses: actions/setup-dotnet@v2
       with:
         dotnet-version: 7.0.x
+    - name: Install MAUI Workload
+      run: dotnet workload install maui --ignore-failed-sources
     - name: Restore dependencies
       run: dotnet restore
     - name: Build solution
