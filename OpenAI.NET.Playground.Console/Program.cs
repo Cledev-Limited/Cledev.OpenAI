@@ -49,8 +49,8 @@ var client = serviceProvider.GetRequiredService<IOpenAIClient>();
 //});
 
 //Files
-var file = await File.ReadAllBytesAsync("Data/fine-tune-1.json");
-var uploadedFile = await client.UploadFile(file, "fine-tune-1.json", "fine-tune");
+var file = await File.ReadAllBytesAsync("Data/fine-tune-1.jsonl");
+var uploadedFile = await client.UploadFile(file, "fine-tune-1.jsonl", "fine-tune");
 var response = await client.RetrieveFile(uploadedFile!.Id);
 
 //Console.WriteLine(response.IsSuccess

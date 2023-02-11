@@ -29,6 +29,14 @@ public enum EmbeddingsModel
     TextEmbeddingAdaV2
 }
 
+public enum FineTuningModel
+{
+    Ada,
+    Babbage,
+    Curie,
+    Davinci
+}
+
 public static class OpenAIModelsExtensions
 {
     public static string ToStringModel(this CompletionsModel completionsModel)
@@ -69,6 +77,18 @@ public static class OpenAIModelsExtensions
         {
             EmbeddingsModel.TextEmbeddingAdaV2 => "text-embedding-ada-002",
             _ => throw new ArgumentOutOfRangeException(nameof(embeddingsModel), embeddingsModel, null)
+        };
+    }
+
+    public static string ToStringModel(this FineTuningModel fineTuningModel)
+    {
+        return fineTuningModel switch
+        {
+            FineTuningModel.Ada => "ada",
+            FineTuningModel.Babbage => "babbage",
+            FineTuningModel.Curie => "curie",
+            FineTuningModel.Davinci => "davinci",
+            _ => throw new ArgumentOutOfRangeException(nameof(fineTuningModel), fineTuningModel, null)
         };
     }
 }
