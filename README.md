@@ -1,5 +1,5 @@
 # OpenAI.NET _(Preview)_
-.NET SDK for OpenAI with a Blazor playground _(available soon)_
+.NET SDK for OpenAI with a Blazor Server playground _(available soon)_
 
 [![Main](https://github.com/lucabriguglia/OpenAI.NET/actions/workflows/main.yml/badge.svg)](https://github.com/lucabriguglia/OpenAI.NET/actions/workflows/main.yml)
 [![Nuget Package](https://img.shields.io/badge/nuget-1.0.0-blue.svg)](https://www.nuget.org/packages/OpenAI.NET.SDK)
