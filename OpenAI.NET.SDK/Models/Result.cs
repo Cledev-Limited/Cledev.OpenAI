@@ -18,10 +18,6 @@ public sealed class Result<TResult> : OneOfBase<Success<TResult>, Failure>
 
     public new TResult? Value => AsT0.Result;
 
-    public static Result<TResult> Ok(TResult result) => new(new Success<TResult>(result));
-    public static Result<TResult> Ok(Success<TResult> success) => new(success);
-    public static Result<TResult> Fail(string errorCode = ErrorCodes.Error, string? title = null, string? description = null) => new(new Failure(errorCode, title, description));
-
     public bool TryPickSuccess(out Success<TResult> success, out Failure failure) => TryPickT0(out success, out failure);
     public bool TryPickFailure(out Failure failure, out Success<TResult> success) => TryPickT1(out failure, out success);
 }
