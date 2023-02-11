@@ -27,17 +27,31 @@ serviceCollection.AddOpenAIClient();
 var serviceProvider = serviceCollection.BuildServiceProvider();
 var client = serviceProvider.GetRequiredService<IOpenAIClient>();
 
+//Models
 //var response = await client.ListModels();
 //var response = await client.RetrieveModel("text-davinci-003");
+
+//Completions
 //var response = await client.CreateCompletion(CompletionsModel.Ada, "Say something nice");
 //var response = await client.CreateCompletion("What is MOB programming?", OpenAIModels.TextDavinciV3, maxTokens: 100);
+
+//Edits
 //var response = await client.CreateEdit(input: "What day of the wek is it?", instruction: "Fix the spelling mistakes");
+
+//Images
 //var response = await client.CreateImage(prompt: "A cute baby sea otter");
-var response = await client.CreateEmbeddings(new CreateEmbeddingsRequest
-{
-    Model = EmbeddingsModel.TextEmbeddingAdaV2.ToStringModel(),
-    Input = "The food was delicious and the waiter..."
-});
+
+//Embeddings
+//var response = await client.CreateEmbeddings(new CreateEmbeddingsRequest
+//{
+//    Model = EmbeddingsModel.TextEmbeddingAdaV2.ToStringModel(),
+//    Input = "The food was delicious and the waiter..."
+//});
+
+//Files
+var file = await File.ReadAllBytesAsync("Data/fine-tune-1.json");
+var uploadedFile = await client.UploadFile(file, "fine-tune-1.json", "fine-tune");
+var response = await client.RetrieveFile(uploadedFile!.Id);
 
 //Console.WriteLine(response.IsSuccess
 //    ? $"{JsonSerializer.Serialize(response.Value, jsonSerializerOptions)}"
