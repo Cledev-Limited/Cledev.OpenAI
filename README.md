@@ -8,7 +8,7 @@
 Install-Package OpenAI.NET.SDK
 ```
 
-## APIs _(all work in progress)_
+## APIs
 
 - Models
 - Completions
@@ -16,8 +16,8 @@ Install-Package OpenAI.NET.SDK
 - Images
 - Embeddings
 - Files
-- Fine-tunes
-- Moderations
+- Fine-tunes _(available soon)_
+- Moderations _(available soon)_
 
 ## Configuration
 
@@ -52,4 +52,4 @@ services.AddOpenAIClient(options =>
 
 Inject `IOpenAIClient` interface into your service
 
-_(complete guide coming soon)_
+_(complete guide available soon)_
