@@ -1,5 +1,4 @@
-﻿using System.Net.Http;
-using System.Net.Http.Json;
+﻿using System.Net.Http.Json;
 using Microsoft.Extensions.Options;
 using OpenAI.NET.SDK.Extensions;
 using OpenAI.NET.SDK.V1.Contracts.Completions;
@@ -17,7 +16,7 @@ public class OpenAIClient : IOpenAIClient
 
     private readonly HttpClient _httpClient;
 
-    public OpenAIClient(HttpClient httpClient, IOptions<OpenAISettings> options)
+    public OpenAIClient(HttpClient httpClient, IOptions<Settings> options)
     {
         _httpClient = httpClient;
         _httpClient.BaseAddress = new Uri("https://api.openai.com/");
