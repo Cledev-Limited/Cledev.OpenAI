@@ -2,7 +2,7 @@
 
 namespace OpenAI.NET.SDK.V1.Contracts.Completions;
 
-public class CreateCompletionResponse
+public record CreateCompletionResponse
 {
     [JsonPropertyName("id")]
     public string Id { get; set; } = null!;
@@ -22,7 +22,7 @@ public class CreateCompletionResponse
     [JsonPropertyName("usage")]
     public CreateCompletionResponseUsage Usage { get; set; } = null!;
 
-    public class CreateCompletionResponseChoice
+    public record CreateCompletionResponseChoice
     {
         [JsonPropertyName("text")]
         public string Text { get; set; } = null!;
@@ -37,7 +37,7 @@ public class CreateCompletionResponse
         public string FinishReason { get; set; } = null!;
     }
 
-    public class CreateCompletionResponseUsage
+    public record CreateCompletionResponseUsage
     {
         [JsonPropertyName("prompt_tokens")]
         public int PromptTokens { get; set; }

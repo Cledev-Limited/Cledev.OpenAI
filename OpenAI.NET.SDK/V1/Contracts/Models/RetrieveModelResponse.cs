@@ -2,7 +2,7 @@
 
 namespace OpenAI.NET.SDK.V1.Contracts.Models;
 
-public class RetrieveModelResponse
+public record RetrieveModelResponse
 {
     [JsonPropertyName("id")]
     public string Id { get; set; } = null!;
@@ -13,7 +13,7 @@ public class RetrieveModelResponse
     [JsonPropertyName("permissions")]
     public List<RetrieveModelResponsePermission> Permissions { get; set; } = null!;
 
-    public class RetrieveModelResponsePermission
+    public record RetrieveModelResponsePermission
     {
         [JsonPropertyName("id")]
         public string Id { get; set; } = null!;

@@ -2,7 +2,7 @@
 
 namespace OpenAI.NET.SDK.V1.Contracts.Images;
 
-public class CreateImageResponse
+public record CreateImageResponse
 {
     [JsonPropertyName("created")]
     public int Created { get; set; }
@@ -10,7 +10,7 @@ public class CreateImageResponse
     [JsonPropertyName("data")]
     public List<CreateImageResponseData> Data { get; set; } = new();
 
-    public class CreateImageResponseData
+    public record CreateImageResponseData
     {
         [JsonPropertyName("url")]
         public string? Url { get; set; }

@@ -2,12 +2,12 @@
 
 namespace OpenAI.NET.SDK.V1.Contracts.Models;
 
-public class ListModelsResponse
+public record ListModelsResponse
 {
     [JsonPropertyName("data")]
     public List<ListModelsResponseData> Data { get; set; } = null!;
 
-    public class ListModelsResponseData
+    public record ListModelsResponseData
     {
         [JsonPropertyName("id")]
         public string Id { get; set; } = null!;
@@ -18,7 +18,7 @@ public class ListModelsResponse
         [JsonPropertyName("permissions")]
         public List<ListModelsResponseDataPermission> Permissions { get; set; } = null!;
 
-        public class ListModelsResponseDataPermission
+        public record ListModelsResponseDataPermission
         {
             [JsonPropertyName("id")]
             public string Id { get; set; } = null!;

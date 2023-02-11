@@ -2,7 +2,7 @@
 
 namespace OpenAI.NET.SDK.V1.Contracts.Files;
 
-public class DeleteFileResponse
+public record DeleteFileResponse
 {
     [JsonPropertyName("id")]
     public string Id { get; set; } = null!;

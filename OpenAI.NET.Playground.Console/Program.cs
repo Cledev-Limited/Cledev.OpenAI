@@ -28,7 +28,7 @@ var serviceProvider = serviceCollection.BuildServiceProvider();
 var client = serviceProvider.GetRequiredService<IOpenAIClient>();
 
 //Models
-//var response = await client.ListModels();
+var response = await client.ListModels();
 //var response = await client.RetrieveModel("text-davinci-003");
 
 //Completions
@@ -49,9 +49,9 @@ var client = serviceProvider.GetRequiredService<IOpenAIClient>();
 //});
 
 //Files
-var file = await File.ReadAllBytesAsync("Data/fine-tune-1.jsonl");
-var uploadedFile = await client.UploadFile(file, "fine-tune-1.jsonl", "fine-tune");
-var response = await client.RetrieveFile(uploadedFile!.Id);
+//var file = await File.ReadAllBytesAsync("Data/fine-tune-1.jsonl");
+//var uploadedFile = await client.UploadFile(file, "fine-tune-1.jsonl", "fine-tune");
+//var response = await client.RetrieveFile(uploadedFile!.Id);
 
 //Console.WriteLine(response.IsSuccess
 //    ? $"{JsonSerializer.Serialize(response.Value, jsonSerializerOptions)}"

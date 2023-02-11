@@ -2,7 +2,7 @@
 
 namespace OpenAI.NET.SDK.V1.Contracts.Embeddings;
 
-public class CreateEmbeddingsResponse
+public record CreateEmbeddingsResponse
 {
     [JsonPropertyName("model")]
     public string Model { get; set; } = null!;
@@ -28,7 +28,7 @@ public class CreateEmbeddingsResponse
         public List<double> Embedding { get; set; } = new();
     }
 
-    public class CreateEmbeddingsResponseUsage
+    public record CreateEmbeddingsResponseUsage
     {
         [JsonPropertyName("prompt_tokens")]
         public int PromptTokens { get; set; }

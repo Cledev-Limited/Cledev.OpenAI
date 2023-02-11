@@ -2,7 +2,7 @@
 
 namespace OpenAI.NET.SDK.V1.Contracts.Files;
 
-public class UploadFileResponse
+public record UploadFileResponse
 {
     [JsonPropertyName("id")]
     public string Id { get; set; } = null!;

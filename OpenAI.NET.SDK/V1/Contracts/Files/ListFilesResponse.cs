@@ -2,7 +2,7 @@
 
 namespace OpenAI.NET.SDK.V1.Contracts.Files;
 
-public class ListFilesResponse
+public record ListFilesResponse
 {
     [JsonPropertyName("object")]
     public string? Object { get; set; }
@@ -10,7 +10,7 @@ public class ListFilesResponse
     [JsonPropertyName("data")]
     public List<ListFilesResponseData> Data { get; set; } = null!;
 
-    public class ListFilesResponseData
+    public record ListFilesResponseData
     {
         [JsonPropertyName("id")]
         public string Id { get; set; } = null!;
