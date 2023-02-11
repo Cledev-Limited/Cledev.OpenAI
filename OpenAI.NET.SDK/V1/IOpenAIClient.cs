@@ -2,8 +2,12 @@
 using OpenAI.NET.SDK.V1.Contracts.Edits;
 using OpenAI.NET.SDK.V1.Contracts.Embeddings;
 using OpenAI.NET.SDK.V1.Contracts.Files;
+using OpenAI.NET.SDK.V1.Contracts.FineTunes;
 using OpenAI.NET.SDK.V1.Contracts.Images;
 using OpenAI.NET.SDK.V1.Contracts.Models;
+using System.Numerics;
+using System.Text;
+using System.Xml.Linq;
 
 namespace OpenAI.NET.SDK.V1;
 
@@ -89,4 +93,12 @@ public interface IOpenAIClient
     /// <param name="fileId">The ID of the file to use for this request.</param>
     /// <returns>The retrieve file response.</returns>
     Task<RetrieveFileResponse?> RetrieveFile(string fileId);
+
+    /// <summary>
+    /// Creates a job that fine-tunes a specified model from a given dataset.
+    /// Response includes details of the enqueued job including job status and the name of the fine-tuned models once complete.
+    /// </summary>
+    /// <param name="request">The create fine tune request.</param>
+    /// <returns>The create fine tune response.</returns>
+    Task<CreateFineTuneResponse?> CreateFineTune(CreateFineTuneRequest request);
 }

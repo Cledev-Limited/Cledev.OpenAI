@@ -1,10 +1,12 @@
-﻿using System.Net.Http.Json;
+﻿using System.Net.Http;
+using System.Net.Http.Json;
 using Microsoft.Extensions.Options;
 using OpenAI.NET.SDK.Extensions;
 using OpenAI.NET.SDK.V1.Contracts.Completions;
 using OpenAI.NET.SDK.V1.Contracts.Edits;
 using OpenAI.NET.SDK.V1.Contracts.Embeddings;
 using OpenAI.NET.SDK.V1.Contracts.Files;
+using OpenAI.NET.SDK.V1.Contracts.FineTunes;
 using OpenAI.NET.SDK.V1.Contracts.Images;
 using OpenAI.NET.SDK.V1.Contracts.Models;
 
@@ -103,5 +105,11 @@ public class OpenAIClient : IOpenAIClient
     public async Task<RetrieveFileResponse?> RetrieveFile(string fileId)
     {
         return await _httpClient.Get<RetrieveFileResponse?>($"/{ApiVersion}/files/{fileId}");
+    }
+
+    /// <inheritdoc />
+    public async Task<CreateFineTuneResponse?> CreateFineTune(CreateFineTuneRequest request)
+    {
+        return await _httpClient.Post<CreateFineTuneResponse?>($"/{ApiVersion}/fine-tunes", request);
     }
 }
