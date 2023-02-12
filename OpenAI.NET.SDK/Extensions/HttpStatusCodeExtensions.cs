@@ -9,10 +9,10 @@ internal static class HttpStatusCodeExtensions
     {
         return httpStatusCode switch
         {
-            HttpStatusCode.Unauthorized => Errors.Unauthorized,
-            HttpStatusCode.BadRequest => Errors.BadRequest,
-            HttpStatusCode.NotFound => Errors.NotFound,
-            _ => Errors.Error
+            HttpStatusCode.Unauthorized => ErrorCodes.Unauthorized,
+            HttpStatusCode.BadRequest => ErrorCodes.BadRequest,
+            HttpStatusCode.NotFound => ErrorCodes.NotFound,
+            _ => ErrorCodes.Error
         };
     }
 }
