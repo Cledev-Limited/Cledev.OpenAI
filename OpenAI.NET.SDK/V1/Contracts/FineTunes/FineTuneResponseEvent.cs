@@ -2,7 +2,7 @@
 
 namespace OpenAI.NET.SDK.V1.Contracts.FineTunes;
 
-public record FineTuneEvent
+public record FineTuneResponseEvent
 {
     [JsonPropertyName("object")]
     public string Object { get; set; } = null!;

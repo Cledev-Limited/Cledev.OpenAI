@@ -99,8 +99,8 @@ public interface IOpenAIClient
     /// Response includes details of the enqueued job including job status and the name of the fine-tuned models once complete.
     /// </summary>
     /// <param name="request">The create fine tune request.</param>
-    /// <returns>The create fine tune response.</returns>
-    Task<CreateFineTuneResponse?> CreateFineTune(CreateFineTuneRequest request);
+    /// <returns>The fine tune response.</returns>
+    Task<FineTuneResponse?> CreateFineTune(CreateFineTuneRequest request);
 
     /// <summary>
     /// List your organization's fine-tuning jobs.
@@ -112,6 +112,13 @@ public interface IOpenAIClient
     /// Gets info about the fine-tune job.
     /// </summary>
     /// <param name="fineTuneId">The ID of the fine-tune job.</param>
-    /// <returns>The retrieve fine tune response.</returns>
-    Task<RetrieveFineTuneResponse?> RetrieveFineTune(string fineTuneId);
+    /// <returns>The fine tune response.</returns>
+    Task<FineTuneResponse?> RetrieveFineTune(string fineTuneId);
+
+    /// <summary>
+    /// Immediately cancel a fine-tune job.
+    /// </summary>
+    /// <param name="fineTuneId">The ID of the fine-tune job to cancel.</param>
+    /// <returns>The fine tune response.</returns>
+    Task<FineTuneResponse?> CancelFineTune(string fineTuneId);
 }

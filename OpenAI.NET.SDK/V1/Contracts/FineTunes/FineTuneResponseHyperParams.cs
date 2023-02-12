@@ -2,7 +2,7 @@
 
 namespace OpenAI.NET.SDK.V1.Contracts.FineTunes;
 
-public record FineTuneHyperParams
+public record FineTuneResponseHyperParams
 {
     [JsonPropertyName("batch_size")]
     public int? BatchSize { get; set; }

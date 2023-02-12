@@ -2,7 +2,7 @@
 
 namespace OpenAI.NET.SDK.V1.Contracts.FineTunes;
 
-public record RetrieveFineTuneResponse
+public record FineTuneResponse
 {
     [JsonPropertyName("id")]
     public string Id { get; set; } = null!;
@@ -20,26 +20,26 @@ public record RetrieveFineTuneResponse
     public string? FineTunedModel { get; set; }
 
     [JsonPropertyName("hyperparams")]
-    public FineTuneHyperParams? HyperParams { get; set; }
+    public FineTuneResponseHyperParams? HyperParams { get; set; }
 
     [JsonPropertyName("organization_id")]
     public string? OrganizationId { get; set; }
 
     [JsonPropertyName("result_files")]
-    public List<FineTuneFile> ResultFiles { get; set; } = new();
+    public List<FineTuneResponseFile> ResultFiles { get; set; } = new();
 
     [JsonPropertyName("status")]
     public string Status { get; set; } = null!;
 
     [JsonPropertyName("validation_files")]
-    public List<FineTuneFile> ValidationFiles { get; set; } = new();
+    public List<FineTuneResponseFile> ValidationFiles { get; set; } = new();
 
     [JsonPropertyName("training_files")]
-    public List<FineTuneFile> TrainingFiles { get; set; } = new();
+    public List<FineTuneResponseFile> TrainingFiles { get; set; } = new();
 
     [JsonPropertyName("updated_at")]
     public int? UpdatedAt { get; set; }
 
     [JsonPropertyName("events")]
-    public List<FineTuneEvent> Events { get; set; } = new();
+    public List<FineTuneResponseEvent> Events { get; set; } = new();
 }

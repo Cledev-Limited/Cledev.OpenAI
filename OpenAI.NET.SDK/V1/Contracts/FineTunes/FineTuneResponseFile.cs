@@ -2,7 +2,7 @@
 
 namespace OpenAI.NET.SDK.V1.Contracts.FineTunes;
 
-public record FineTuneFile
+public record FineTuneResponseFile
 {
     [JsonPropertyName("id")]
     public string Id { get; set; } = null!;

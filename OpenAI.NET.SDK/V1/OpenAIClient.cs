@@ -108,9 +108,9 @@ public class OpenAIClient : IOpenAIClient
     }
 
     /// <inheritdoc />
-    public async Task<CreateFineTuneResponse?> CreateFineTune(CreateFineTuneRequest request)
+    public async Task<FineTuneResponse?> CreateFineTune(CreateFineTuneRequest request)
     {
-        return await _httpClient.Post<CreateFineTuneResponse?>($"/{ApiVersion}/fine-tunes", request);
+        return await _httpClient.Post<FineTuneResponse?>($"/{ApiVersion}/fine-tunes", request);
     }
 
     /// <inheritdoc />
@@ -120,8 +120,14 @@ public class OpenAIClient : IOpenAIClient
     }
 
     /// <inheritdoc />
-    public async Task<RetrieveFineTuneResponse?> RetrieveFineTune(string fineTuneId)
+    public async Task<FineTuneResponse?> RetrieveFineTune(string fineTuneId)
     {
-        return await _httpClient.Get<RetrieveFineTuneResponse?>($"/{ApiVersion}/fine-tunes/{fineTuneId}");
+        return await _httpClient.Get<FineTuneResponse?>($"/{ApiVersion}/fine-tunes/{fineTuneId}");
+    }
+
+    /// <inheritdoc />
+    public async Task<FineTuneResponse?> CancelFineTune(string fineTuneId)
+    {
+        return await _httpClient.Post<FineTuneResponse?>($"/{ApiVersion}/fine-tunes/{fineTuneId}/cancel", null);
     }
 }
