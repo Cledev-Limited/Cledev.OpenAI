@@ -54,7 +54,7 @@ var client = serviceProvider.GetRequiredService<IOpenAIClient>();
 //var response = await client.RetrieveFile(uploadedFile!.Id);
 
 //Fine Tunes
-var response = client.ListFineTunes();
+var response = await client.ListFineTunes();
 
 //Console.WriteLine(response.IsSuccess
 //    ? $"{JsonSerializer.Serialize(response.Value, jsonSerializerOptions)}"

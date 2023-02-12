@@ -118,4 +118,10 @@ public class OpenAIClient : IOpenAIClient
     {
         return await _httpClient.Get<ListFineTunesResponse?>($"/{ApiVersion}/fine-tunes");
     }
+
+    /// <inheritdoc />
+    public async Task<RetrieveFineTuneResponse?> RetrieveFineTune(string fineTuneId)
+    {
+        return await _httpClient.Get<RetrieveFineTuneResponse?>($"/{ApiVersion}/fine-tunes/{fineTuneId}");
+    }
 }

@@ -107,4 +107,11 @@ public interface IOpenAIClient
     /// </summary>
     /// <returns>The list fine tunes response.</returns>
     Task<ListFineTunesResponse?> ListFineTunes();
+
+    /// <summary>
+    /// Gets info about the fine-tune job.
+    /// </summary>
+    /// <param name="fineTuneId">The ID of the fine-tune job.</param>
+    /// <returns>The retrieve fine tune response.</returns>
+    Task<RetrieveFineTuneResponse?> RetrieveFineTune(string fineTuneId);
 }
