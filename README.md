@@ -11,13 +11,32 @@ Install-Package OpenAI.NET.SDK
 ## APIs
 
 - Models
+  - List Models
+  - Retrieve Model
 - Completions
+  - Create Completion
 - Edits
+  - Create Edit
 - Images
+  - Create Image
+  - Create Image Edit
+  - Create Image Variation
 - Embeddings
+  - Create Embeddings
 - Files
+  - List Files
+  - Upload File
+  - Delete File
+  - Retrieve File
 - Fine-tunes
+  - Create Fine-tune
+  - List Fine-tunes
+  - Retrieve Fine-tune
+  - Cencel Fine-tune
+  - List Fine-tune Events
+  - Delete Fine-tune Model
 - Moderations
+  - Create Moderation
 
 ## Configuration
 
