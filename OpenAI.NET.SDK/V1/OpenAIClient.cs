@@ -137,4 +137,10 @@ public class OpenAIClient : IOpenAIClient
         var queryParameters = stream is not null ? $"?stream={stream}" : string.Empty;
         return await _httpClient.Get<ListFineTuneEventsResponse?>($"/{ApiVersion}/fine-tunes/{fineTuneId}/events{queryParameters}");
     }
+
+    /// <inheritdoc />
+    public async Task<DeleteFineTuneResponse?> DeleteFineTune(string model)
+    {
+        return await _httpClient.Delete<DeleteFineTuneResponse?>($"/{ApiVersion}/models/{model}");
+    }
 }

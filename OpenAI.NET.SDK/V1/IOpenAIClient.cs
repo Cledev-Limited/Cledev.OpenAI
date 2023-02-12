@@ -136,4 +136,11 @@ public interface IOpenAIClient
     /// </param>
     /// <returns></returns>
     Task<ListFineTuneEventsResponse?> ListFineTuneEvents(string fineTuneId, bool? stream = null);
+
+    /// <summary>
+    /// Delete a fine-tuned model. You must have the Owner role in your organization.
+    /// </summary>
+    /// <param name="model">The model to delete.</param>
+    /// <returns>The delete fine tune model response.</returns>
+    Task<DeleteFineTuneResponse?> DeleteFineTune(string model);
 }
