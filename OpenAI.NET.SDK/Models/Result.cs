@@ -2,22 +2,19 @@ using OneOf;
 
 namespace OpenAI.NET.SDK.Models;
 
-public sealed class Result<TResult> : OneOfBase<Success<TResult>, Failure>
+public sealed class Result<TResponse> : OneOfBase<TResponse, Error>
 {
-    private Result(OneOf<Success<TResult>, Failure> input) : base(input) { }
+    private Result(OneOf<TResponse, Error> input) : base(input) { }
 
-    public static implicit operator Result<TResult>(Success<TResult> success) => new(success);
-    public static implicit operator Result<TResult>(Failure failure) => new(failure);
-    public static implicit operator Result<TResult>(TResult result) => new(new Success<TResult>(result));
+    public static implicit operator Result<TResponse>(TResponse response) => new(response);
+    public static implicit operator Result<TResponse>(Error error) => new(error);
 
     public bool IsSuccess => IsT0;
-    public bool IsFailure => IsT1;
+    public bool IsError => IsT1;
 
-    public Success<TResult> Success => AsT0;
-    public Failure Failure => AsT1;
+    public TResponse? Response => AsT0;
+    public Error Error => AsT1;
 
-    public new TResult? Value => AsT0.Result;
-
-    public bool TryPickSuccess(out Success<TResult> success, out Failure failure) => TryPickT0(out success, out failure);
-    public bool TryPickFailure(out Failure failure, out Success<TResult> success) => TryPickT1(out failure, out success);
+    public bool TryPickSuccess(out TResponse response, out Error error) => TryPickT0(out response, out error);
+    public bool TryPickError(out Error error, out TResponse response) => TryPickT1(out error, out response);
 }
