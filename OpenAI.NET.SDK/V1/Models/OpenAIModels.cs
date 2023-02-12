@@ -37,6 +37,12 @@ public enum FineTuningModel
     Davinci
 }
 
+public enum ModerationModel
+{
+    TextModerationStable,
+    TextModerationLatest
+}
+
 public static class OpenAIModelsExtensions
 {
     public static string ToStringModel(this CompletionsModel completionsModel)
@@ -89,6 +95,16 @@ public static class OpenAIModelsExtensions
             FineTuningModel.Curie => "curie",
             FineTuningModel.Davinci => "davinci",
             _ => throw new ArgumentOutOfRangeException(nameof(fineTuningModel), fineTuningModel, null)
+        };
+    }
+
+    public static string ToStringModel(this ModerationModel moderationModel)
+    {
+        return moderationModel switch
+        {
+            ModerationModel.TextModerationStable => "text-moderation-stable",
+            ModerationModel.TextModerationLatest => "text-moderation-latest",
+            _ => throw new ArgumentOutOfRangeException(nameof(moderationModel), moderationModel, null)
         };
     }
 }

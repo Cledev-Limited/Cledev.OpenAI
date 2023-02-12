@@ -1,5 +1,4 @@
-﻿using System.Net.Http;
-using System.Net.Http.Json;
+﻿using System.Net.Http.Json;
 using Microsoft.Extensions.Options;
 using OpenAI.NET.SDK.Extensions;
 using OpenAI.NET.SDK.V1.Contracts.Completions;
@@ -9,6 +8,7 @@ using OpenAI.NET.SDK.V1.Contracts.Files;
 using OpenAI.NET.SDK.V1.Contracts.FineTunes;
 using OpenAI.NET.SDK.V1.Contracts.Images;
 using OpenAI.NET.SDK.V1.Contracts.Models;
+using OpenAI.NET.SDK.V1.Contracts.Moderations;
 
 namespace OpenAI.NET.SDK.V1;
 
@@ -142,5 +142,11 @@ public class OpenAIClient : IOpenAIClient
     public async Task<DeleteFineTuneResponse?> DeleteFineTune(string model)
     {
         return await _httpClient.Delete<DeleteFineTuneResponse?>($"/{ApiVersion}/models/{model}");
+    }
+
+    /// <inheritdoc />
+    public async Task<CreateModerationResponse?> CreateModeration(CreateModerationRequest request)
+    {
+        return await _httpClient.Post<CreateModerationResponse?>($"/{ApiVersion}/moderations", request);
     }
 }

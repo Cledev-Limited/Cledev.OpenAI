@@ -5,6 +5,7 @@ using OpenAI.NET.SDK.Extensions;
 using OpenAI.NET.SDK.V1;
 using OpenAI.NET.SDK.V1.Contracts;
 using OpenAI.NET.SDK.V1.Contracts.Embeddings;
+using OpenAI.NET.SDK.V1.Contracts.Moderations;
 using OpenAI.NET.SDK.V1.Models;
 
 var jsonSerializerOptions = new JsonSerializerOptions
@@ -54,7 +55,13 @@ var client = serviceProvider.GetRequiredService<IOpenAIClient>();
 //var response = await client.RetrieveFile(uploadedFile!.Id);
 
 //Fine Tunes
-var response = await client.ListFineTunes();
+//var response = await client.ListFineTunes();
+
+//Moderations
+var response = await client.CreateModeration(new CreateModerationRequest
+{
+    Input = "I want to kill them"
+});
 
 //Console.WriteLine(response.IsSuccess
 //    ? $"{JsonSerializer.Serialize(response.Value, jsonSerializerOptions)}"

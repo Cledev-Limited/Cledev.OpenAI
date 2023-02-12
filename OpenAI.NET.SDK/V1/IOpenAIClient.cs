@@ -5,9 +5,7 @@ using OpenAI.NET.SDK.V1.Contracts.Files;
 using OpenAI.NET.SDK.V1.Contracts.FineTunes;
 using OpenAI.NET.SDK.V1.Contracts.Images;
 using OpenAI.NET.SDK.V1.Contracts.Models;
-using System.Numerics;
-using System.Text;
-using System.Xml.Linq;
+using OpenAI.NET.SDK.V1.Contracts.Moderations;
 
 namespace OpenAI.NET.SDK.V1;
 
@@ -143,4 +141,11 @@ public interface IOpenAIClient
     /// <param name="model">The model to delete.</param>
     /// <returns>The delete fine tune model response.</returns>
     Task<DeleteFineTuneResponse?> DeleteFineTune(string model);
+
+    /// <summary>
+    /// Classifies if text violates OpenAI's Content Policy.
+    /// </summary>
+    /// <param name="request">The create moderation request.</param>
+    /// <returns>The create moderation response.</returns>
+    Task<CreateModerationResponse?> CreateModeration(CreateModerationRequest request);
 }
