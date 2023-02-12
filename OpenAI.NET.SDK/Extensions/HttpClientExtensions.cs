@@ -1,6 +1,7 @@
 ﻿using System.Net.Http.Json;
 using System.Text.Json.Serialization;
 using System.Text.Json;
+using OpenAI.NET.SDK.Models;
 
 namespace OpenAI.NET.SDK.Extensions;
 
@@ -28,5 +29,15 @@ internal static class HttpClientExtensions
     {
         var response = await httpClient.DeleteAsync(requestUri);
         return await response.Content.ReadFromJsonAsync<T?>();
+    }
+
+    private static async Task<Result<T?>> ToResult<T>(this HttpResponseMessage response)
+    {
+        if (response.IsSuccessStatusCode)
+        {
+            return await response.Content.ReadFromJsonAsync<T?>();
+        }
+
+        return new Error(response.StatusCode.ToErrorCode());
     }
 }
