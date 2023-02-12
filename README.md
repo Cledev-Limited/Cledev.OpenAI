@@ -16,8 +16,8 @@ Install-Package OpenAI.NET.SDK
 - Images
 - Embeddings
 - Files
-- Fine-tunes _(available soon)_
-- Moderations _(available soon)_
+- Fine-tunes
+- Moderations
 
 ## Configuration
 
