@@ -121,4 +121,19 @@ public interface IOpenAIClient
     /// <param name="fineTuneId">The ID of the fine-tune job to cancel.</param>
     /// <returns>The fine tune response.</returns>
     Task<FineTuneResponse?> CancelFineTune(string fineTuneId);
+
+    /// <summary>
+    /// Get fine-grained status updates for a fine-tune job.
+    /// </summary>
+    /// <param name="fineTuneId">
+    /// <para>Required.</para>
+    /// <para>The ID of the fine-tune job to get events for.</para>
+    /// </param>
+    /// <param name="stream">
+    /// <para>Optional (Defaults to false).</para>
+    /// <para>Whether to stream events for the fine-tune job. If set to true, events will be sent as data-only server-sent events as they become available. The stream will terminate with a data: [DONE] message when the job is finished (succeeded, cancelled, or failed).</para>
+    /// <para>If set to false, only events generated so far will be returned.</para>
+    /// </param>
+    /// <returns></returns>
+    Task<ListFineTuneEventsResponse?> ListFineTuneEvents(string fineTuneId, bool? stream = null);
 }

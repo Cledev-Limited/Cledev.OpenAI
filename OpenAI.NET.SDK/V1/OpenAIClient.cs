@@ -130,4 +130,11 @@ public class OpenAIClient : IOpenAIClient
     {
         return await _httpClient.Post<FineTuneResponse?>($"/{ApiVersion}/fine-tunes/{fineTuneId}/cancel", null);
     }
+
+    /// <inheritdoc />
+    public async Task<ListFineTuneEventsResponse?> ListFineTuneEvents(string fineTuneId, bool? stream = null)
+    {
+        var queryParameters = stream is not null ? $"?stream={stream}" : string.Empty;
+        return await _httpClient.Get<ListFineTuneEventsResponse?>($"/{ApiVersion}/fine-tunes/{fineTuneId}/events{queryParameters}");
+    }
 }
