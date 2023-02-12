@@ -101,4 +101,10 @@ public interface IOpenAIClient
     /// <param name="request">The create fine tune request.</param>
     /// <returns>The create fine tune response.</returns>
     Task<CreateFineTuneResponse?> CreateFineTune(CreateFineTuneRequest request);
+
+    /// <summary>
+    /// List your organization's fine-tuning jobs.
+    /// </summary>
+    /// <returns>The list fine tunes response.</returns>
+    Task<ListFineTunesResponse?> ListFineTunes();
 }
