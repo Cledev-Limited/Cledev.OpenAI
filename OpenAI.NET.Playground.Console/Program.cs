@@ -63,10 +63,6 @@ var response = await client.CreateModeration(new CreateModerationRequest
     Input = "I want to kill them"
 });
 
-//Console.WriteLine(response.IsSuccess
-//    ? $"{JsonSerializer.Serialize(response.Value, jsonSerializerOptions)}"
-//    : $"{JsonSerializer.Serialize(response.Error, jsonSerializerOptions)}");
-
 Console.WriteLine($"{JsonSerializer.Serialize(response, jsonSerializerOptions)}");
 
 Console.ReadKey();
