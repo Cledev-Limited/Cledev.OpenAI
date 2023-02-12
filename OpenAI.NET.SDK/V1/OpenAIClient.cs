@@ -84,7 +84,7 @@ public class OpenAIClient : IOpenAIClient
     }
 
     /// <inheritdoc />
-    public async Task<UploadFileResponse?> UploadFile(byte[] file, string fileName, string purpose)
+    public async Task<FileResponse?> UploadFile(byte[] file, string fileName, string purpose)
     {
         var multipartFormDataContent = new MultipartFormDataContent
         {
@@ -92,7 +92,7 @@ public class OpenAIClient : IOpenAIClient
             { new StringContent(purpose), "purpose" }
         };
 
-        return await _httpClient.Post<UploadFileResponse?>($"/{ApiVersion}/files", multipartFormDataContent);
+        return await _httpClient.Post<FileResponse?>($"/{ApiVersion}/files", multipartFormDataContent);
     }
 
     /// <inheritdoc />
@@ -102,9 +102,9 @@ public class OpenAIClient : IOpenAIClient
     }
 
     /// <inheritdoc />
-    public async Task<RetrieveFileResponse?> RetrieveFile(string fileId)
+    public async Task<FileResponse?> RetrieveFile(string fileId)
     {
-        return await _httpClient.Get<RetrieveFileResponse?>($"/{ApiVersion}/files/{fileId}");
+        return await _httpClient.Get<FileResponse?>($"/{ApiVersion}/files/{fileId}");
     }
 
     /// <inheritdoc />

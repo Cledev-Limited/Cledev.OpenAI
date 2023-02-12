@@ -75,8 +75,8 @@ public interface IOpenAIClient
     /// <param name="file">The file.</param>
     /// <param name="fileName">The name of the file.</param>
     /// <param name="purpose">The purpose of the file.</param>
-    /// <returns>The upload file response.</returns>
-    Task<UploadFileResponse?> UploadFile(byte[] file, string fileName, string purpose);
+    /// <returns>The file response.</returns>
+    Task<FileResponse?> UploadFile(byte[] file, string fileName, string purpose);
 
     /// <summary>
     /// Delete a file.
@@ -90,7 +90,7 @@ public interface IOpenAIClient
     /// </summary>
     /// <param name="fileId">The ID of the file to use for this request.</param>
     /// <returns>The retrieve file response.</returns>
-    Task<RetrieveFileResponse?> RetrieveFile(string fileId);
+    Task<FileResponse?> RetrieveFile(string fileId);
 
     /// <summary>
     /// Creates a job that fine-tunes a specified model from a given dataset.

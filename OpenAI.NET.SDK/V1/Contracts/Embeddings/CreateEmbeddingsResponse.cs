@@ -11,29 +11,8 @@ public record CreateEmbeddingsResponse
     public string? Object { get; set; }
 
     [JsonPropertyName("data")]
-    public List<CreateEmbeddingsResponseData> Data { get; set; } = new();
+    public List<EmbeddingsData> Data { get; set; } = new();
 
     [JsonPropertyName("usage")]
-    public CreateEmbeddingsResponseUsage Usage { get; set; } = null!;
-
-    public record CreateEmbeddingsResponseData
-    {
-        [JsonPropertyName("object")]
-        public string? Object { get; set; }
-
-        [JsonPropertyName("index")]
-        public int? Index { get; set; }
-
-        [JsonPropertyName("embedding")]
-        public List<double> Embedding { get; set; } = new();
-    }
-
-    public record CreateEmbeddingsResponseUsage
-    {
-        [JsonPropertyName("prompt_tokens")]
-        public int PromptTokens { get; set; }
-
-        [JsonPropertyName("total_tokens")]
-        public int TotalTokens { get; set; }
-    }
+    public EmbeddingsUsage Usage { get; set; } = null!;
 }

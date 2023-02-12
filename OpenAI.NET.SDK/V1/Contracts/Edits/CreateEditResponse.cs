@@ -11,29 +11,8 @@ public class CreateEditResponse
     public int Created { get; set; }
 
     [JsonPropertyName("choices")]
-    public List<CreateEditResponseChoice> Choices { get; set; } = new();
+    public List<EditChoice> Choices { get; set; } = new();
 
     [JsonPropertyName("usage")]
-    public CreateEditResponseUsage Usage { get; set; } = null!;
-
-    public class CreateEditResponseChoice
-    {
-        [JsonPropertyName("text")]
-        public string Text { get; set; } = null!;
-
-        [JsonPropertyName("index")]
-        public int Index { get; set; }
-    }
-
-    public class CreateEditResponseUsage
-    {
-        [JsonPropertyName("prompt_tokens")]
-        public int PromptTokens { get; set; }
-
-        [JsonPropertyName("completion_tokens")]
-        public int EditTokens { get; set; }
-
-        [JsonPropertyName("total_tokens")]
-        public int TotalTokens { get; set; }
-    }
+    public EditUsage Usage { get; set; } = null!;
 }
