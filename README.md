@@ -8,6 +8,9 @@
 Install-Package OpenAI.NET.SDK
 ```
 
+_**SOON TO BE REBRANDED**_
+
+
 ## APIs
 
 - **Models**
