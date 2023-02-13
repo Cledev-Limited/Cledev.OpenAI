@@ -1,6 +1,6 @@
 ﻿<div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="">OpenAI.NET Playground</a>
+        <a class="navbar-brand" href="">OpenAI.NET</a>
         <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -14,16 +14,56 @@
                 <span class="oi oi-home" aria-hidden="true"></span> Home
             </NavLink>
         </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="/completions" Match="NavLinkMatch.All">
+                <span class="oi oi-globe" aria-hidden="true"></span> Completions
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="/edits" Match="NavLinkMatch.All">
+                <span class="oi oi-globe" aria-hidden="true"></span> Edits
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="/embeddings" Match="NavLinkMatch.All">
+                <span class="oi oi-globe" aria-hidden="true"></span> Embeddings
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="/files" Match="NavLinkMatch.All">
+                <span class="oi oi-globe" aria-hidden="true"></span> Files
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="/fine-tunes" Match="NavLinkMatch.All">
+                <span class="oi oi-globe" aria-hidden="true"></span> Fine-tunes
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="/images" Match="NavLinkMatch.All">
+                <span class="oi oi-globe" aria-hidden="true"></span> Images
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="/models" Match="NavLinkMatch.All">
+                <span class="oi oi-globe" aria-hidden="true"></span> Models
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="/moderations" Match="NavLinkMatch.All">
+                <span class="oi oi-globe" aria-hidden="true"></span> Moderations
+            </NavLink>
+        </div>
     </nav>
 </div>
 
 @code {
-    private bool collapseNavMenu = true;
+    private bool _collapseNavMenu = true;
 
-    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+    private string? NavMenuCssClass => _collapseNavMenu ? "collapse" : null;
 
     private void ToggleNavMenu()
     {
-        collapseNavMenu = !collapseNavMenu;
+        _collapseNavMenu = !_collapseNavMenu;
     }
 }
