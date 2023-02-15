@@ -1,4 +1,4 @@
-# OpenAI.NET _(Preview)_
+# Cledev.OpenAI _(Preview)_
 .NET SDK for OpenAI with a Blazor Server playground _(available soon)_
 
 [![Main](https://github.com/lucabriguglia/OpenAI.NET/actions/workflows/main.yml/badge.svg)](https://github.com/lucabriguglia/OpenAI.NET/actions/workflows/main.yml)
@@ -7,9 +7,6 @@
 ```
 Install-Package OpenAI.NET.SDK
 ```
-
-_**SOON TO BE REBRANDED**_
-
 
 ## APIs
 
