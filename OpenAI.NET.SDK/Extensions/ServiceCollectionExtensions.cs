@@ -1,8 +1,8 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Cledev.OpenAI.V1;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using OpenAI.NET.SDK.V1;
 
-namespace OpenAI.NET.SDK.Extensions;
+namespace Cledev.OpenAI.Extensions;
 
 public static class ServiceCollectionExtensions
 {

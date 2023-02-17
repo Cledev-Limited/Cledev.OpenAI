@@ -1,6 +1,4 @@
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
-using OpenAI.NET.Playground.Blazor.Data;
+using Cledev.OpenAI.Playground.Blazor.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 

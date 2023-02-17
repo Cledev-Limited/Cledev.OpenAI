@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace OpenAI.NET.SDK.V1.Contracts.Embeddings;
+namespace Cledev.OpenAI.V1.Contracts.Embeddings;
 
 public record EmbeddingsUsage
 {

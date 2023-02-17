@@ -1,12 +1,10 @@
 ﻿using System.Text.Json;
+using Cledev.OpenAI.Extensions;
+using Cledev.OpenAI.V1;
+using Cledev.OpenAI.V1.Contracts.Moderations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using OpenAI.NET.SDK.Extensions;
-using OpenAI.NET.SDK.V1;
-using OpenAI.NET.SDK.V1.Contracts;
-using OpenAI.NET.SDK.V1.Contracts.Embeddings;
-using OpenAI.NET.SDK.V1.Contracts.Moderations;
-using OpenAI.NET.SDK.V1.Models;
+using Cledev.OpenAI.V1.Contracts;
 
 var jsonSerializerOptions = new JsonSerializerOptions
 {

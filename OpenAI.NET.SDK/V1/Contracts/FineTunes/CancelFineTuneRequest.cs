@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace OpenAI.NET.SDK.V1.Contracts.FineTunes;
+namespace Cledev.OpenAI.V1.Contracts.FineTunes;
 
 /// <summary>
 /// Immediately cancel a fine-tune job.

@@ -1,4 +1,4 @@
-namespace OpenAI.NET.Playground.Blazor.Data
+namespace Cledev.OpenAI.Playground.Blazor.Data
 {
     public class WeatherForecast
     {

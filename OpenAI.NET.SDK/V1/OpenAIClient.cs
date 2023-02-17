@@ -1,16 +1,16 @@
 ﻿using System.Net.Http.Json;
+using Cledev.OpenAI.Extensions;
+using Cledev.OpenAI.V1.Contracts.Completions;
+using Cledev.OpenAI.V1.Contracts.Edits;
+using Cledev.OpenAI.V1.Contracts.Embeddings;
+using Cledev.OpenAI.V1.Contracts.Files;
+using Cledev.OpenAI.V1.Contracts.FineTunes;
+using Cledev.OpenAI.V1.Contracts.Images;
+using Cledev.OpenAI.V1.Contracts.Models;
+using Cledev.OpenAI.V1.Contracts.Moderations;
 using Microsoft.Extensions.Options;
-using OpenAI.NET.SDK.Extensions;
-using OpenAI.NET.SDK.V1.Contracts.Completions;
-using OpenAI.NET.SDK.V1.Contracts.Edits;
-using OpenAI.NET.SDK.V1.Contracts.Embeddings;
-using OpenAI.NET.SDK.V1.Contracts.Files;
-using OpenAI.NET.SDK.V1.Contracts.FineTunes;
-using OpenAI.NET.SDK.V1.Contracts.Images;
-using OpenAI.NET.SDK.V1.Contracts.Models;
-using OpenAI.NET.SDK.V1.Contracts.Moderations;
 
-namespace OpenAI.NET.SDK.V1;
+namespace Cledev.OpenAI.V1;
 
 public class OpenAIClient : IOpenAIClient
 {

@@ -1,8 +1,8 @@
 ﻿using System.Net.Http.Json;
-using System.Text.Json.Serialization;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
-namespace OpenAI.NET.SDK.Extensions;
+namespace Cledev.OpenAI.Extensions;
 
 internal static class HttpClientExtensions
 {

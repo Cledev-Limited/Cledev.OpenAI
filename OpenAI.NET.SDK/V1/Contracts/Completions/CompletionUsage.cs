@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace OpenAI.NET.SDK.V1.Contracts.Completions;
+namespace Cledev.OpenAI.V1.Contracts.Completions;
 
 public record CompletionUsage
 {

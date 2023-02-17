@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace OpenAI.NET.SDK.V1.Contracts.Images;
+namespace Cledev.OpenAI.V1.Contracts.Images;
 
 /// <summary>
 /// Creates an image given a prompt.

@@ -1,7 +1,16 @@
 ﻿@page "/completions"
 
-<PageTitle>OpenAI.NET - Completions</PageTitle>
+<PageTitle>Cledev.OpenAI - Completions</PageTitle>
 
 <h1>Completions</h1>
 
-Available soon
+<form>
+    <div class="mb-3">
+        <label for="prompt" class="form-label">Prompt</label>
+        <input type="text" class="form-control" id="prompt" aria-describedby="promptHelp">
+        <div id="promptHelp" class="form-text">
+            The prompt(s) to generate completions for, encoded as a string, array of strings, array of tokens, or array of token arrays.
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

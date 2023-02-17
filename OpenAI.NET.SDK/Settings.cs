@@ -1,4 +1,4 @@
-﻿namespace OpenAI.NET.SDK;
+﻿namespace Cledev.OpenAI;
 
 public class Settings
 {

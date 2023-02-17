@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace OpenAI.NET.SDK.V1.Contracts.Moderations;
+namespace Cledev.OpenAI.V1.Contracts.Moderations;
 
 /// <summary>
 /// Classifies if text violates OpenAI's Content Policy.

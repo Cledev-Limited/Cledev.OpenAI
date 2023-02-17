@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace OpenAI.NET.SDK.V1.Contracts.Files;
+namespace Cledev.OpenAI.V1.Contracts.Files;
 
 public record DeleteFileResponse
 {
