@@ -34,7 +34,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\OpenAI.NET.SDK\Cledev.OpenAI.csproj" />
+	  <ProjectReference Include="..\Cledev.OpenAI\Cledev.OpenAI.csproj" />
 	</ItemGroup>
 
 </Project>
