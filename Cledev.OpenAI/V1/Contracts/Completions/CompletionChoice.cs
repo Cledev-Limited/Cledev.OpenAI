@@ -11,7 +11,7 @@ public record CompletionChoice
     public int Index { get; set; }
 
     [JsonPropertyName("logprobs")]
-    public string? Logprobs { get; set; }
+    public string? LogProbs { get; set; }
 
     [JsonPropertyName("finish_reason")]
     public string FinishReason { get; set; } = null!;
