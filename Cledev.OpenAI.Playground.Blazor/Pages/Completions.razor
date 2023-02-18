@@ -34,27 +34,44 @@
     }
 </EditForm>
 
-@*@if (IsLoading)
-{
-    <div class="mt-3">
-        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-    </div>
-}*@
-
 @if (Response is not null)
 {
-    <div class="mt-3">
-        @Response.Choices[0].Text;
-    </div>
-}
+    for (var index = 0; index < Response.Choices.Count; index++)
+    {
+        var choice = Response.Choices[index];
+        <div class="card d-flex mt-3">
+            <div class="card-header">
+                Choice @(index + 1)
+            </div>
+            <div class="card-body">
+                <div class="mb-3">@choice.Text</div>
+                <span class="fw-bold">Index</span>: @choice.Index<br />
+                <span class="fw-bold">Finish Reason</span>: @choice.FinishReason<br />
+                <span class="fw-bold">Logprobs</span>: @choice.Logprobs
+            </div>
+        </div>
+    }
 
-@*<form>
-    <div class="mb-3">
-        <label for="prompt" class="form-label">Prompt</label>
-        <input type="text" class="form-control" id="prompt" aria-describedby="promptHelp">
-        <div id="promptHelp" class="form-text">
-            The prompt(s) to generate completions for, encoded as a string, array of strings, array of tokens, or array of token arrays.
+    <div class="card d-flex mt-3">
+        <div class="card-header">
+            Info
+        </div>
+        <div class="card-body">
+            <span class="fw-bold">Id</span>: @Response.Id<br />
+            <span class="fw-bold">Object</span>: @Response.Object<br />
+            <span class="fw-bold">Created</span>: @Response.Created<br />
+            <span class="fw-bold">Model</span>: @Response.Model
         </div>
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>*@
+
+    <div class="card d-flex mt-3">
+        <div class="card-header">
+            Usage
+        </div>
+        <div class="card-body">
+            <span class="fw-bold">Prompt Tokens</span>: @Response.Usage.PromptTokens<br />
+            <span class="fw-bold">Completion Tokens</span>: @Response.Usage.CompletionTokens<br />
+            <span class="fw-bold">Total Tokens</span>: @Response.Usage.TotalTokens
+        </div>
+    </div>
+}
