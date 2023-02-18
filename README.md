@@ -1,5 +1,5 @@
 # Cledev.OpenAI _(Beta)_
-.NET SDK for OpenAI with a Blazor Server playground _(available soon)_
+.NET SDK for OpenAI with a Blazor Server playground _(work in progress)_
 
 [![Main](https://github.com/lucabriguglia/Cledev.OpenAI/actions/workflows/main.yml/badge.svg)](https://github.com/lucabriguglia/Cledev.OpenAI/actions/workflows/main.yml)
 [![Nuget Package](https://img.shields.io/badge/nuget-1.0.0-blue.svg)](https://www.nuget.org/packages/Cledev.OpenAI)
