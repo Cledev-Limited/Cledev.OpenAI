@@ -40,7 +40,7 @@ Install-Package Cledev.OpenAI
 
 ## Blazor Playground
 
-<img src="https://user-images.githubusercontent.com/8679253/219854795-37b833f2-bd2d-4e56-8d83-a87f02141f24.png" width="500" />
+<img src="https://user-images.githubusercontent.com/8679253/219868910-8efcb5f9-128d-4db8-a8a3-edb93a19c948.png" width="600" />
 
 ## Configuration
 
