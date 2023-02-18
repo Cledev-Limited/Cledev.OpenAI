@@ -38,6 +38,10 @@ Install-Package Cledev.OpenAI
 - **Moderations**
   - Create Moderation
 
+## Blazor Playground
+
+<img src="https://user-images.githubusercontent.com/8679253/219854795-37b833f2-bd2d-4e56-8d83-a87f02141f24.png" width="500" />
+
 ## Configuration
 
 ### Option 1
