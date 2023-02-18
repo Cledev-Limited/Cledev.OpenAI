@@ -43,7 +43,7 @@ public class CreateCompletionRequest
     ///<para>We generally recommend altering this or top_p but not both.</para>
     /// </summary>
     [JsonPropertyName("temperature")]
-    public object? Temperature { get; set; }
+    public float? Temperature { get; set; }
 
     /// <summary>
     /// <para>Optional (Defaults to 1).</para>
@@ -120,7 +120,7 @@ public class CreateCompletionRequest
     /// <para>As an example, you can pass {"50256": -100} to prevent the &amp;lt;|endoftext|&amp;rt; token from being generated.</para>
     /// </summary>
     [JsonPropertyName("logit_bias")]
-    public object? LogitBias { get; set; }
+    public string? LogitBias { get; set; }
 
     /// <summary>
     /// <para>Optional.</para>

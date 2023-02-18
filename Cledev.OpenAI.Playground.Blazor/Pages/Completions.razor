@@ -4,23 +4,126 @@
 
 <PageTitle>Cledev.OpenAI - Completions</PageTitle>
 
-<h1>Completions <span class="small">(Work In Progress)</span></h1>
+<h1 class="mb-3">Completions</h1>
+
+<p class="mb-3">Given a prompt, the model will return one or more predicted completions, and can also return the probabilities of alternative tokens at each position.</p>
 
 <EditForm Model="Model.Request" OnValidSubmit="OnSubmitAsync">
     <div class="mb-3">
-        <label for="model" class="form-label">Model</label>
-        <InputSelect id="model" @bind-Value="Model.Request.Model" class="form-select">
-            @foreach (var item in Model.CompletionModels)
-            {
-                <option value="@item">@item</option>
-            }
-        </InputSelect>
+        <InputTextArea id="Prompt" placeholder="Prompt" @bind-Value="Model.Request.Prompt" class="form-control" />
     </div>
-    <div class="mb-3">
-        <label for="prompt" class="form-label">Prompt</label>
-        <InputText id="prompt" @bind-Value="Model.Request.Prompt" class="form-control" />
+
+    <div class="modal fade" id="optionsModal" tabindex="-1" aria-labelledby="optionsModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="optionsModalLabel">Options</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row mb-3">
+                        <label for="Model" class="col-sm-4 col-form-label">Model</label>
+                        <div class="col-sm-8">
+                            <InputSelect id="Model" @bind-Value="Model.Request.Model" class="form-select">
+                                @foreach (var item in Model.CompletionModels)
+                                {
+                                    <option value="@item">@item</option>
+                                }
+                            </InputSelect>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="Suffix" class="col-sm-4 col-form-label">Suffix</label>
+                        <div class="col-sm-8">
+                            <InputText id="Suffix" @bind-Value="Model.Request.Suffix" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="MaxTokens" class="col-sm-4 col-form-label">Max Tokens</label>
+                        <div class="col-sm-8">
+                            <InputNumber id="MaxTokens" @bind-Value="Model.Request.MaxTokens" class="form-control" />
+                        </div>
+                    </div>                    
+                    <div class="row mb-3">
+                        <label for="Temperature" class="col-sm-4 col-form-label">Temperature</label>
+                        <div class="col-sm-8">
+                            <InputNumber id="Temperature" @bind-Value="Model.Request.Temperature" @bind-Value:format="F2" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="TopP" class="col-sm-4 col-form-label">TopP</label>
+                        <div class="col-sm-8">
+                            <InputNumber id="TopP" @bind-Value="Model.Request.TopP" @bind-Value:format="F2" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="N" class="col-sm-4 col-form-label">N</label>
+                        <div class="col-sm-8">
+                            <InputNumber id="N" @bind-Value="Model.Request.N" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="row mb-3 align-items-center">
+                        <label for="Stream" class="col-sm-4 col-form-label">Stream</label>
+                        <div class="col-sm-8">
+                            <input class="form-check-input" type="checkbox" id="Stream" checked="@Model.Request.Stream">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="LogProbs" class="col-sm-4 col-form-label">Log Probs</label>
+                        <div class="col-sm-8">
+                            <InputNumber id="LogProbs" @bind-Value="Model.Request.LogProbs" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="row mb-3 align-items-center">
+                        <label for="Echo" class="col-sm-4 col-form-label">Echo</label>
+                        <div class="col-sm-8">
+                            <input class="form-check-input" type="checkbox" id="Echo" checked="@Model.Request.Echo">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="Stop" class="col-sm-4 col-form-label">Stop</label>
+                        <div class="col-sm-8">
+                            <InputText id="Stop" @bind-Value="Model.Request.Stop" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="PresencePenalty" class="col-sm-4 col-form-label">Presence Penalty</label>
+                        <div class="col-sm-8">
+                            <InputNumber id="PresencePenalty" @bind-Value="Model.Request.PresencePenalty" @bind-Value:format="F2" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="FrequencyPenalty" class="col-sm-4 col-form-label">Frequency Penalty</label>
+                        <div class="col-sm-8">
+                            <InputNumber id="FrequencyPenalty" @bind-Value="Model.Request.FrequencyPenalty" @bind-Value:format="F2" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="BestOf" class="col-sm-4 col-form-label">Best Of</label>
+                        <div class="col-sm-8">
+                            <InputNumber id="BestOf" @bind-Value="Model.Request.BestOf" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="LogitBias" class="col-sm-4 col-form-label">Logit Bias</label>
+                        <div class="col-sm-8">
+                            <InputTextArea id="LogitBias" @bind-Value="Model.Request.LogitBias" class="form-control" r />
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="User" class="col-sm-4 col-form-label">User</label>
+                        <div class="col-sm-8">
+                            <InputText id="User" @bind-Value="Model.Request.User" class="form-control" r />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
     </div>
-    
+
     @if (IsLoading)
     {
         <button class="btn btn-primary text-nowrap" type="button" disabled>
@@ -31,47 +134,88 @@
     else
     {
         <button type="submit" class="btn btn-primary">Create Completion</button>
+        <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#optionsModal">Options</button>
     }
 </EditForm>
 
 @if (Response is not null)
 {
-    for (var index = 0; index < Response.Choices.Count; index++)
-    {
-        var choice = Response.Choices[index];
-        <div class="card d-flex mt-3">
-            <div class="card-header">
-                Choice @(index + 1)
+    <div class="row my-5">
+        <div class="col-6">
+            <h4>Request</h4>
+            <div class="card d-flex mt-3">
+                <div class="card-header">
+                    Prompt
+                </div>
+                <div class="card-body">
+                    @Model.Request.Prompt
+                </div>
             </div>
-            <div class="card-body">
-                <div class="mb-3">@choice.Text</div>
-                <span class="fw-bold">Index</span>: @choice.Index<br />
-                <span class="fw-bold">Finish Reason</span>: @choice.FinishReason<br />
-                <span class="fw-bold">Logprobs</span>: @choice.Logprobs
+            
+            <div class="card d-flex mt-3">
+                <div class="card-header">
+                    Options
+                </div>
+                <div class="card-body">
+                    <span class="fw-bold">Model</span>: @Model.Request.Model<br />
+                    <span class="fw-bold">Suffix</span>: @Model.Request.Suffix<br />
+                    <span class="fw-bold">Max Tokens</span>: @Model.Request.MaxTokens<br />
+                    <span class="fw-bold">Temperature</span>: @Model.Request.Temperature<br />
+                    <span class="fw-bold">TopP</span>: @Model.Request.TopP<br />
+                    <span class="fw-bold">N</span>: @Model.Request.N<br />
+                    <span class="fw-bold">Stream</span>: @Model.Request.Stream<br />
+                    <span class="fw-bold">Log Probs</span>: @Model.Request.LogProbs<br />
+                    <span class="fw-bold">Echo</span>: @Model.Request.Echo<br />
+                    <span class="fw-bold">Stop</span>: @Model.Request.Stop<br />
+                    <span class="fw-bold">Presence Penalty</span>: @Model.Request.PresencePenalty<br />
+                    <span class="fw-bold">Frequency Penalty</span>: @Model.Request.FrequencyPenalty<br />
+                    <span class="fw-bold">BestOf</span>: @Model.Request.BestOf<br />
+                    <span class="fw-bold">Logit Bias</span>: @Model.Request.LogitBias<br />
+                    <span class="fw-bold">User</span>: @Model.Request.User
+                </div>
             </div>
         </div>
-    }
+        <div class="col-6">
+            <h4>Response</h4>
 
-    <div class="card d-flex mt-3">
-        <div class="card-header">
-            Info
-        </div>
-        <div class="card-body">
-            <span class="fw-bold">Id</span>: @Response.Id<br />
-            <span class="fw-bold">Object</span>: @Response.Object<br />
-            <span class="fw-bold">Created</span>: @Response.Created<br />
-            <span class="fw-bold">Model</span>: @Response.Model
-        </div>
-    </div>
+            @for (var index = 0; index < Response.Choices.Count; index++)
+            {
+                var choice = Response.Choices[index];
+                <div class="card d-flex mt-3">
+                    <div class="card-header">
+                        Choice @(index + 1)
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">@choice.Text</div>
+                        <span class="fw-bold">Index</span>: @choice.Index<br />
+                        <span class="fw-bold">Finish Reason</span>: @choice.FinishReason<br />
+                        <span class="fw-bold">Logprobs</span>: @choice.Logprobs
+                    </div>
+                </div>
+            }
 
-    <div class="card d-flex mt-3">
-        <div class="card-header">
-            Usage
-        </div>
-        <div class="card-body">
-            <span class="fw-bold">Prompt Tokens</span>: @Response.Usage.PromptTokens<br />
-            <span class="fw-bold">Completion Tokens</span>: @Response.Usage.CompletionTokens<br />
-            <span class="fw-bold">Total Tokens</span>: @Response.Usage.TotalTokens
+            <div class="card d-flex mt-3">
+                <div class="card-header">
+                    Info
+                </div>
+                <div class="card-body">
+                    <span class="fw-bold">Id</span>: @Response.Id<br />
+                    <span class="fw-bold">Object</span>: @Response.Object<br />
+                    <span class="fw-bold">Created</span>: @Response.Created<br />
+                    <span class="fw-bold">Model</span>: @Response.Model
+                </div>
+            </div>
+
+            <div class="card d-flex mt-3">
+                <div class="card-header">
+                    Usage
+                </div>
+                <div class="card-body">
+                    <span class="fw-bold">Prompt Tokens</span>: @Response.Usage.PromptTokens<br />
+                    <span class="fw-bold">Completion Tokens</span>: @Response.Usage.CompletionTokens<br />
+                    <span class="fw-bold">Total Tokens</span>: @Response.Usage.TotalTokens
+                </div>
+            </div>
         </div>
     </div>
 }
