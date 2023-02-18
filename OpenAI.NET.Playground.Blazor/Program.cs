@@ -1,3 +1,4 @@
+using Cledev.OpenAI.Extensions;
 using Cledev.OpenAI.Playground.Blazor.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,6 +7,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();
+
+builder.Services.AddOpenAIClient();
 
 var app = builder.Build();
 

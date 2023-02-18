@@ -4,7 +4,6 @@ using Cledev.OpenAI.V1;
 using Cledev.OpenAI.V1.Contracts.Moderations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Cledev.OpenAI.V1.Contracts;
 
 var jsonSerializerOptions = new JsonSerializerOptions
 {
