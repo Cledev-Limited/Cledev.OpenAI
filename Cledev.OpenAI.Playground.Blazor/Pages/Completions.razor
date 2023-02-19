@@ -13,7 +13,7 @@
         <InputText id="Prompt" placeholder="Prompt" @bind-Value="Request.Prompt" class="form-control" />
     </div>
 
-    <div class="modal modal-lg fade" id="optionsModal" tabindex="-1" aria-labelledby="optionsModalLabel" aria-hidden="true">
+    <div class="modal fade" id="optionsModal" tabindex="-1" aria-labelledby="optionsModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -22,11 +22,11 @@
                 </div>
                 <div class="modal-body">
                     <div class="row mb-3">
-                        <label for="Model" class="col-sm-4 col-form-label">
-                            <i class="fa-regular fa-circle-question mx-1" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="Required. ID of the model to use. You can use the List models API to see all of your available models, or see our Model overview for descriptions of them."></i>
+                        <label for="Model" class="col-sm-5 col-form-label">
+                            <i class="fa-regular fa-circle-question" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="Required. ID of the model to use. You can use the List models API to see all of your available models, or see our Model overview for descriptions of them."></i>
                             Model
                         </label>
-                        <div class="col-sm-8">
+                        <div class="col-sm-7">
                             <InputSelect id="Model" @bind-Value="Request.Model" class="form-select">
                                 @foreach (var item in CompletionModels)
                                 {
@@ -36,128 +36,128 @@
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <label for="Suffix" class="col-sm-4 col-form-label">
-                            <i class="fa-regular fa-circle-question mx-1" data-bs-toggle="tooltip" data-bs-placement="right" title="Optional (Defaults to null). The suffix that comes after a completion of inserted text."></i>
+                        <label for="Suffix" class="col-sm-5 col-form-label">
+                            <i class="fa-regular fa-circle-question" data-bs-toggle="tooltip" data-bs-placement="right" title="Optional (Defaults to null). The suffix that comes after a completion of inserted text."></i>
                             Suffix
                         </label>
-                        <div class="col-sm-8">
+                        <div class="col-sm-7">
                             <InputText id="Suffix" @bind-Value="Request.Suffix" class="form-control"/>
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <label for="MaxTokens" class="col-sm-4 col-form-label">
-                            <i class="fa-regular fa-circle-question mx-1" data-bs-toggle="tooltip" data-bs-placement="right" title="Optional (Defaults to 16). The maximum number of tokens to generate in the completion. The token count of your prompt plus max_tokens cannot exceed the model's context length. Most models have a context length of 2048 tokens (except for the newest models, which support 4096)."></i>
+                        <label for="MaxTokens" class="col-sm-5 col-form-label">
+                            <i class="fa-regular fa-circle-question" data-bs-toggle="tooltip" data-bs-placement="right" title="Optional (Defaults to 16). The maximum number of tokens to generate in the completion. The token count of your prompt plus max_tokens cannot exceed the model's context length. Most models have a context length of 2048 tokens (except for the newest models, which support 4096)."></i>
                             Max Tokens
                         </label>
-                        <div class="col-sm-8">
+                        <div class="col-sm-7">
                             <InputNumber id="MaxTokens" @bind-Value="Request.MaxTokens" class="form-control"/>
                         </div>
                     </div>                    
                     <div class="row mb-3">
-                        <label for="Temperature" class="col-sm-4 col-form-label">
-                            <i class="fa-regular fa-circle-question mx-1" data-bs-toggle="tooltip" data-bs-placement="right" title="Optional (Defaults to 1). What sampling temperature to use. Higher values means the model will take more risks. Try 0.9 for more creative applications, and 0 (argmax sampling) for ones with a well-defined answer. We generally recommend altering this or top_p but not both."></i>
+                        <label for="Temperature" class="col-sm-5 col-form-label">
+                            <i class="fa-regular fa-circle-question" data-bs-toggle="tooltip" data-bs-placement="right" title="Optional (Defaults to 1). What sampling temperature to use. Higher values means the model will take more risks. Try 0.9 for more creative applications, and 0 (argmax sampling) for ones with a well-defined answer. We generally recommend altering this or top_p but not both."></i>
                             Temperature
                         </label>
-                        <div class="col-sm-8">
+                        <div class="col-sm-7">
                             <InputNumber id="Temperature" @bind-Value="Request.Temperature" @bind-Value:format="F2" class="form-control"/>
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <label for="TopP" class="col-sm-4 col-form-label">
-                            <i class="fa-regular fa-circle-question mx-1" data-bs-toggle="tooltip" data-bs-placement="right" title="Optional (Defaults to 1). An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered. We generally recommend altering this or temperature but not both."></i>
+                        <label for="TopP" class="col-sm-5 col-form-label">
+                            <i class="fa-regular fa-circle-question" data-bs-toggle="tooltip" data-bs-placement="right" title="Optional (Defaults to 1). An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered. We generally recommend altering this or temperature but not both."></i>
                             TopP
                         </label>
-                        <div class="col-sm-8">
+                        <div class="col-sm-7">
                             <InputNumber id="TopP" @bind-Value="Request.TopP" @bind-Value:format="F2" class="form-control"/>
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <label for="N" class="col-sm-4 col-form-label">
-                            <i class="fa-regular fa-circle-question mx-1" data-bs-toggle="tooltip" data-bs-placement="right" title="Optional (Defaults to 1). How many completions to generate for each prompt. Note: Because this parameter generates many completions, it can quickly consume your token quota. Use carefully and ensure that you have reasonable settings for max_tokens and stop."></i>
+                        <label for="N" class="col-sm-5 col-form-label">
+                            <i class="fa-regular fa-circle-question" data-bs-toggle="tooltip" data-bs-placement="right" title="Optional (Defaults to 1). How many completions to generate for each prompt. Note: Because this parameter generates many completions, it can quickly consume your token quota. Use carefully and ensure that you have reasonable settings for max_tokens and stop."></i>
                             N
                         </label>
-                        <div class="col-sm-8">
+                        <div class="col-sm-7">
                             <InputNumber id="N" @bind-Value="Request.N" class="form-control"/>
                         </div>
                     </div>
                     <div class="row mb-3 align-items-center">
-                        <label for="Stream" class="col-sm-4 col-form-label">
-                            <i class="fa-regular fa-circle-question mx-1" data-bs-toggle="tooltip" data-bs-placement="right" title="Optional (Defaults to false). Whether to stream back partial progress. If set, tokens will be sent as data-only server-sent events as they become available, with the stream terminated by a data: [DONE] message."></i>
+                        <label for="Stream" class="col-sm-5 col-form-label">
+                            <i class="fa-regular fa-circle-question" data-bs-toggle="tooltip" data-bs-placement="right" title="Optional (Defaults to false). Whether to stream back partial progress. If set, tokens will be sent as data-only server-sent events as they become available, with the stream terminated by a data: [DONE] message."></i>
                             Stream
                         </label>
-                        <div class="col-sm-8">
+                        <div class="col-sm-7">
                             <input class="form-check-input" type="checkbox" id="Stream" checked="@Request.Stream">
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <label for="LogProbs" class="col-sm-4 col-form-label">
-                            <i class="fa-regular fa-circle-question mx-1" data-bs-toggle="tooltip" data-bs-placement="right" title="..."></i>
+                        <label for="LogProbs" class="col-sm-5 col-form-label">
+                            <i class="fa-regular fa-circle-question" data-bs-toggle="tooltip" data-bs-placement="right" title="..."></i>
                             Log Probs
                         </label>
-                        <div class="col-sm-8">
+                        <div class="col-sm-7">
                             <InputNumber id="LogProbs" @bind-Value="Request.LogProbs" class="form-control"/>
                         </div>
                     </div>
                     <div class="row mb-3 align-items-center">
-                        <label for="Echo" class="col-sm-4 col-form-label">
-                            <i class="fa-regular fa-circle-question mx-1" data-bs-toggle="tooltip" data-bs-placement="right" title="..."></i>
+                        <label for="Echo" class="col-sm-5 col-form-label">
+                            <i class="fa-regular fa-circle-question" data-bs-toggle="tooltip" data-bs-placement="right" title="..."></i>
                             Echo
                         </label>
-                        <div class="col-sm-8">
+                        <div class="col-sm-7">
                             <input class="form-check-input" type="checkbox" id="Echo" checked="@Request.Echo">
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <label for="Stop" class="col-sm-4 col-form-label">
-                            <i class="fa-regular fa-circle-question mx-1" data-bs-toggle="tooltip" data-bs-placement="right" title="..."></i>
+                        <label for="Stop" class="col-sm-5 col-form-label">
+                            <i class="fa-regular fa-circle-question" data-bs-toggle="tooltip" data-bs-placement="right" title="..."></i>
                             Stop
                         </label>
-                        <div class="col-sm-8">
+                        <div class="col-sm-7">
                             <InputText id="Stop" @bind-Value="Request.Stop" class="form-control"/>
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <label for="PresencePenalty" class="col-sm-4 col-form-label">
-                            <i class="fa-regular fa-circle-question mx-1" data-bs-toggle="tooltip" data-bs-placement="right" title="..."></i>
+                        <label for="PresencePenalty" class="col-sm-5 col-form-label">
+                            <i class="fa-regular fa-circle-question" data-bs-toggle="tooltip" data-bs-placement="right" title="..."></i>
                             Presence Penalty
                         </label>
-                        <div class="col-sm-8">
+                        <div class="col-sm-7">
                             <InputNumber id="PresencePenalty" @bind-Value="Request.PresencePenalty" @bind-Value:format="F2" class="form-control"/>
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <label for="FrequencyPenalty" class="col-sm-4 col-form-label">
-                            <i class="fa-regular fa-circle-question mx-1" data-bs-toggle="tooltip" data-bs-placement="right" title="..."></i>
+                        <label for="FrequencyPenalty" class="col-sm-5 col-form-label">
+                            <i class="fa-regular fa-circle-question" data-bs-toggle="tooltip" data-bs-placement="right" title="..."></i>
                             Frequency Penalty
                         </label>
-                        <div class="col-sm-8">
+                        <div class="col-sm-7">
                             <InputNumber id="FrequencyPenalty" @bind-Value="Request.FrequencyPenalty" @bind-Value:format="F2" class="form-control"/>
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <label for="BestOf" class="col-sm-4 col-form-label">
-                            <i class="fa-regular fa-circle-question mx-1" data-bs-toggle="tooltip" data-bs-placement="right" title="..."></i>
+                        <label for="BestOf" class="col-sm-5 col-form-label">
+                            <i class="fa-regular fa-circle-question" data-bs-toggle="tooltip" data-bs-placement="right" title="..."></i>
                             Best Of
                         </label>
-                        <div class="col-sm-8">
+                        <div class="col-sm-7">
                             <InputNumber id="BestOf" @bind-Value="Request.BestOf" class="form-control"/>
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <label for="LogitBias" class="col-sm-4 col-form-label">
-                            <i class="fa-regular fa-circle-question mx-1" data-bs-toggle="tooltip" data-bs-placement="right" title="..."></i>
+                        <label for="LogitBias" class="col-sm-5 col-form-label">
+                            <i class="fa-regular fa-circle-question" data-bs-toggle="tooltip" data-bs-placement="right" title="..."></i>
                             Logit Bias
                         </label>
-                        <div class="col-sm-8">
+                        <div class="col-sm-7">
                             <InputTextArea id="LogitBias" @bind-Value="Request.LogitBias" class="form-control" r/>
                         </div>
                     </div>
-                    <div class="row mb-3">
-                        <label for="User" class="col-sm-4 col-form-label">
-                            <i class="fa-regular fa-circle-question mx-1" data-bs-toggle="tooltip" data-bs-placement="right" title="..."></i>
+                    <div class="row">
+                        <label for="User" class="col-sm-5 col-form-label">
+                            <i class="fa-regular fa-circle-question" data-bs-toggle="tooltip" data-bs-placement="right" title="..."></i>
                             User
                         </label>
-                        <div class="col-sm-8">
+                        <div class="col-sm-7">
                             <InputText id="User" @bind-Value="Request.User" class="form-control" r/>
                         </div>
                     </div>
