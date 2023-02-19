@@ -1,7 +1,24 @@
 ﻿@page "/"
+@using Markdig
 
 <PageTitle>Cledev.OpenAI</PageTitle>
 
-<h1>Playground</h1>
+<h1 class="pb-3 mb-4 border-bottom">Playground</h1>
 
-Work In Progress
+<p>In order to use the playground, you need to update the <span class="fw-bold">appsettings.json</span> with your your <span class="fw-bold">ApiKey</span> and <span class="fw-bold">Organization</span> (<a href="https://platform.openai.com/account/">get yours</a>).</p>
+
+@if (string.IsNullOrEmpty(Content) is false)
+{
+    @((MarkupString)Content)
+}
+
+@code
+{
+    protected string? Content { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var index = await File.ReadAllTextAsync("index.md");
+        Content = Markdown.ToHtml(index);
+    }
+}

@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Markdig.Signed" Version="0.30.4" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Cledev.OpenAI\Cledev.OpenAI.csproj" />
   </ItemGroup>
 
