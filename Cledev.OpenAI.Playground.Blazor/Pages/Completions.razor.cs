@@ -40,7 +40,30 @@ public class CompletionsPage : ComponentBase
     {
         IsLoading = true;
         Response = null;
-        Response = await OpenAIClient.CreateCompletion(Request);
+
+        if (Request.Stream is true)
+        {
+            var completions = OpenAIClient.CreateCompletionAsStream(Request);
+
+            await foreach (var completion in completions)
+            {
+                if (Response is null)
+                {
+                    Response = completion;
+                }
+                else
+                {
+                    Response.Choices[0].Text += completion.Choices[0].Text;
+                }
+
+                StateHasChanged();
+            }
+        }
+        else
+        {
+            Response = await OpenAIClient.CreateCompletion(Request);            
+        }
+
         IsLoading = false;
     }
 }

@@ -25,7 +25,7 @@ internal static class HttpClientExtensions
         return await response.Content.ReadFromJsonAsync<T?>();
     }
 
-    public static HttpResponseMessage PostAsStream(this HttpClient httpClient, string requestUri, object request)
+    public static async Task<HttpResponseMessage> PostAsStream(this HttpClient httpClient, string requestUri, object request)
     {
         var jsonSerializerOptions = new JsonSerializerOptions { DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault };
         var jsonContent = JsonContent.Create(request, null, jsonSerializerOptions);
@@ -34,7 +34,7 @@ internal static class HttpClientExtensions
         httpRequestMessage.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("text/event-stream"));
         httpRequestMessage.Content = jsonContent;
 
-        return httpClient.Send(httpRequestMessage, HttpCompletionOption.ResponseHeadersRead);
+        return await httpClient.SendAsync(httpRequestMessage, HttpCompletionOption.ResponseHeadersRead);
     }
 
     internal static async Task<T?> Delete<T>(this HttpClient httpClient, string requestUri)

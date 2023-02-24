@@ -80,7 +80,7 @@
                             <InputNumber id="N" @bind-Value="Request.N" class="form-control" />
                         </div>
                     </div>
-                    @*<div class="row mb-3 align-items-center">
+                    <div class="row mb-3 align-items-center">
                         <label for="Stream" class="col-sm-5 col-form-label">
                             <i class="fa-regular fa-circle-question" data-bs-toggle="tooltip" data-bs-placement="right" title="Optional (Defaults to false). Whether to stream back partial progress. If set, tokens will be sent as data-only server-sent events as they become available, with the stream terminated by a data: [DONE] message."></i>
                             Stream
@@ -88,7 +88,7 @@
                         <div class="col-sm-7">
                             <InputCheckbox id="Stream" @bind-Value="Request.Stream" class="form-check-input" />
                         </div>
-                    </div>*@
+                    </div>
                     <div class="row mb-3">
                         <label for="LogProbs" class="col-sm-5 col-form-label">
                             <i class="fa-regular fa-circle-question" data-bs-toggle="tooltip" data-bs-placement="right" title="Optional (Defaults to null). Include the log probabilities on the logprobs most likely tokens, as well the chosen tokens. For example, if logprobs is 5, the API will return a list of the 5 most likely tokens. The API will always return the logprob of the sampled token, so there may be up to logprobs+1 elements in the response. The maximum value for logprobs is 5. If you need more than this, please contact us through our Help center and describe your use case."></i>

@@ -54,7 +54,7 @@ public class OpenAIClient : IOpenAIClient
     {
         request.Stream = true;
 
-        using var httpResponseMessage = _httpClient.PostAsStream($"/{ApiVersion}/completions", request);
+        using var httpResponseMessage = await _httpClient.PostAsStream($"/{ApiVersion}/completions", request);
         await using var stream = await httpResponseMessage.Content.ReadAsStreamAsync();
         using var streamReader = new StreamReader(stream);
         while (streamReader.EndOfStream is false)
