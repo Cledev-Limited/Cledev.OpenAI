@@ -1,4 +1,5 @@
 ﻿using System.Net.Http.Json;
+using System.Text.Json;
 using Cledev.OpenAI.Extensions;
 using Cledev.OpenAI.V1.Contracts.Completions;
 using Cledev.OpenAI.V1.Contracts.Edits;
@@ -9,6 +10,7 @@ using Cledev.OpenAI.V1.Contracts.Images;
 using Cledev.OpenAI.V1.Contracts.Models;
 using Cledev.OpenAI.V1.Contracts.Moderations;
 using Microsoft.Extensions.Options;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Cledev.OpenAI.V1;
 
@@ -45,6 +47,50 @@ public class OpenAIClient : IOpenAIClient
     public async Task<CreateCompletionResponse?> CreateCompletion(CreateCompletionRequest request)
     {
         return await _httpClient.Post<CreateCompletionResponse>($"/{ApiVersion}/completions", request);
+    }
+
+    /// <inheritdoc />
+    public async IAsyncEnumerable<CreateCompletionResponse> CreateCompletionAsStream(CreateCompletionRequest request)
+    {
+        request.Stream = true;
+
+        using var httpResponseMessage = _httpClient.PostAsStream($"/{ApiVersion}/completions", request);
+        await using var stream = await httpResponseMessage.Content.ReadAsStreamAsync();
+        using var streamReader = new StreamReader(stream);
+        while (streamReader.EndOfStream is false)
+        {
+            var line = await streamReader.ReadLineAsync();
+
+            if (string.IsNullOrEmpty(line))
+            {
+                continue;
+            }
+
+            var dataPosition = line.IndexOf("data: ", StringComparison.Ordinal);
+            line = dataPosition != 0 ? line : line["data: ".Length..];
+
+            if (line.StartsWith("[DONE]"))
+            {
+                break;
+            }
+
+            CreateCompletionResponse? createCompletionResponse;
+
+            try
+            {
+                createCompletionResponse = JsonSerializer.Deserialize<CreateCompletionResponse>(line);
+            }
+            catch (Exception)
+            {
+                line += await streamReader.ReadToEndAsync();
+                createCompletionResponse = JsonSerializer.Deserialize<CreateCompletionResponse>(line);
+            }
+
+            if (createCompletionResponse is not null) 
+            {
+                yield return createCompletionResponse;
+            }
+        }
     }
 
     /// <inheritdoc />

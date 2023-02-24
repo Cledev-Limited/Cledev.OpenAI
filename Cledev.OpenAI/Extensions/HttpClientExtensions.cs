@@ -1,4 +1,5 @@
-﻿using System.Net.Http.Json;
+﻿using System.Net.Http.Headers;
+using System.Net.Http.Json;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -22,6 +23,18 @@ internal static class HttpClientExtensions
     {
         var response = await httpClient.PostAsync(requestUri, content);
         return await response.Content.ReadFromJsonAsync<T?>();
+    }
+
+    public static HttpResponseMessage PostAsStream(this HttpClient httpClient, string requestUri, object request)
+    {
+        var jsonSerializerOptions = new JsonSerializerOptions { DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault };
+        var jsonContent = JsonContent.Create(request, null, jsonSerializerOptions);
+
+        using var httpRequestMessage = new HttpRequestMessage(HttpMethod.Post, requestUri);
+        httpRequestMessage.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("text/event-stream"));
+        httpRequestMessage.Content = jsonContent;
+
+        return httpClient.Send(httpRequestMessage, HttpCompletionOption.ResponseHeadersRead);
     }
 
     internal static async Task<T?> Delete<T>(this HttpClient httpClient, string requestUri)

@@ -66,7 +66,7 @@ public class CreateCompletionRequest
     /// <para>Whether to stream back partial progress. If set, tokens will be sent as data-only server-sent events as they become available, with the stream terminated by a data: [DONE] message.</para>
     /// </summary>
     [JsonPropertyName("stream")]
-    public bool? Stream { get; set; }
+    public bool Stream { get; set; }
 
     /// <summary>
     /// <para>Optional (Defaults to null).</para>
@@ -81,7 +81,7 @@ public class CreateCompletionRequest
     /// <para>Echo back the prompt in addition to the completion.</para>
     /// </summary>
     [JsonPropertyName("echo")]
-    public bool? Echo { get; set; }
+    public bool Echo { get; set; }
 
     /// <summary>
     /// <para>Optional (Defaults to null).</para>

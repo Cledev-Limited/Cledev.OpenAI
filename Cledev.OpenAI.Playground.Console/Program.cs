@@ -1,9 +1,13 @@
-﻿using System.Text.Json;
+﻿using System.Runtime.CompilerServices;
+using System.Text.Json;
 using Cledev.OpenAI.Extensions;
 using Cledev.OpenAI.V1;
+using Cledev.OpenAI.V1.Contracts.Completions;
 using Cledev.OpenAI.V1.Contracts.Moderations;
+using Cledev.OpenAI.V1.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using static System.Net.Mime.MediaTypeNames;
 
 var jsonSerializerOptions = new JsonSerializerOptions
 {
@@ -55,11 +59,31 @@ var client = serviceProvider.GetRequiredService<IOpenAIClient>();
 //var response = await client.ListFineTunes();
 
 //Moderations
-var response = await client.CreateModeration(new CreateModerationRequest
-{
-    Input = "I want to kill them"
-});
+//var response = await client.CreateModeration(new CreateModerationRequest
+//{
+//    Input = "I want to kill them"
+//});
 
-Console.WriteLine($"{JsonSerializer.Serialize(response, jsonSerializerOptions)}");
+//Console.WriteLine($"{JsonSerializer.Serialize(response, jsonSerializerOptions)}");
+
+await TestCreateCompletionAsStream();
 
 Console.ReadKey();
+
+async Task TestCreateCompletionAsStream()
+{
+    var request = new CreateCompletionRequest
+    {
+        Model = CompletionsModel.TextDavinciV3.ToStringModel(),
+        Stream = true,
+        Prompt = "Please write a 1000 word assay about differences between functional programming and object oriented programming",
+        MaxTokens = 500
+    };
+
+    var completions = client.CreateCompletionAsStream(request);
+
+    await foreach (var completion in completions)
+    {
+        Console.Write(completion.Choices[0].Text);
+    }
+}

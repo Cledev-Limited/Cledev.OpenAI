@@ -26,8 +26,15 @@ public interface IOpenAIClient
     /// Creates a completion for the provided prompt and parameters.
     /// </summary>
     /// <param name="request">The create completion request.</param>
-    /// <returns>The create completion response or failure.</returns>
+    /// <returns>The create completion response.</returns>
     Task<CreateCompletionResponse?> CreateCompletion(CreateCompletionRequest request);
+
+    /// <summary>
+    /// Creates a completion for the provided prompt and parameters as stream.
+    /// </summary>
+    /// <param name="request">The create completion request.</param>
+    /// <returns>The create completion response.</returns>
+    IAsyncEnumerable<CreateCompletionResponse> CreateCompletionAsStream(CreateCompletionRequest request);
 
     /// <summary>
     /// Creates a new edit for the provided input, instruction, and parameters.
