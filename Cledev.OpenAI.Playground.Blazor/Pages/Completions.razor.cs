@@ -42,10 +42,5 @@ public class CompletionsPage : ComponentBase
         Response = null;
         Response = await OpenAIClient.CreateCompletion(Request);
         IsLoading = false;
-
-        if (Response is null)
-        {
-            // TODO: Display error message
-        }
     }
 }
