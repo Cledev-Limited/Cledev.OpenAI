@@ -1,7 +1,97 @@
 ﻿@page "/models"
 
+@inherits ModelsPage
+
 <PageTitle>Cledev.OpenAI - Models</PageTitle>
 
 <h1 class="pb-3 mb-4 border-bottom">Models</h1>
 
-Available soon
+<p class="mb-4">List and describe the various models available in the API. You can refer to the <a href="https://platform.openai.com/docs/models" title="Models" target="_blank">Models</a> documentation to understand what models are available and the differences between them.</p>
+
+<div class="mb-3">
+    <input type="text" id="ModelId" placeholder="ModelId (Optional)" @oninput="OnValueChanged" class="form-control" />
+</div>
+
+@if (IsLoading)
+{
+    <button class="btn btn-primary text-nowrap" type="button" disabled>
+        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+        &nbsp;
+        @if (string.IsNullOrEmpty(ModelId))
+        {
+            <literal>Getting Models...</literal>
+        }
+        else
+        {
+            <literal>Retrieving Model...</literal>
+        }
+    </button>
+}
+else
+{
+    <button type="submit" class="btn btn-primary" @onclick="OnSubmitAsync">
+        @if (string.IsNullOrEmpty(ModelId))
+        {
+            <literal>List Models</literal>
+        }
+        else
+        {
+            <literal>Retrieve Model</literal>
+        }
+    </button>
+}
+
+@if (Error is null && SearchCompleted)
+{
+    <div class="row my-4">
+        <div class="col-6">
+            <h4>Response</h4>
+
+            @if (ListModelsResponse is not null)
+            {
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Id</th>
+                            <th scope="col">OwnedBy</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (var index = 0; index < ListModelsResponse.Data.Count; index++)
+                        {
+                            var model = ListModelsResponse.Data[index];
+                            <tr>
+                                <th scope="row">@(index + 1)</th>
+                                <td>@model.Id</td>
+                                <td>@model.OwnedBy</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+
+            @if (RetrieveModelResponse is not null)
+            {
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Id</th>
+                            <th scope="col">OwnedBy</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>@RetrieveModelResponse.Id</td>
+                            <td>@RetrieveModelResponse.OwnedBy</td>
+                        </tr>
+                    </tbody>
+                </table>
+            }
+        </div>
+    </div>
+}
+
+<Error Model="Error"></Error>
