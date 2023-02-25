@@ -7,7 +7,7 @@ public enum ImageSize
     Size1024x1024
 }
 
-public enum ImageResponseFormat
+public enum ImageFormat
 {
     Url,
     Base64
@@ -26,13 +26,13 @@ public static class ImageModelsExtensions
         };
     }
 
-    public static string ToStringFormat(this ImageResponseFormat imageResponseFormat)
+    public static string ToStringFormat(this ImageFormat imageFormat)
     {
-        return imageResponseFormat switch
+        return imageFormat switch
         {
-            ImageResponseFormat.Url => "url",
-            ImageResponseFormat.Base64 => "b64_json",
-            _ => throw new ArgumentOutOfRangeException(nameof(imageResponseFormat), imageResponseFormat, null)
+            ImageFormat.Url => "url",
+            ImageFormat.Base64 => "b64_json",
+            _ => throw new ArgumentOutOfRangeException(nameof(imageFormat), imageFormat, null)
         };
     }
 }

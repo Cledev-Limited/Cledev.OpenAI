@@ -1,7 +1,105 @@
 ﻿@page "/images"
 
+@inherits ImagesPage
+
 <PageTitle>Cledev.OpenAI - Images</PageTitle>
 
 <h1 class="pb-3 mb-4 border-bottom">Images</h1>
 
-Available soon
+<p class="mb-4">Given a prompt and/or an input image, the model will generate a new image.</p>
+
+<h3>Create Image</h3>
+
+<EditForm Model="Request" OnValidSubmit="OnSubmitAsync">
+    <div class="mb-3">
+        <InputText id="Prompt" placeholder="Prompt (Required)" @bind-Value="Request.Prompt" class="form-control" />
+    </div>
+
+    <div class="modal fade" id="optionsModal" tabindex="-1" aria-labelledby="optionsModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="optionsModalLabel">Options</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row mb-3">
+                        <label for="N" class="col-sm-5 col-form-label">
+                            <i class="fa-regular fa-circle-question" data-bs-toggle="tooltip" data-bs-placement="right" title="Optional (Defaults to 1). The number of images to generate. Must be between 1 and 10."></i>
+                            N
+                        </label>
+                        <div class="col-sm-7">
+                            <InputNumber id="N" @bind-Value="Request.N" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="Size" class="col-sm-5 col-form-label">
+                            <i class="fa-regular fa-circle-question" data-bs-toggle="tooltip" data-bs-placement="right" title="Optional (Defaults to 1024x1024). The size of the generated images. Must be one of 256x256, 512x512, or 1024x1024."></i>
+                            Size
+                        </label>
+                        <div class="col-sm-7">
+                            <InputSelect id="Size" @bind-Value="Request.Size" class="form-select">
+                                @foreach (var item in Sizes)
+                                {
+                                    <option value="@item">@item</option>
+                                }
+                            </InputSelect>                        
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="ResponseFormat" class="col-sm-5 col-form-label">
+                            <i class="fa-regular fa-circle-question" data-bs-toggle="tooltip" data-bs-placement="right" title="Optional (Defaults to url). The format in which the generated images are returned. Must be one of url or b64_json."></i>
+                            Response Format
+                        </label>
+                        <div class="col-sm-7">
+                            <InputSelect id="ResponseFormat" @bind-Value="Request.ResponseFormat" class="form-select">
+                                @foreach (var item in Formats)
+                                {
+                                    <option value="@item">@item</option>
+                                }
+                            </InputSelect>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label for="User" class="col-sm-5 col-form-label">
+                            <i class="fa-regular fa-circle-question" data-bs-toggle="tooltip" data-bs-placement="right" title="Optional. A unique identifier representing your end-user, which can help OpenAI to monitor and detect abuse."></i>
+                            User
+                        </label>
+                        <div class="col-sm-7">
+                            <InputText id="User" @bind-Value="Request.User" class="form-control" r />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @if (IsLoading)
+    {
+        <button class="btn btn-primary text-nowrap" type="button" disabled>
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            Creating Image...
+        </button>
+        <button type="button" class="btn btn-outline-secondary" disabled>Options</button>
+    }
+    else
+    {
+        <button type="submit" class="btn btn-primary">Create Image</button>
+        <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#optionsModal">Options</button>
+    }
+</EditForm>
+
+@if (Response is not null && Error is null)
+{
+    <h4 class="mt-3">Response</h4>
+
+    @foreach (var image in Response.Data)
+    {
+        <img src="@Response.Data[0].Url" alt="@Request.Prompt" class="mb-3 border" />
+    }
+}
+        
+<Error Model="Error"></Error>

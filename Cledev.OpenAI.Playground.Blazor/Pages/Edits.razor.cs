@@ -24,7 +24,9 @@ public class EditsPage : PageComponentBase
     protected async Task OnSubmitAsync()
     {
         IsLoading = true;
+
         Response = null;
+        Error = null;
 
         Response = await OpenAIClient.CreateEdit(Request);
         Error = Response?.Error;
