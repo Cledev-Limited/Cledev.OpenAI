@@ -96,7 +96,11 @@
 
     @foreach (var image in Response.Data)
     {
-        <img src="@Response.Data[0].Url" alt="@Request.Prompt" class="mb-3 border" />
+        if (image.Url is not null)
+        {
+            <img src="@image.Url" alt="@Request.Prompt" class="mb-3 border" />
+        }
+        
     }
 }
         
