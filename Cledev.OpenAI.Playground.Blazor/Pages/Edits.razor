@@ -1,7 +1,135 @@
 ﻿@page "/edits"
 
+@inherits EditsPage
+
 <PageTitle>Cledev.OpenAI - Edits</PageTitle>
 
 <h1 class="pb-3 mb-4 border-bottom">Edits</h1>
 
-Available soon
+<p class="mb-4">Given a prompt and an instruction, the model will return an edited version of the prompt.</p>
+
+<EditForm Model="Request" OnValidSubmit="OnSubmitAsync">
+    <div class="mb-3">
+        <InputText id="Input" placeholder="Prompt (Optional)" @bind-Value="Request.Input" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <InputText id="Instruction" placeholder="Instruction (Required)" @bind-Value="Request.Instruction" class="form-control" />
+    </div>
+
+    <div class="modal fade" id="optionsModal" tabindex="-1" aria-labelledby="optionsModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="optionsModalLabel">Options</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row mb-3">
+                        <label for="Model" class="col-sm-5 col-form-label">
+                            <i class="fa-regular fa-circle-question" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="Required. ID of the model to use. You can use the text-davinci-edit-001 or code-davinci-edit-001 model with this endpoint."></i>
+                            Model
+                        </label>
+                        <div class="col-sm-7">
+                            <InputSelect id="Model" @bind-Value="Request.Model" class="form-select">
+                                @foreach (var item in EditModels)
+                                {
+                                    <option value="@item">@item</option>
+                                }
+                            </InputSelect>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="Temperature" class="col-sm-5 col-form-label">
+                            <i class="fa-regular fa-circle-question" data-bs-toggle="tooltip" data-bs-placement="right" title="Optional (Defaults to 1). What sampling temperature to use. Higher values means the model will take more risks. Try 0.9 for more creative applications, and 0 (argmax sampling) for ones with a well-defined answer. We generally recommend altering this or top_p but not both."></i>
+                            Temperature
+                        </label>
+                        <div class="col-sm-7">
+                            <InputNumber id="Temperature" @bind-Value="Request.Temperature" @bind-Value:format="F2" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="TopP" class="col-sm-5 col-form-label">
+                            <i class="fa-regular fa-circle-question" data-bs-toggle="tooltip" data-bs-placement="right" title="Optional (Defaults to 1). An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered. We generally recommend altering this or temperature but not both."></i>
+                            TopP
+                        </label>
+                        <div class="col-sm-7">
+                            <InputNumber id="TopP" @bind-Value="Request.TopP" @bind-Value:format="F2" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="N" class="col-sm-5 col-form-label">
+                            <i class="fa-regular fa-circle-question" data-bs-toggle="tooltip" data-bs-placement="right" title="Optional (Defaults to 1). How many edits to generate for each prompt. Note: Because this parameter generates many completions, it can quickly consume your token quota. Use carefully and ensure that you have reasonable settings for max_tokens and stop."></i>
+                            N
+                        </label>
+                        <div class="col-sm-7">
+                            <InputNumber id="N" @bind-Value="Request.N" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @if (IsLoading)
+    {
+        <button class="btn btn-primary text-nowrap" type="button" disabled>
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            Creating Edit...
+        </button>
+        <button type="button" class="btn btn-outline-secondary" disabled>Options</button>
+    }
+    else
+    {
+        <button type="submit" class="btn btn-primary">Create Edit</button>
+        <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#optionsModal">Options</button>
+    }
+</EditForm>
+
+@if (Response is not null && Error is null)
+{
+    <div class="row my-4">
+        <div class="col-6">
+            <h4>Response</h4>
+
+            @for (var index = 0; index < Response.Choices.Count; index++)
+            {
+                var choice = Response.Choices[index];
+                <div class="card d-flex mt-3">
+                    <div class="card-header">
+                        Choice @(index + 1)
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">@choice.Text</div>
+                        <span class="fw-bold">Index</span>: @choice.Index<br />
+                    </div>
+                </div>
+            }
+
+            <div class="card d-flex mt-3">
+                <div class="card-header">
+                    Info
+                </div>
+                <div class="card-body">
+                    <span class="fw-bold">Object</span>: @Response.Object<br />
+                    <span class="fw-bold">Created</span>: @Response.Created<br />
+                </div>
+            </div>
+
+            <div class="card d-flex mt-3">
+                <div class="card-header">
+                    Usage
+                </div>
+                <div class="card-body">
+                    <span class="fw-bold">Prompt Tokens</span>: @Response.Usage.PromptTokens<br />
+                    <span class="fw-bold">Completion Tokens</span>: @Response.Usage.CompletionTokens<br />
+                    <span class="fw-bold">Total Tokens</span>: @Response.Usage.TotalTokens
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<Error Model="Error"></Error>
