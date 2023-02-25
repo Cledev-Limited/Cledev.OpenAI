@@ -235,29 +235,4 @@
     </div>
 }
 
-@if (Error is not null)
-{
-    <div class="row my-4">
-        <div class="col-6">
-            <div class="card d-flex mt-3 border-danger">
-                <div class="card-header text-white bg-danger">
-                    Error
-                </div>
-                <div class="card-body">
-                    <span class="fw-bold">Type</span>: @Error.Type<br/>
-                    <span class="fw-bold">Code</span>: @Error.Code<br/>
-                    <span class="fw-bold">Message</span>: @Error.Message<br/>
-                    <span class="fw-bold">Param</span>: 
-                    @if (Error.Param is not null)
-                    {
-                        @Error.Param
-                    }
-                    else
-                    {
-                        <literal>&lt;null&gt;</literal>
-                    }
-                </div>
-            </div>
-        </div>
-    </div>
-}
+<Error Model="Error"></Error>
