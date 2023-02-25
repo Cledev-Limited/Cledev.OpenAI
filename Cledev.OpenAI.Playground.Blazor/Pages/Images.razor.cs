@@ -20,7 +20,7 @@ public class ImagesPage : PageComponentBase
         {
             Prompt = string.Empty,
             Size = ImageSize.Size512x512.ToStringSize(),
-            ResponseFormat = ImageFormat.Url.ToStringFormat()
+            ResponseFormat = ImageFormat.B64Json.ToStringFormat()
         };
 
         Sizes = Enum.GetValues(typeof(ImageSize)).Cast<ImageSize>().Select(x => x.ToStringSize()).ToList();
@@ -33,6 +33,7 @@ public class ImagesPage : PageComponentBase
 
         Response = null;
         Error = null;
+        Images.Clear();
 
         Response = await OpenAIClient.CreateImage(Request);
         Error = Response?.Error;
