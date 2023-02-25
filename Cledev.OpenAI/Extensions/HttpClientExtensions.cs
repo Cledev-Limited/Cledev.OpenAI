@@ -9,7 +9,8 @@ internal static class HttpClientExtensions
 {
     internal static async Task<T?> Get<T>(this HttpClient httpClient, string requestUri)
     {
-        return await httpClient.GetFromJsonAsync<T?>(requestUri);
+        var response = await httpClient.GetAsync(requestUri);
+        return await response.Content.ReadFromJsonAsync<T?>();
     }
 
     internal static async Task<T?> Post<T>(this HttpClient httpClient, string requestUri, object request)
