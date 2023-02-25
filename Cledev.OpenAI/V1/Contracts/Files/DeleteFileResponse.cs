@@ -2,7 +2,7 @@
 
 namespace Cledev.OpenAI.V1.Contracts.Files;
 
-public record DeleteFileResponse
+public record DeleteFileResponse : ResponseBase
 {
     [JsonPropertyName("id")]
     public string Id { get; set; } = null!;
@@ -12,7 +12,4 @@ public record DeleteFileResponse
 
     [JsonPropertyName("deleted")]
     public bool Deleted { get; set; }
-
-    [JsonPropertyName("error")]
-    public Error? Error { get; set; }
 }

@@ -2,7 +2,7 @@
 
 namespace Cledev.OpenAI.V1.Contracts.Models;
 
-public record RetrieveModelResponse
+public record RetrieveModelResponse : ResponseBase
 {
     [JsonPropertyName("id")]
     public string Id { get; set; } = null!;
@@ -12,9 +12,6 @@ public record RetrieveModelResponse
 
     [JsonPropertyName("permissions")]
     public List<Permission> Permissions { get; set; } = null!;
-
-    [JsonPropertyName("error")]
-    public Error? Error { get; set; }
 
     public record Permission
     {

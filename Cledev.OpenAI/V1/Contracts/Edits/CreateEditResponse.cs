@@ -2,7 +2,7 @@
 
 namespace Cledev.OpenAI.V1.Contracts.Edits;
 
-public class CreateEditResponse
+public record CreateEditResponse : ResponseBase
 {
     [JsonPropertyName("object")]
     public string Object { get; set; } = null!;
@@ -15,7 +15,4 @@ public class CreateEditResponse
 
     [JsonPropertyName("usage")]
     public EditUsage Usage { get; set; } = null!;
-
-    [JsonPropertyName("error")]
-    public Error? Error { get; set; }
 }

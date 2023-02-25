@@ -2,7 +2,7 @@
 
 namespace Cledev.OpenAI.V1.Contracts.Moderations;
 
-public record CreateModerationResponse
+public record CreateModerationResponse : ResponseBase
 {
     [JsonPropertyName("id")]
     public string Id { get; set; } = null!;
@@ -12,9 +12,6 @@ public record CreateModerationResponse
 
     [JsonPropertyName("results")] 
     public List<Result> Results { get; set; } = new ();
-
-    [JsonPropertyName("error")]
-    public Error? Error { get; set; }
 
     public record Result
     {

@@ -2,7 +2,7 @@
 
 namespace Cledev.OpenAI.V1.Contracts.FineTunes;
 
-public record DeleteFineTuneResponse
+public record DeleteFineTuneResponse : ResponseBase
 {
     [JsonPropertyName("id")]
     public string Id { get; set; } = null!;
@@ -12,7 +12,4 @@ public record DeleteFineTuneResponse
 
     [JsonPropertyName("deleted")]
     public bool Deleted { get; set; }
-
-    [JsonPropertyName("error")]
-    public Error? Error { get; set; }
 }

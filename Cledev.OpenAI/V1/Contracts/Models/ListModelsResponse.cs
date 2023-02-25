@@ -2,13 +2,10 @@
 
 namespace Cledev.OpenAI.V1.Contracts.Models;
 
-public record ListModelsResponse
+public record ListModelsResponse : ResponseBase
 {
     [JsonPropertyName("data")]
     public List<ListModelsResponseData> Data { get; set; } = null!;
-
-    [JsonPropertyName("error")]
-    public Error? Error { get; set; }
 }
 
 public record ListModelsResponseData

@@ -2,6 +2,12 @@
 
 namespace Cledev.OpenAI.V1.Contracts;
 
+public abstract record ResponseBase
+{
+    [JsonPropertyName("error")]
+    public Error? Error { get; set; }
+}
+
 public record Error
 {
     [JsonPropertyName("code")]

@@ -2,16 +2,13 @@
 
 namespace Cledev.OpenAI.V1.Contracts.Images;
 
-public record CreateImageResponse
+public record CreateImageResponse : ResponseBase
 {
     [JsonPropertyName("created")]
     public int Created { get; set; }
 
     [JsonPropertyName("data")]
     public List<CreateImageResponseData> Data { get; set; } = new();
-
-    [JsonPropertyName("error")]
-    public Error? Error { get; set; }
 }
 
 public record CreateImageResponseData

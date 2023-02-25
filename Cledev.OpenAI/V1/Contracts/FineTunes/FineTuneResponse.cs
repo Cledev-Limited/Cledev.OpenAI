@@ -2,7 +2,7 @@
 
 namespace Cledev.OpenAI.V1.Contracts.FineTunes;
 
-public record FineTuneResponse
+public record FineTuneResponse : ResponseBase
 {
     [JsonPropertyName("id")]
     public string Id { get; set; } = null!;
@@ -42,7 +42,4 @@ public record FineTuneResponse
 
     [JsonPropertyName("events")]
     public List<FineTuneResponseEvent> Events { get; set; } = new();
-
-    [JsonPropertyName("error")]
-    public Error? Error { get; set; }
 }

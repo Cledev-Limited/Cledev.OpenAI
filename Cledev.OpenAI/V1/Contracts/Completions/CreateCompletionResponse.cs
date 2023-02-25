@@ -2,7 +2,7 @@
 
 namespace Cledev.OpenAI.V1.Contracts.Completions;
 
-public record CreateCompletionResponse
+public record CreateCompletionResponse : ResponseBase
 {
     [JsonPropertyName("id")]
     public string Id { get; set; } = null!;
@@ -21,7 +21,4 @@ public record CreateCompletionResponse
 
     [JsonPropertyName("usage")]
     public CompletionUsage? Usage { get; set; }
-
-    [JsonPropertyName("error")] 
-    public Error? Error { get; set; }
 }

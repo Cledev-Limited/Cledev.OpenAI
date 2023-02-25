@@ -2,7 +2,7 @@
 
 namespace Cledev.OpenAI.V1.Contracts.Files;
 
-public record FileResponse
+public record FileResponse : ResponseBase
 {
     [JsonPropertyName("id")]
     public string Id { get; set; } = null!;
@@ -21,7 +21,4 @@ public record FileResponse
 
     [JsonPropertyName("purpose")]
     public string Purpose { get; set; } = null!;
-
-    [JsonPropertyName("error")]
-    public Error? Error { get; set; }
 }

@@ -2,7 +2,7 @@
 
 namespace Cledev.OpenAI.V1.Contracts.Embeddings;
 
-public record CreateEmbeddingsResponse
+public record CreateEmbeddingsResponse : ResponseBase
 {
     [JsonPropertyName("model")]
     public string Model { get; set; } = null!;
@@ -15,7 +15,4 @@ public record CreateEmbeddingsResponse
 
     [JsonPropertyName("usage")]
     public EmbeddingsUsage Usage { get; set; } = null!;
-
-    [JsonPropertyName("error")]
-    public Error? Error { get; set; }
 }
