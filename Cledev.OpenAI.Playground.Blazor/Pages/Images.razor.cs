@@ -1,13 +1,10 @@
 ﻿using Cledev.OpenAI.V1.Contracts.Images;
 using Cledev.OpenAI.V1.Models;
-using Microsoft.AspNetCore.Components;
 
 namespace Cledev.OpenAI.Playground.Blazor.Pages;
 
 public class ImagesPage : PageComponentBase
 {
-    [Inject] public WebClient WebClient { get; set; } = null!;
-
     protected CreateImageRequest Request { get; set; } = null!;
     protected CreateImageResponse? Response { get; set; }
 
