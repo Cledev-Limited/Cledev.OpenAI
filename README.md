@@ -32,7 +32,7 @@ Install-Package Cledev.OpenAI
   - Create Fine-tune
   - List Fine-tunes
   - Retrieve Fine-tune
-  - Cencel Fine-tune
+  - Cancel Fine-tune
   - List Fine-tune Events
   - Delete Fine-tune Model
 - **Moderations**
