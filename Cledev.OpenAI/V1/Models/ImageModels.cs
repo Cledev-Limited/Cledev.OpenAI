@@ -10,7 +10,7 @@ public enum ImageSize
 public enum ImageFormat
 {
     Url,
-    Base64
+    B64Json
 }
 
 public static class ImageModelsExtensions
@@ -31,7 +31,7 @@ public static class ImageModelsExtensions
         return imageFormat switch
         {
             ImageFormat.Url => "url",
-            ImageFormat.Base64 => "b64_json",
+            ImageFormat.B64Json => "b64_json",
             _ => throw new ArgumentOutOfRangeException(nameof(imageFormat), imageFormat, null)
         };
     }
