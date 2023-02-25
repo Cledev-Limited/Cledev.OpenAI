@@ -11,9 +11,12 @@ public record RetrieveModelResponse
     public string OwnedBy { get; set; } = null!;
 
     [JsonPropertyName("permissions")]
-    public List<RetrieveModelResponsePermission> Permissions { get; set; } = null!;
+    public List<Permission> Permissions { get; set; } = null!;
 
-    public record RetrieveModelResponsePermission
+    [JsonPropertyName("error")]
+    public Error? Error { get; set; }
+
+    public record Permission
     {
         [JsonPropertyName("id")]
         public string Id { get; set; } = null!;

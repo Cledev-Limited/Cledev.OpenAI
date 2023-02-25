@@ -21,4 +21,7 @@ public record FileResponse
 
     [JsonPropertyName("purpose")]
     public string Purpose { get; set; } = null!;
+
+    [JsonPropertyName("error")]
+    public Error? Error { get; set; }
 }

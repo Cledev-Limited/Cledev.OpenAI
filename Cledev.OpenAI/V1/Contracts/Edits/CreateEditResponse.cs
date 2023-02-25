@@ -15,4 +15,7 @@ public class CreateEditResponse
 
     [JsonPropertyName("usage")]
     public EditUsage Usage { get; set; } = null!;
+
+    [JsonPropertyName("error")]
+    public Error? Error { get; set; }
 }

@@ -20,5 +20,8 @@ public record CreateCompletionResponse
     public List<CompletionChoice> Choices { get; set; } = new();
 
     [JsonPropertyName("usage")]
-    public CompletionUsage? Usage { get; set; } = null!;
+    public CompletionUsage? Usage { get; set; }
+
+    [JsonPropertyName("error")] 
+    public Error? Error { get; set; }
 }

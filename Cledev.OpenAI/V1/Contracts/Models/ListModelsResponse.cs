@@ -7,21 +7,24 @@ public record ListModelsResponse
     [JsonPropertyName("data")]
     public List<ListModelsResponseData> Data { get; set; } = null!;
 
-    public record ListModelsResponseData
-    {
-        [JsonPropertyName("id")]
-        public string Id { get; set; } = null!;
+    [JsonPropertyName("error")]
+    public Error? Error { get; set; }
+}
 
-        [JsonPropertyName("owned_by")]
-        public string OwnedBy { get; set; } = null!;
+public record ListModelsResponseData
+{
+    [JsonPropertyName("id")]
+    public string Id { get; set; } = null!;
 
-        [JsonPropertyName("permissions")]
-        public List<ListModelsResponseDataPermission> Permissions { get; set; } = null!;
+    [JsonPropertyName("owned_by")]
+    public string OwnedBy { get; set; } = null!;
 
-        public record ListModelsResponseDataPermission
-        {
-            [JsonPropertyName("id")]
-            public string Id { get; set; } = null!;
-        }
-    }
+    [JsonPropertyName("permissions")]
+    public List<ListModelsResponseDataPermission> Permissions { get; set; } = null!;
+
+}
+public record ListModelsResponseDataPermission
+{
+    [JsonPropertyName("id")]
+    public string Id { get; set; } = null!;
 }

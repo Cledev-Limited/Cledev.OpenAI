@@ -42,4 +42,7 @@ public record FineTuneResponse
 
     [JsonPropertyName("events")]
     public List<FineTuneResponseEvent> Events { get; set; } = new();
+
+    [JsonPropertyName("error")]
+    public Error? Error { get; set; }
 }

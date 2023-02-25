@@ -176,7 +176,6 @@
             Creating Completion...
         </button>
         <button type="button" class="btn btn-outline-secondary" disabled>Options</button>
-
     }
     else
     {
@@ -185,7 +184,7 @@
     }
 </EditForm>
 
-@if (Response is not null)
+@if (Response is not null && Error is null)
 {
     <div class="row my-4">
         <div class="col-6">
@@ -232,30 +231,33 @@
                     </div>
                 </div>
             }
+        </div>
+    </div>
+}
 
-            @*<div class="card d-flex mt-3">
-                <div class="card-header">
-                    Request
+@if (Error is not null)
+{
+    <div class="row my-4">
+        <div class="col-6">
+            <div class="card d-flex mt-3 border-danger">
+                <div class="card-header text-white bg-danger">
+                    Error
                 </div>
                 <div class="card-body">
-                    <div class="mb-3">@Request.Prompt</div>
-                    <span class="fw-bold">Model</span>: @Request.Model<br/>
-                    <span class="fw-bold">Suffix</span>: @Request.Suffix<br/>
-                    <span class="fw-bold">Max Tokens</span>: @Request.MaxTokens<br/>
-                    <span class="fw-bold">Temperature</span>: @Request.Temperature<br/>
-                    <span class="fw-bold">TopP</span>: @Request.TopP<br/>
-                    <span class="fw-bold">N</span>: @Request.N<br/>
-                    <span class="fw-bold">Stream</span>: @Request.Stream<br/>
-                    <span class="fw-bold">Log Probs</span>: @Request.LogProbs<br/>
-                    <span class="fw-bold">Echo</span>: @Request.Echo<br/>
-                    <span class="fw-bold">Stop</span>: @Request.Stop<br/>
-                    <span class="fw-bold">Presence Penalty</span>: @Request.PresencePenalty<br/>
-                    <span class="fw-bold">Frequency Penalty</span>: @Request.FrequencyPenalty<br/>
-                    <span class="fw-bold">BestOf</span>: @Request.BestOf<br/>
-                    <span class="fw-bold">Logit Bias</span>: @Request.LogitBias<br/>
-                    <span class="fw-bold">User</span>: @Request.User
+                    <span class="fw-bold">Type</span>: @Error.Type<br/>
+                    <span class="fw-bold">Code</span>: @Error.Code<br/>
+                    <span class="fw-bold">Message</span>: @Error.Message<br/>
+                    <span class="fw-bold">Param</span>: 
+                    @if (Error.Param is not null)
+                    {
+                        @Error.Param
+                    }
+                    else
+                    {
+                        <literal>&lt;null&gt;</literal>
+                    }
                 </div>
-            </div>*@
+            </div>
         </div>
     </div>
 }

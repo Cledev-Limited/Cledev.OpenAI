@@ -13,6 +13,9 @@ public record CreateModerationResponse
     [JsonPropertyName("results")] 
     public List<Result> Results { get; set; } = new ();
 
+    [JsonPropertyName("error")]
+    public Error? Error { get; set; }
+
     public record Result
     {
         [JsonPropertyName("categories")]

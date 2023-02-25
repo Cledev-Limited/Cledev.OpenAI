@@ -12,4 +12,7 @@ public record DeleteFineTuneResponse
 
     [JsonPropertyName("deleted")]
     public bool Deleted { get; set; }
+
+    [JsonPropertyName("error")]
+    public Error? Error { get; set; }
 }

@@ -9,4 +9,7 @@ public record ListFilesResponse
 
     [JsonPropertyName("data")]
     public List<FileResponse> Data { get; set; } = null!;
+
+    [JsonPropertyName("error")]
+    public Error? Error { get; set; }
 }

@@ -9,4 +9,7 @@ public record ListFineTuneEventsResponse
 
     [JsonPropertyName("data")]
     public List<FineTuneResponseEvent> Data { get; set; } = new();
+
+    [JsonPropertyName("error")]
+    public Error? Error { get; set; }
 }

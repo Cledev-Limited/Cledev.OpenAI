@@ -15,4 +15,7 @@ public record CreateEmbeddingsResponse
 
     [JsonPropertyName("usage")]
     public EmbeddingsUsage Usage { get; set; } = null!;
+
+    [JsonPropertyName("error")]
+    public Error? Error { get; set; }
 }

@@ -1,4 +1,5 @@
 ﻿using Cledev.OpenAI.V1;
+using Cledev.OpenAI.V1.Contracts;
 using Cledev.OpenAI.V1.Contracts.Completions;
 using Cledev.OpenAI.V1.Models;
 using Microsoft.AspNetCore.Components;
@@ -15,6 +16,7 @@ public class CompletionsPage : ComponentBase
 
     protected CreateCompletionRequest Request { get; set; } = null!;
     protected CreateCompletionResponse? Response { get; set; }
+    protected Error? Error { get; set; }
 
     public IList<string> CompletionModels { get; set; } = new List<string>();
 
@@ -61,7 +63,8 @@ public class CompletionsPage : ComponentBase
         }
         else
         {
-            Response = await OpenAIClient.CreateCompletion(Request);            
+            Response = await OpenAIClient.CreateCompletion(Request);
+            Error = Response?.Error;
         }
 
         IsLoading = false;
