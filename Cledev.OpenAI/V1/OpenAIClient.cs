@@ -10,7 +10,6 @@ using Cledev.OpenAI.V1.Contracts.Images;
 using Cledev.OpenAI.V1.Contracts.Models;
 using Cledev.OpenAI.V1.Contracts.Moderations;
 using Microsoft.Extensions.Options;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace Cledev.OpenAI.V1;
 
