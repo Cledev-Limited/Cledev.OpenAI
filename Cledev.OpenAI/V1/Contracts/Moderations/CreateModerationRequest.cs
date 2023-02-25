@@ -12,7 +12,7 @@ public class CreateModerationRequest
     /// <para>The input text to classify.</para>
     /// </summary>
     [JsonPropertyName("input")]
-    public required string? Input { get; set; }
+    public required string Input { get; set; }
 
     /// <summary>
     /// <para>Optional (Defaults to text-moderation-latest).</para>
