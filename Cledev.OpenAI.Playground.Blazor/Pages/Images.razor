@@ -8,8 +8,6 @@
 
 <p class="mb-4">Given a prompt and/or an input image, the model will generate a new image.</p>
 
-<h3>Create Image</h3>
-
 <EditForm Model="Request" OnValidSubmit="OnSubmitAsync">
     <div class="mb-3">
         <InputText id="Prompt" placeholder="Prompt (Required)" @bind-Value="Request.Prompt" class="form-control" />
