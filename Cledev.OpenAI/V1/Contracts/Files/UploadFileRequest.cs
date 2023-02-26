@@ -13,7 +13,13 @@ public class UploadFileRequest
     /// <para>If the purpose is set to "fine-tune", each line is a JSON record with "prompt" and "completion" fields representing your training examples.</para>
     /// </summary>
     [JsonPropertyName("file")]
-    public required string File { get; set; }
+    public byte[] File { get; set; } = null!;
+
+    /// <summary>
+    /// <para>Required.</para>
+    /// <para>The name of the file to upload.</para>
+    /// </summary>
+    public string FileName { get; set; } = null!;
 
     /// <summary>
     /// <para>Required.</para>
@@ -21,5 +27,5 @@ public class UploadFileRequest
     /// <para>Use "fine-tune" for Fine-tuning. This allows us to validate the format of the uploaded file.</para>
     /// </summary>
     [JsonPropertyName("purpose")]
-    public required string Purpose { get; set; }
+    public string Purpose { get; set; } = null!;
 }

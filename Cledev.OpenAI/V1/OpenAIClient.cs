@@ -107,7 +107,8 @@ public class OpenAIClient : IOpenAIClient
     /// <inheritdoc />
     public async Task<CreateImageResponse?> CreateImageEdit(CreateImageEditRequest request)
     {
-        return await _httpClient.Post<CreateImageResponse>($"/{ApiVersion}/images/edits", request);
+        var multipartFormDataContent = request.ToMultipartFormDataContent();
+        return await _httpClient.Post<CreateImageResponse>($"/{ApiVersion}/images/edits", multipartFormDataContent);
     }
 
     /// <inheritdoc />
@@ -129,14 +130,9 @@ public class OpenAIClient : IOpenAIClient
     }
 
     /// <inheritdoc />
-    public async Task<FileResponse?> UploadFile(byte[] file, string fileName, string purpose)
+    public async Task<FileResponse?> UploadFile(UploadFileRequest request)
     {
-        var multipartFormDataContent = new MultipartFormDataContent
-        {
-            { new ByteArrayContent(file), "file", fileName },
-            { new StringContent(purpose), "purpose" }
-        };
-
+        var multipartFormDataContent = request.ToMultipartFormDataContent();
         return await _httpClient.Post<FileResponse?>($"/{ApiVersion}/files", multipartFormDataContent);
     }
 

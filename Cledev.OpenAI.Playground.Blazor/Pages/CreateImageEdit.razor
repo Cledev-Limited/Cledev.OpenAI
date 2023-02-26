@@ -1,16 +1,37 @@
-﻿@page "/images"
+﻿@page "/create-image-edit"
 
-@inherits ImagesPage
+@inherits CreateImageEditPage
 
 <PageTitle>Cledev.OpenAI - Images</PageTitle>
 
 <h1 class="pb-3 mb-4 border-bottom">Images</h1>
 
-<p class="mb-4">Given a prompt and/or an input image, the model will generate a new image.</p>
+<ul class="nav nav-tabs mb-4">
+    <li class="nav-item">
+        <a class="nav-link" href="/create-image">Create Image</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="#">Create Image Edit</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/create-image-variation">Create Image Variation</a>
+    </li>
+</ul>
+
+<p class="mb-4">Creates an edited or extended image given an original image and a prompt.</p>
 
 <EditForm Model="Request" OnValidSubmit="OnSubmitAsync">
     <div class="mb-3">
-        <InputText id="Prompt" placeholder="Prompt (Required)" @bind-Value="Request.Prompt" class="form-control" />
+        <label for="Image" class="form-label">Select the image to edit</label>
+        <InputFile id="Image" OnChange="OnInputFileForImageChange" class="form-control"></InputFile>
+    </div>
+    <div class="mb-3">
+        <label for="Mask" class="form-label">Select a mask <span class="fst-italic">(Optional)</span></label>
+        <InputFile id="Mask" OnChange="OnInputFileForMaskChange" class="form-control"></InputFile>
+    </div>
+    <div class="mb-3">
+        <label for="Prompt" class="form-label">Prompt</label>
+        <InputText id="Prompt" @bind-Value="Request.Prompt" MaxBufferSize="@(4*1024)" class="form-control" />
     </div>
 
     <div class="modal fade" id="optionsModal" tabindex="-1" aria-labelledby="optionsModalLabel" aria-hidden="true">
@@ -27,7 +48,7 @@
                             N
                         </label>
                         <div class="col-sm-7">
-                            <InputNumber id="N" @bind-Value="Request.N" class="form-control" />
+                            <InputNumber id="N" @bind-Value="Request.N" class="form-control"/>
                         </div>
                     </div>
                     <div class="row mb-3">
@@ -41,7 +62,7 @@
                                 {
                                     <option value="@item">@item</option>
                                 }
-                            </InputSelect>                        
+                            </InputSelect>
                         </div>
                     </div>
                     <div class="row mb-3">
@@ -64,7 +85,7 @@
                             User
                         </label>
                         <div class="col-sm-7">
-                            <InputText id="User" @bind-Value="Request.User" class="form-control" r />
+                            <InputText id="User" @bind-Value="Request.User" class="form-control" r/>
                         </div>
                     </div>
                 </div>
@@ -79,13 +100,13 @@
     {
         <button class="btn btn-primary text-nowrap" type="button" disabled>
             <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-            Creating Image...
+            Creating Image Edit...
         </button>
         <button type="button" class="btn btn-outline-secondary" disabled>Options</button>
     }
     else
     {
-        <button type="submit" class="btn btn-primary">Create Image</button>
+        <button type="submit" class="btn btn-primary">Create Image Edit</button>
         <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#optionsModal">Options</button>
     }
 </EditForm>
