@@ -1,7 +1,114 @@
 ﻿@page "/embeddings"
 
+@inherits EmbeddingsPage
+
 <PageTitle>Cledev.OpenAI - Embeddings</PageTitle>
 
 <h1 class="pb-3 mb-4 border-bottom">Embeddings</h1>
 
-Available soon
+<p class="mb-4">Get a vector representation of a given input that can be easily consumed by machine learning models and algorithms.</p>
+
+<EditForm Model="Request" OnValidSubmit="OnSubmitAsync">
+    <div class="mb-3">
+        <InputText id="Input" placeholder="Input" @bind-Value="Request.Input" class="form-control" />
+    </div>
+
+    <div class="modal fade" id="optionsModal" tabindex="-1" aria-labelledby="optionsModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="optionsModalLabel">Options</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row mb-3">
+                        <label for="Model" class="col-sm-5 col-form-label">
+                            <i class="fa-regular fa-circle-question" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="Required. ID of the model to use. You can use the List models API to see all of your available models, or see our Model overview for descriptions of them."></i>
+                            Model
+                        </label>
+                        <div class="col-sm-7">
+                            <InputSelect id="Model" @bind-Value="Request.Model" class="form-select">
+                                @foreach (var item in EmbeddingModels)
+                                {
+                                    <option value="@item">@item</option>
+                                }
+                            </InputSelect>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label for="User" class="col-sm-5 col-form-label">
+                            <i class="fa-regular fa-circle-question" data-bs-toggle="tooltip" data-bs-placement="right" title="Optional. A unique identifier representing your end-user, which can help OpenAI to monitor and detect abuse."></i>
+                            User
+                        </label>
+                        <div class="col-sm-7">
+                            <InputText id="User" @bind-Value="Request.User" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @if (IsLoading)
+    {
+        <button class="btn btn-primary text-nowrap" type="button" disabled>
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            Creating Embeddings...
+        </button>
+        <button type="button" class="btn btn-outline-secondary" disabled>Options</button>
+    }
+    else
+    {
+        <button type="submit" class="btn btn-primary">Create Embeddings</button>
+        <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#optionsModal">Options</button>
+    }
+</EditForm>
+
+@if (Response is not null && Error is null)
+{
+    <div class="row my-4">
+        <div class="col-6">
+            <h4>Response</h4>
+
+            @for (var index = 0; index < Response.Data.Count; index++)
+            {
+                var data = Response.Data[index];
+                <div class="card d-flex mt-3">
+                    <div class="card-header">
+                        Data @(index + 1)
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">@string.Join(", ", data.Embedding.Select(x => x))</div>
+                        <span class="fw-bold">Index</span>: @data.Index<br/>
+                        <span class="fw-bold">Object</span>: @data.Object
+                    </div>
+                </div>
+            }
+
+            <div class="card d-flex mt-3">
+                <div class="card-header">
+                    Info
+                </div>
+                <div class="card-body">
+                    <span class="fw-bold">Object</span>: @Response.Object<br />
+                    <span class="fw-bold">Model</span>: @Response.Model
+                </div>
+            </div>
+
+            <div class="card d-flex mt-3">
+                <div class="card-header">
+                    Usage
+                </div>
+                <div class="card-body">
+                    <span class="fw-bold">Prompt Tokens</span>: @Response.Usage.PromptTokens<br />
+                    <span class="fw-bold">Total Tokens</span>: @Response.Usage.TotalTokens
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<Error Model="Error"></Error>
