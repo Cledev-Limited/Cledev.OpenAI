@@ -1,4 +1,5 @@
 ﻿using Cledev.OpenAI.V1.Contracts.Images;
+using Cledev.OpenAI.V1.Models;
 
 namespace Cledev.OpenAI.Playground.Blazor.Pages;
 
@@ -10,6 +11,12 @@ public abstract class ImagePageBase : PageComponentBase
     public IList<string> Formats { get; set; } = new List<string>();
 
     public IList<string> Images { get; set; } = new List<string>();
+
+    protected override void OnInitialized()
+    {
+        Sizes = Enum.GetValues(typeof(ImageSize)).Cast<ImageSize>().Select(x => x.ToStringSize()).ToList();
+        Formats = Enum.GetValues(typeof(ImageFormat)).Cast<ImageFormat>().Select(x => x.ToStringFormat()).ToList();
+    }
 
     protected static string Base64ToImage(string base64String)
     {

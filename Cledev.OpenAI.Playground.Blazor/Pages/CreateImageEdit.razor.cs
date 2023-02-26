@@ -11,17 +11,17 @@ public class CreateImageEditPage : ImagePageBase
 
     protected override void OnInitialized()
     {
+        base.OnInitialized();
+
         Request = new CreateImageEditRequest
         {
             Image = new byte[1],
             ImageName = "Something",
             Prompt = string.Empty,
             Size = ImageSize.Size512x512.ToStringSize(),
-            ResponseFormat = ImageFormat.B64Json.ToStringFormat()
+            ResponseFormat = ImageFormat.B64Json.ToStringFormat(),
+            N = 1
         };
-
-        Sizes = Enum.GetValues(typeof(ImageSize)).Cast<ImageSize>().Select(x => x.ToStringSize()).ToList();
-        Formats = Enum.GetValues(typeof(ImageFormat)).Cast<ImageFormat>().Select(x => x.ToStringFormat()).ToList();
     }
 
     public async Task OnInputFileForImageChange(InputFileChangeEventArgs e)

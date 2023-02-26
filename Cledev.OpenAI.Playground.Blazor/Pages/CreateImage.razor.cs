@@ -9,15 +9,15 @@ public class CreateImagePage : ImagePageBase
 
     protected override void OnInitialized()
     {
+        base.OnInitialized();
+
         Request = new CreateImageRequest
         {
             Prompt = string.Empty,
             Size = ImageSize.Size512x512.ToStringSize(),
-            ResponseFormat = ImageFormat.B64Json.ToStringFormat()
+            ResponseFormat = ImageFormat.B64Json.ToStringFormat(),
+            N = 1
         };
-
-        Sizes = Enum.GetValues(typeof(ImageSize)).Cast<ImageSize>().Select(x => x.ToStringSize()).ToList();
-        Formats = Enum.GetValues(typeof(ImageFormat)).Cast<ImageFormat>().Select(x => x.ToStringFormat()).ToList();
     }
 
     protected async Task OnSubmitAsync()

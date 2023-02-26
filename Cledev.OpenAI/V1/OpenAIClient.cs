@@ -114,7 +114,8 @@ public class OpenAIClient : IOpenAIClient
     /// <inheritdoc />
     public async Task<CreateImageResponse?> CreateImageVariation(CreateImageVariationRequest request)
     {
-        return await _httpClient.Post<CreateImageResponse>($"/{ApiVersion}/images/variations", request);
+        var multipartFormDataContent = request.ToMultipartFormDataContent();
+        return await _httpClient.Post<CreateImageResponse>($"/{ApiVersion}/images/variations", multipartFormDataContent);
     }
 
     /// <inheritdoc />

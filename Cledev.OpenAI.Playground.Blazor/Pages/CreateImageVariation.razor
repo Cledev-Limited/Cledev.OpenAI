@@ -2,7 +2,7 @@
 
 @inherits CreateImageVariationPage
 
-<PageTitle>Cledev.OpenAI - Images</PageTitle>
+<PageTitle>Cledev.OpenAI - Crate Image Variation</PageTitle>
 
 <h1 class="pb-3 mb-4 border-bottom">Images</h1>
 
@@ -18,4 +18,40 @@
     </li>
 </ul>
 
-<p class="mb-4">Work In Progress</p>
+<p class="mb-4">Creates a variation of a given image.</p>
+
+<EditForm Model="Request" OnValidSubmit="OnSubmitAsync">
+    <div class="mb-3">
+        <label for="Image" class="form-label">Select the image</label>
+        <InputFile id="Image" OnChange="OnInputFileForImageChange" class="form-control"></InputFile>
+    </div>
+
+    <ImageOptions Request="Request" Sizes="Sizes" Formats="Formats"></ImageOptions>
+
+    @if (IsLoading)
+    {
+        <button class="btn btn-primary text-nowrap" type="button" disabled>
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            Creating Image Variation...
+        </button>
+        <button type="button" class="btn btn-outline-secondary" disabled>Options</button>
+    }
+    else
+    {
+        <button type="submit" class="btn btn-primary">Create Image Variation</button>
+        <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#optionsModal">Options</button>
+    }
+</EditForm>
+
+@if (Response is not null && Error is null)
+{
+    <h4 class="mt-3">Response</h4>
+
+    @foreach (var image in Images)
+    {
+        <img src="@image" alt="Image variation" class="mb-3 border" />
+        <literal>&nbsp;</literal>
+    }
+}
+
+<Error Model="Error"></Error>
