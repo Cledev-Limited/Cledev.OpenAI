@@ -37,9 +37,9 @@ public class OpenAIClient : IOpenAIClient
     }
 
     /// <inheritdoc />
-    public async Task<RetrieveModelResponse?> RetrieveModel(string id)
+    public async Task<ModelResponse?> RetrieveModel(string id)
     {
-        return await _httpClient.Get<RetrieveModelResponse?>($"/{ApiVersion}/models/{id}");
+        return await _httpClient.Get<ModelResponse?>($"/{ApiVersion}/models/{id}");
     }
 
     /// <inheritdoc />
@@ -147,6 +147,12 @@ public class OpenAIClient : IOpenAIClient
     public async Task<FileResponse?> RetrieveFile(string fileId)
     {
         return await _httpClient.Get<FileResponse?>($"/{ApiVersion}/files/{fileId}");
+    }
+
+    /// <inheritdoc />
+    public async Task<string?> RetrieveFileContent(string fileId)
+    {
+        return await _httpClient.Get<string?>($"/{ApiVersion}/files/{fileId}/content");
     }
 
     /// <inheritdoc />

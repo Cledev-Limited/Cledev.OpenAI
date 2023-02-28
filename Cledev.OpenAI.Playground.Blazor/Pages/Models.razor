@@ -47,49 +47,26 @@ else
         <div class="col-6">
             <h4>Response</h4>
 
-            @if (ListModelsResponse is not null)
-            {
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Id</th>
-                            <th scope="col">OwnedBy</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @for (var index = 0; index < ListModelsResponse.Data.Count; index++)
-                        {
-                            var model = ListModelsResponse.Data[index];
-                            <tr>
-                                <th scope="row">@(index + 1)</th>
-                                <td>@model.Id</td>
-                                <td>@model.OwnedBy</td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            }
-
-            @if (RetrieveModelResponse is not null)
-            {
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Id</th>
-                            <th scope="col">OwnedBy</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>@RetrieveModelResponse.Id</td>
-                            <td>@RetrieveModelResponse.OwnedBy</td>
-                        </tr>
-                    </tbody>
-                </table>
-            }
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Id</th>
+                    <th scope="col">OwnedBy</th>
+                </tr>
+                </thead>
+                <tbody>
+                @for (var index = 0; index < Models.Count; index++)
+                {
+                        var model = Models[index];
+                    <tr>
+                        <th scope="row">@(index + 1)</th>
+                        <td>@model.Id</td>
+                        <td>@model.OwnedBy</td>
+                    </tr>
+                }
+                </tbody>
+            </table>
         </div>
     </div>
 }

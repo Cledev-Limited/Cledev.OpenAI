@@ -20,7 +20,7 @@ public interface IOpenAIClient
     /// Retrieves a model instance, providing basic information about the model such as the owner and permissioning.
     /// </summary>
     /// <param name="id">The id of the model (e.g. text-davinci-003)</param>
-    Task<RetrieveModelResponse?> RetrieveModel(string id);
+    Task<ModelResponse?> RetrieveModel(string id);
 
     /// <summary>
     /// Creates a completion for the provided prompt and parameters.
@@ -96,6 +96,13 @@ public interface IOpenAIClient
     /// <param name="fileId">The ID of the file to use for this request.</param>
     /// <returns>The retrieve file response.</returns>
     Task<FileResponse?> RetrieveFile(string fileId);
+
+    /// <summary>
+    /// Returns the contents of the specified file.
+    /// </summary>
+    /// <param name="fileId">The ID of the file to use for this request.</param>
+    /// <returns>The file content.</returns>
+    Task<string?> RetrieveFileContent(string fileId);
 
     /// <summary>
     /// Creates a job that fine-tunes a specified model from a given dataset.

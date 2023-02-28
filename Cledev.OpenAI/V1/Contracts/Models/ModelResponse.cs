@@ -2,7 +2,7 @@
 
 namespace Cledev.OpenAI.V1.Contracts.Models;
 
-public record RetrieveModelResponse : ResponseBase
+public record ModelResponse : ResponseBase
 {
     [JsonPropertyName("id")]
     public string Id { get; set; } = null!;
