@@ -26,7 +26,7 @@ internal static class HttpClientExtensions
         return await response.Content.ReadFromJsonAsync<T?>();
     }
 
-    public static async Task<HttpResponseMessage> PostAsStream(this HttpClient httpClient, string requestUri, object request)
+    internal static async Task<HttpResponseMessage> PostAsStream(this HttpClient httpClient, string requestUri, object request)
     {
         var jsonSerializerOptions = new JsonSerializerOptions { DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault };
         var jsonContent = JsonContent.Create(request, null, jsonSerializerOptions);
