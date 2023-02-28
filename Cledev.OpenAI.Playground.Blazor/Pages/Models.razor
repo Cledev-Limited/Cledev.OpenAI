@@ -50,7 +50,7 @@ else
             <table class="table table-bordered">
                 <thead>
                 <tr>
-                    <th scope="col">#</th>
+                    <th scope="col">&nbsp;</th>
                     <th scope="col">Id</th>
                     <th scope="col">OwnedBy</th>
                 </tr>
@@ -60,7 +60,7 @@ else
                 {
                         var model = Models[index];
                     <tr>
-                        <th scope="row">@(index + 1)</th>
+                        <th scope="row" class="text-end">@(index + 1)</th>
                         <td>@model.Id</td>
                         <td>@model.OwnedBy</td>
                     </tr>
