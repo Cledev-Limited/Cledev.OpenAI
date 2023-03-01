@@ -38,7 +38,7 @@ Install-Package Cledev.OpenAI
 - **Moderations**
   - Create Moderation
 
-ChatGPT and Whisper coming soon
+**Coming soon: ChatGPT and Whisper**
 
 ## Blazor Playground
 
