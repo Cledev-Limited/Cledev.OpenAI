@@ -17,6 +17,8 @@ Install-Package Cledev.OpenAI
   - Create Completion
 - **Edits**
   - Create Edit
+- **ChatGPT**
+  - _(coming soon)_
 - **Images**
   - Create Image
   - Create Image Edit
@@ -37,8 +39,8 @@ Install-Package Cledev.OpenAI
   - Delete Fine-tune Model
 - **Moderations**
   - Create Moderation
-
-**Coming soon: ChatGPT and Whisper**
+- **Whisper**
+  - _(coming soon)_
 
 ## Blazor Playground
 
