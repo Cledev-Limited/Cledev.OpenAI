@@ -8,7 +8,7 @@
 Install-Package Cledev.OpenAI
 ```
 
-## APIs
+## API
 
 - **Models**
   - List Models
