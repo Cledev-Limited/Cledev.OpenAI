@@ -1,6 +1,7 @@
 ﻿using System.Net.Http.Json;
 using System.Text.Json;
 using Cledev.OpenAI.Extensions;
+using Cledev.OpenAI.V1.Contracts.Chats;
 using Cledev.OpenAI.V1.Contracts.Completions;
 using Cledev.OpenAI.V1.Contracts.Edits;
 using Cledev.OpenAI.V1.Contracts.Embeddings;
@@ -40,6 +41,56 @@ public class OpenAIClient : IOpenAIClient
     public async Task<ModelResponse?> RetrieveModel(string id)
     {
         return await _httpClient.Get<ModelResponse?>($"/{ApiVersion}/models/{id}");
+    }
+
+    /// <inheritdoc />
+    public async Task<CreateCompletionResponse?> CreateChatCompletion(CreateChatCompletionRequest request)
+    {
+        return await _httpClient.Post<CreateCompletionResponse>($"/{ApiVersion}/chat/completions", request);
+    }
+
+    /// <inheritdoc />
+    public async IAsyncEnumerable<CreateChatCompletionResponse> CreateChatCompletionAsStream(CreateChatCompletionRequest request)
+    {
+        request.Stream = true;
+
+        using var httpResponseMessage = await _httpClient.PostAsStream($"/{ApiVersion}/chat/completions", request);
+        await using var stream = await httpResponseMessage.Content.ReadAsStreamAsync();
+        using var streamReader = new StreamReader(stream);
+        while (streamReader.EndOfStream is false)
+        {
+            var line = await streamReader.ReadLineAsync();
+
+            if (string.IsNullOrEmpty(line))
+            {
+                continue;
+            }
+
+            var dataPosition = line.IndexOf("data: ", StringComparison.Ordinal);
+            line = dataPosition != 0 ? line : line["data: ".Length..];
+
+            if (line.StartsWith("[DONE]"))
+            {
+                break;
+            }
+
+            CreateChatCompletionResponse? createChatCompletionResponse;
+
+            try
+            {
+                createChatCompletionResponse = JsonSerializer.Deserialize<CreateChatCompletionResponse>(line);
+            }
+            catch (Exception)
+            {
+                line += await streamReader.ReadToEndAsync();
+                createChatCompletionResponse = JsonSerializer.Deserialize<CreateChatCompletionResponse>(line);
+            }
+
+            if (createChatCompletionResponse is not null)
+            {
+                yield return createChatCompletionResponse;
+            }
+        }
     }
 
     /// <inheritdoc />

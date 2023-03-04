@@ -2,6 +2,7 @@
 using System.Text.Json;
 using Cledev.OpenAI.Extensions;
 using Cledev.OpenAI.V1;
+using Cledev.OpenAI.V1.Contracts.Chats;
 using Cledev.OpenAI.V1.Contracts.Completions;
 using Cledev.OpenAI.V1.Contracts.Moderations;
 using Cledev.OpenAI.V1.Models;
@@ -66,7 +67,8 @@ var client = serviceProvider.GetRequiredService<IOpenAIClient>();
 
 //Console.WriteLine($"{JsonSerializer.Serialize(response, jsonSerializerOptions)}");
 
-await TestCreateCompletionAsStream();
+//await TestCreateCompletionAsStream();
+await TestCreateChatCompletionAsStream();
 
 Console.ReadKey();
 
@@ -85,5 +87,29 @@ async Task TestCreateCompletionAsStream()
     await foreach (var completion in completions)
     {
         Console.Write(completion.Choices[0].Text);
+    }
+}
+
+async Task TestCreateChatCompletionAsStream()
+{
+    var request = new CreateChatCompletionRequest
+    {
+        Model = ChatModel.Gpt35Turbo.ToStringModel(),
+        Stream = true,
+        MaxTokens = 500,
+        Messages = new List<ChatCompletionMessage>
+        {
+            new("system", "You are a helpful assistant."),
+            new("user", "Who won the world series in 2020?"),
+            new("assistant", "The Los Angeles Dodgers won the World Series in 2020."),
+            new("user", "Where was it played?")
+        }
+    };
+
+    var completions = client.CreateChatCompletionAsStream(request);
+
+    await foreach (var completion in completions)
+    {
+        Console.Write(completion.Choices[0].Message?.Content);
     }
 }

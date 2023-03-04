@@ -1,4 +1,5 @@
-﻿using Cledev.OpenAI.V1.Contracts.Completions;
+﻿using Cledev.OpenAI.V1.Contracts.Chats;
+using Cledev.OpenAI.V1.Contracts.Completions;
 using Cledev.OpenAI.V1.Contracts.Edits;
 using Cledev.OpenAI.V1.Contracts.Embeddings;
 using Cledev.OpenAI.V1.Contracts.Files;
@@ -21,6 +22,20 @@ public interface IOpenAIClient
     /// </summary>
     /// <param name="id">The id of the model (e.g. text-davinci-003)</param>
     Task<ModelResponse?> RetrieveModel(string id);
+
+    /// <summary>
+    /// Creates a chat completion for the provided messages and parameters.
+    /// </summary>
+    /// <param name="request">The create chat completion request.</param>
+    /// <returns>The create chat completion response.</returns>
+    Task<CreateCompletionResponse?> CreateChatCompletion(CreateChatCompletionRequest request);
+
+    /// <summary>
+    /// Creates a chat completion for the provided messages and parameters as stream.
+    /// </summary>
+    /// <param name="request">The create chat completion request.</param>
+    /// <returns>The create chat completion response.</returns>
+    IAsyncEnumerable<CreateChatCompletionResponse> CreateChatCompletionAsStream(CreateChatCompletionRequest request);
 
     /// <summary>
     /// Creates a completion for the provided prompt and parameters.

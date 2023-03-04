@@ -13,7 +13,7 @@
 		<RepositoryUrl>https://github.com/lucabriguglia/OpenAI.NET</RepositoryUrl>
 		<PackageTags>.net;.net core;utilities;extensions;openai;client;</PackageTags>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<Version>1.0.0-beta-6</Version>
+		<Version>1.0.0-beta-7</Version>
 	</PropertyGroup>
 
 	<ItemGroup>
