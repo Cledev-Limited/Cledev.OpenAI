@@ -18,7 +18,7 @@ Install-Package Cledev.OpenAI
 - **Edits**
   - Create Edit
 - **ChatGPT**
-  - _(coming soon)_
+  - Create Chat Completion
 - **Images**
   - Create Image
   - Create Image Edit
