@@ -40,7 +40,7 @@ public class CreateCompletionRequest
     /// <summary>
     /// <para>Optional (Defaults to 1).</para>
     /// <para>What sampling temperature to use. Higher values means the model will take more risks. Try 0.9 for more creative applications, and 0 (argmax sampling) for ones with a well-defined answer.</para>
-    ///<para>We generally recommend altering this or top_p but not both.</para>
+    /// <para>We generally recommend altering this or top_p but not both.</para>
     /// </summary>
     [JsonPropertyName("temperature")]
     public float? Temperature { get; set; }

@@ -2,6 +2,7 @@
 using System.Runtime.CompilerServices;
 using System.Text.Json;
 using Cledev.OpenAI.Extensions;
+using Cledev.OpenAI.V1.Contracts.Audio;
 using Cledev.OpenAI.V1.Contracts.Chats;
 using Cledev.OpenAI.V1.Contracts.Completions;
 using Cledev.OpenAI.V1.Contracts.Edits;
@@ -42,56 +43,6 @@ public class OpenAIClient : IOpenAIClient
     public async Task<ModelResponse?> RetrieveModel(string id, CancellationToken cancellationToken = default)
     {
         return await _httpClient.Get<ModelResponse?>($"/{ApiVersion}/models/{id}", cancellationToken);
-    }
-
-    /// <inheritdoc />
-    public async Task<CreateCompletionResponse?> CreateChatCompletion(CreateChatCompletionRequest request, CancellationToken cancellationToken = default)
-    {
-        return await _httpClient.Post<CreateCompletionResponse>($"/{ApiVersion}/chat/completions", request, cancellationToken);
-    }
-
-    /// <inheritdoc />
-    public async IAsyncEnumerable<CreateChatCompletionResponse> CreateChatCompletionAsStream(CreateChatCompletionRequest request, [EnumeratorCancellation] CancellationToken cancellationToken = default)
-    {
-        request.Stream = true;
-
-        using var httpResponseMessage = await _httpClient.PostAsStream($"/{ApiVersion}/chat/completions", request, cancellationToken);
-        await using var stream = await httpResponseMessage.Content.ReadAsStreamAsync(cancellationToken);
-        using var streamReader = new StreamReader(stream);
-        while (streamReader.EndOfStream is false)
-        {
-            var line = await streamReader.ReadLineAsync(cancellationToken);
-
-            if (string.IsNullOrEmpty(line))
-            {
-                continue;
-            }
-
-            var dataPosition = line.IndexOf("data: ", StringComparison.Ordinal);
-            line = dataPosition != 0 ? line : line["data: ".Length..];
-
-            if (line.StartsWith("[DONE]"))
-            {
-                break;
-            }
-
-            CreateChatCompletionResponse? createChatCompletionResponse;
-
-            try
-            {
-                createChatCompletionResponse = JsonSerializer.Deserialize<CreateChatCompletionResponse>(line);
-            }
-            catch (Exception)
-            {
-                line += await streamReader.ReadToEndAsync(cancellationToken);
-                createChatCompletionResponse = JsonSerializer.Deserialize<CreateChatCompletionResponse>(line);
-            }
-
-            if (createChatCompletionResponse is not null)
-            {
-                yield return createChatCompletionResponse;
-            }
-        }
     }
 
     /// <inheritdoc />
@@ -145,6 +96,56 @@ public class OpenAIClient : IOpenAIClient
     }
 
     /// <inheritdoc />
+    public async Task<CreateCompletionResponse?> CreateChatCompletion(CreateChatCompletionRequest request, CancellationToken cancellationToken = default)
+    {
+        return await _httpClient.Post<CreateCompletionResponse>($"/{ApiVersion}/chat/completions", request, cancellationToken);
+    }
+
+    /// <inheritdoc />
+    public async IAsyncEnumerable<CreateChatCompletionResponse> CreateChatCompletionAsStream(CreateChatCompletionRequest request, [EnumeratorCancellation] CancellationToken cancellationToken = default)
+    {
+        request.Stream = true;
+
+        using var httpResponseMessage = await _httpClient.PostAsStream($"/{ApiVersion}/chat/completions", request, cancellationToken);
+        await using var stream = await httpResponseMessage.Content.ReadAsStreamAsync(cancellationToken);
+        using var streamReader = new StreamReader(stream);
+        while (streamReader.EndOfStream is false)
+        {
+            var line = await streamReader.ReadLineAsync(cancellationToken);
+
+            if (string.IsNullOrEmpty(line))
+            {
+                continue;
+            }
+
+            var dataPosition = line.IndexOf("data: ", StringComparison.Ordinal);
+            line = dataPosition != 0 ? line : line["data: ".Length..];
+
+            if (line.StartsWith("[DONE]"))
+            {
+                break;
+            }
+
+            CreateChatCompletionResponse? createChatCompletionResponse;
+
+            try
+            {
+                createChatCompletionResponse = JsonSerializer.Deserialize<CreateChatCompletionResponse>(line);
+            }
+            catch (Exception)
+            {
+                line += await streamReader.ReadToEndAsync(cancellationToken);
+                createChatCompletionResponse = JsonSerializer.Deserialize<CreateChatCompletionResponse>(line);
+            }
+
+            if (createChatCompletionResponse is not null)
+            {
+                yield return createChatCompletionResponse;
+            }
+        }
+    }
+
+    /// <inheritdoc />
     public async Task<CreateEditResponse?> CreateEdit(CreateEditRequest request, CancellationToken cancellationToken = default)
     {
         return await _httpClient.Post<CreateEditResponse>($"/{ApiVersion}/edits", request, cancellationToken);
@@ -174,6 +175,20 @@ public class OpenAIClient : IOpenAIClient
     public async Task<CreateEmbeddingsResponse?> CreateEmbeddings(CreateEmbeddingsRequest request, CancellationToken cancellationToken = default)
     {
         return await _httpClient.Post<CreateEmbeddingsResponse>($"/{ApiVersion}/embeddings", request, cancellationToken);
+    }
+
+    /// <inheritdoc />
+    public async Task<CreateAudioResponse?> CreateAudioTranscription(CreateAudioTranscriptionRequest request, CancellationToken cancellationToken = default)
+    {
+        var multipartFormDataContent = request.ToMultipartFormDataContent();
+        return await _httpClient.Post<CreateAudioResponse>($"/{ApiVersion}/audio/transcriptions", multipartFormDataContent, cancellationToken);
+    }
+
+    /// <inheritdoc />
+    public async Task<CreateAudioResponse?> CreateAudioTranslation(CreateAudioTranslationRequest request, CancellationToken cancellationToken = default)
+    {
+        var multipartFormDataContent = request.ToMultipartFormDataContent();
+        return await _httpClient.Post<CreateAudioResponse>($"/{ApiVersion}/audio/translations", multipartFormDataContent, cancellationToken);
     }
 
     /// <inheritdoc />

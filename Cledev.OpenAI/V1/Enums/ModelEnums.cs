@@ -1,4 +1,4 @@
-﻿namespace Cledev.OpenAI.V1.Models;
+﻿namespace Cledev.OpenAI.V1.Enums;
 
 public enum CompletionsModel
 {
@@ -49,7 +49,12 @@ public enum ChatModel
     Gpt35Turbo0301
 }
 
-public static class OpenAIModelsExtensions
+public enum AudioModel
+{
+    Whisper1
+}
+
+public static class ModelEnumsExtensions
 {
     public static string ToStringModel(this CompletionsModel completionsModel)
     {
@@ -121,6 +126,15 @@ public static class OpenAIModelsExtensions
             ChatModel.Gpt35Turbo => "gpt-3.5-turbo",
             ChatModel.Gpt35Turbo0301 => "gpt-3.5-turbo-0301",
             _ => throw new ArgumentOutOfRangeException(nameof(chatModel), chatModel, null)
+        };
+    }
+
+    public static string ToStringModel(this AudioModel audioModel)
+    {
+        return audioModel switch
+        {
+            AudioModel.Whisper1 => "whisper-1",
+            _ => throw new ArgumentOutOfRangeException(nameof(audioModel), audioModel, null)
         };
     }
 }
