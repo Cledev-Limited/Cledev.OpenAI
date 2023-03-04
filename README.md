@@ -25,7 +25,7 @@ Install-Package Cledev.OpenAI
   - Create Image Variation
 - **Embeddings**
   - Create Embeddings
-- **Audio _(Work In Progress)_**
+- **Audio**
   - Create Transcription
   - Create Translation
 - **Files**
@@ -75,5 +75,3 @@ services.AddOpenAIClient(options =>
 ## Usage
 
 Inject `IOpenAIClient` interface into your service
-
-_(complete guide available soon)_
