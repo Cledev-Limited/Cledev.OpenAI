@@ -15,16 +15,19 @@ Install-Package Cledev.OpenAI
   - Retrieve Model
 - **Completions**
   - Create Completion
+- **Chat**
+  - Create Chat Completion
 - **Edits**
   - Create Edit
-- **ChatGPT**
-  - Create Chat Completion
 - **Images**
   - Create Image
   - Create Image Edit
   - Create Image Variation
 - **Embeddings**
   - Create Embeddings
+- **Audio _(Work In Progress)_**
+  - Create Transcription
+  - Create Translation
 - **Files**
   - List Files
   - Upload File
@@ -39,8 +42,6 @@ Install-Package Cledev.OpenAI
   - Delete Fine-tune Model
 - **Moderations**
   - Create Moderation
-- **Whisper**
-  - _(coming soon)_
 
 ## Configuration
 
