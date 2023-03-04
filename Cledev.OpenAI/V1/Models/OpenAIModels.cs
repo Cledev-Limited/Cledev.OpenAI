@@ -43,6 +43,12 @@ public enum ModerationModel
     TextModerationLatest
 }
 
+public enum ChatModel
+{
+    Gpt35Turbo,
+    Gpt35Turbo0301
+}
+
 public static class OpenAIModelsExtensions
 {
     public static string ToStringModel(this CompletionsModel completionsModel)
@@ -105,6 +111,16 @@ public static class OpenAIModelsExtensions
             ModerationModel.TextModerationStable => "text-moderation-stable",
             ModerationModel.TextModerationLatest => "text-moderation-latest",
             _ => throw new ArgumentOutOfRangeException(nameof(moderationModel), moderationModel, null)
+        };
+    }
+
+    public static string ToStringModel(this ChatModel chatModel)
+    {
+        return chatModel switch
+        {
+            ChatModel.Gpt35Turbo => "gpt-3.5-turbo",
+            ChatModel.Gpt35Turbo0301 => "gpt-3.5-turbo-0301",
+            _ => throw new ArgumentOutOfRangeException(nameof(chatModel), chatModel, null)
         };
     }
 }
