@@ -5,15 +5,13 @@ VisualStudioVersion = 17.4.33103.184
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cledev.OpenAI", "Cledev.OpenAI\Cledev.OpenAI.csproj", "{4840FAA1-9676-4695-913C-E71A477EB853}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cledev.OpenAI.Playground.Console", "Cledev.OpenAI.Playground.Console\Cledev.OpenAI.Playground.Console.csproj", "{46A265A7-5B9B-4D4A-B95C-024619009A0F}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3E3FA934-A66D-47D6-B2B7-5FEF6FD75384}"
 	ProjectSection(SolutionItems) = preProject
 		.github\workflows\main.yml = .github\workflows\main.yml
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cledev.OpenAI.Playground.Blazor", "Cledev.OpenAI.Playground.Blazor\Cledev.OpenAI.Playground.Blazor.csproj", "{569124D5-4592-4AF2-9D14-3CF0FE4A8C8B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cledev.OpenAI.Console", "Cledev.OpenAI.Console\Cledev.OpenAI.Console.csproj", "{5AD629F3-69C0-47B0-A35E-CE1749E72B98}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,14 +23,10 @@ Global
 		{4840FAA1-9676-4695-913C-E71A477EB853}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4840FAA1-9676-4695-913C-E71A477EB853}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4840FAA1-9676-4695-913C-E71A477EB853}.Release|Any CPU.Build.0 = Release|Any CPU
-		{46A265A7-5B9B-4D4A-B95C-024619009A0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{46A265A7-5B9B-4D4A-B95C-024619009A0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{46A265A7-5B9B-4D4A-B95C-024619009A0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{46A265A7-5B9B-4D4A-B95C-024619009A0F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{569124D5-4592-4AF2-9D14-3CF0FE4A8C8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{569124D5-4592-4AF2-9D14-3CF0FE4A8C8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{569124D5-4592-4AF2-9D14-3CF0FE4A8C8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{569124D5-4592-4AF2-9D14-3CF0FE4A8C8B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5AD629F3-69C0-47B0-A35E-CE1749E72B98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5AD629F3-69C0-47B0-A35E-CE1749E72B98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5AD629F3-69C0-47B0-A35E-CE1749E72B98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5AD629F3-69C0-47B0-A35E-CE1749E72B98}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
