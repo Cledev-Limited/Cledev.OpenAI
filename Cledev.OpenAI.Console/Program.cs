@@ -2,6 +2,7 @@
 using System.Text.Json;
 using Cledev.OpenAI.Extensions;
 using Cledev.OpenAI.V1;
+using Cledev.OpenAI.V1.Contracts.Audio;
 using Cledev.OpenAI.V1.Contracts.Chats;
 using Cledev.OpenAI.V1.Contracts.Completions;
 using Cledev.OpenAI.V1.Contracts.Moderations;
@@ -68,7 +69,8 @@ var client = serviceProvider.GetRequiredService<IOpenAIClient>();
 //Console.WriteLine($"{JsonSerializer.Serialize(response, jsonSerializerOptions)}");
 
 //await TestCreateCompletionAsStream();
-await TestCreateChatCompletionAsStream();
+//await TestCreateChatCompletionAsStream();
+await TestCreateAudioTranscription();
 
 Console.ReadKey();
 
@@ -112,4 +114,21 @@ async Task TestCreateChatCompletionAsStream()
     {
         Console.Write(completion.Choices[0].Message?.Content);
     }
+}
+
+async Task TestCreateAudioTranscription()
+{
+    const string fileName = "YOUR_RECORDING.m4a";
+    var fileBytes = await File.ReadAllBytesAsync($"Data/{fileName}");
+
+    var request = new CreateAudioTranscriptionRequest
+    {
+        Model = AudioModel.Whisper1.ToStringModel(),
+        File = fileBytes,
+        FileName = fileName
+    };
+
+    var response = await client.CreateAudioTranscription(request);
+
+    Console.Write(response?.Text);
 }

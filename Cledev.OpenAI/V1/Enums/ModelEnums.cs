@@ -49,7 +49,7 @@ public enum ChatModel
     Gpt35Turbo0301
 }
 
-public enum WhisperModel
+public enum AudioModel
 {
     Whisper1
 }
@@ -129,12 +129,12 @@ public static class ModelEnumsExtensions
         };
     }
 
-    public static string ToStringModel(this WhisperModel whisperModel)
+    public static string ToStringModel(this AudioModel audioModel)
     {
-        return whisperModel switch
+        return audioModel switch
         {
-            WhisperModel.Whisper1 => "whisper-1",
-            _ => throw new ArgumentOutOfRangeException(nameof(whisperModel), whisperModel, null)
+            AudioModel.Whisper1 => "whisper-1",
+            _ => throw new ArgumentOutOfRangeException(nameof(audioModel), audioModel, null)
         };
     }
 }
