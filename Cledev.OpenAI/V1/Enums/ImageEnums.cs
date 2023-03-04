@@ -1,4 +1,4 @@
-﻿namespace Cledev.OpenAI.V1.Models;
+﻿namespace Cledev.OpenAI.V1.Enums;
 
 public enum ImageSize
 {
@@ -7,13 +7,13 @@ public enum ImageSize
     Size1024x1024
 }
 
-public enum ImageFormat
+public enum ImageResponseFormat
 {
     Url,
     B64Json
 }
 
-public static class ImageModelsExtensions
+public static class ImageEnumsExtensions
 {
     public static string ToStringSize(this ImageSize imageSize)
     {
@@ -26,13 +26,13 @@ public static class ImageModelsExtensions
         };
     }
 
-    public static string ToStringFormat(this ImageFormat imageFormat)
+    public static string ToStringFormat(this ImageResponseFormat imageResponseFormat)
     {
-        return imageFormat switch
+        return imageResponseFormat switch
         {
-            ImageFormat.Url => "url",
-            ImageFormat.B64Json => "b64_json",
-            _ => throw new ArgumentOutOfRangeException(nameof(imageFormat), imageFormat, null)
+            ImageResponseFormat.Url => "url",
+            ImageResponseFormat.B64Json => "b64_json",
+            _ => throw new ArgumentOutOfRangeException(nameof(imageResponseFormat), imageResponseFormat, null)
         };
     }
 }

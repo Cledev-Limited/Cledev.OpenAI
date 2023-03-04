@@ -5,7 +5,7 @@ using Cledev.OpenAI.V1;
 using Cledev.OpenAI.V1.Contracts.Chats;
 using Cledev.OpenAI.V1.Contracts.Completions;
 using Cledev.OpenAI.V1.Contracts.Moderations;
-using Cledev.OpenAI.V1.Models;
+using Cledev.OpenAI.V1.Enums;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using static System.Net.Mime.MediaTypeNames;
