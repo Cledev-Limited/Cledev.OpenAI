@@ -7,26 +7,26 @@ namespace Cledev.OpenAI.Extensions;
 
 internal static class HttpClientExtensions
 {
-    internal static async Task<T?> Get<T>(this HttpClient httpClient, string requestUri)
+    internal static async Task<T?> Get<T>(this HttpClient httpClient, string requestUri, CancellationToken cancellationToken = default)
     {
-        var response = await httpClient.GetAsync(requestUri);
-        return await response.Content.ReadFromJsonAsync<T?>();
+        var response = await httpClient.GetAsync(requestUri, cancellationToken);
+        return await response.Content.ReadFromJsonAsync<T?>(cancellationToken: cancellationToken);
     }
 
-    internal static async Task<T?> Post<T>(this HttpClient httpClient, string requestUri, object request)
+    internal static async Task<T?> Post<T>(this HttpClient httpClient, string requestUri, object request, CancellationToken cancellationToken = default)
     {
         var jsonSerializerOptions = new JsonSerializerOptions { DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault };
-        var response = await httpClient.PostAsJsonAsync(requestUri, request, jsonSerializerOptions);
-        return await response.Content.ReadFromJsonAsync<T?>();
+        var response = await httpClient.PostAsJsonAsync(requestUri, request, jsonSerializerOptions, cancellationToken);
+        return await response.Content.ReadFromJsonAsync<T?>(cancellationToken: cancellationToken);
     }
 
-    internal static async Task<T?> Post<T>(this HttpClient httpClient, string requestUri, HttpContent? content)
+    internal static async Task<T?> Post<T>(this HttpClient httpClient, string requestUri, HttpContent? content, CancellationToken cancellationToken = default)
     {
-        var response = await httpClient.PostAsync(requestUri, content);
-        return await response.Content.ReadFromJsonAsync<T?>();
+        var response = await httpClient.PostAsync(requestUri, content, cancellationToken);
+        return await response.Content.ReadFromJsonAsync<T?>(cancellationToken: cancellationToken);
     }
 
-    internal static async Task<HttpResponseMessage> PostAsStream(this HttpClient httpClient, string requestUri, object request)
+    internal static async Task<HttpResponseMessage> PostAsStream(this HttpClient httpClient, string requestUri, object request, CancellationToken cancellationToken = default)
     {
         var jsonSerializerOptions = new JsonSerializerOptions { DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault };
         var jsonContent = JsonContent.Create(request, null, jsonSerializerOptions);
@@ -35,12 +35,12 @@ internal static class HttpClientExtensions
         httpRequestMessage.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("text/event-stream"));
         httpRequestMessage.Content = jsonContent;
 
-        return await httpClient.SendAsync(httpRequestMessage, HttpCompletionOption.ResponseHeadersRead);
+        return await httpClient.SendAsync(httpRequestMessage, HttpCompletionOption.ResponseHeadersRead, cancellationToken);
     }
 
-    internal static async Task<T?> Delete<T>(this HttpClient httpClient, string requestUri)
+    internal static async Task<T?> Delete<T>(this HttpClient httpClient, string requestUri, CancellationToken cancellationToken = default)
     {
-        var response = await httpClient.DeleteAsync(requestUri);
-        return await response.Content.ReadFromJsonAsync<T?>();
+        var response = await httpClient.DeleteAsync(requestUri, cancellationToken);
+        return await response.Content.ReadFromJsonAsync<T?>(cancellationToken: cancellationToken);
     }
 }

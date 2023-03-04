@@ -1,4 +1,5 @@
 ﻿using System.Net.Http.Json;
+using System.Runtime.CompilerServices;
 using System.Text.Json;
 using Cledev.OpenAI.Extensions;
 using Cledev.OpenAI.V1.Contracts.Chats;
@@ -32,34 +33,34 @@ public class OpenAIClient : IOpenAIClient
     }
 
     /// <inheritdoc />
-    public async Task<ListModelsResponse?> ListModels()
+    public async Task<ListModelsResponse?> ListModels(CancellationToken cancellationToken = default)
     {
-        return await _httpClient.Get<ListModelsResponse?>($"/{ApiVersion}/models");
+        return await _httpClient.Get<ListModelsResponse?>($"/{ApiVersion}/models", cancellationToken);
     }
 
     /// <inheritdoc />
-    public async Task<ModelResponse?> RetrieveModel(string id)
+    public async Task<ModelResponse?> RetrieveModel(string id, CancellationToken cancellationToken = default)
     {
-        return await _httpClient.Get<ModelResponse?>($"/{ApiVersion}/models/{id}");
+        return await _httpClient.Get<ModelResponse?>($"/{ApiVersion}/models/{id}", cancellationToken);
     }
 
     /// <inheritdoc />
-    public async Task<CreateCompletionResponse?> CreateChatCompletion(CreateChatCompletionRequest request)
+    public async Task<CreateCompletionResponse?> CreateChatCompletion(CreateChatCompletionRequest request, CancellationToken cancellationToken = default)
     {
-        return await _httpClient.Post<CreateCompletionResponse>($"/{ApiVersion}/chat/completions", request);
+        return await _httpClient.Post<CreateCompletionResponse>($"/{ApiVersion}/chat/completions", request, cancellationToken);
     }
 
     /// <inheritdoc />
-    public async IAsyncEnumerable<CreateChatCompletionResponse> CreateChatCompletionAsStream(CreateChatCompletionRequest request)
+    public async IAsyncEnumerable<CreateChatCompletionResponse> CreateChatCompletionAsStream(CreateChatCompletionRequest request, [EnumeratorCancellation] CancellationToken cancellationToken = default)
     {
         request.Stream = true;
 
-        using var httpResponseMessage = await _httpClient.PostAsStream($"/{ApiVersion}/chat/completions", request);
-        await using var stream = await httpResponseMessage.Content.ReadAsStreamAsync();
+        using var httpResponseMessage = await _httpClient.PostAsStream($"/{ApiVersion}/chat/completions", request, cancellationToken);
+        await using var stream = await httpResponseMessage.Content.ReadAsStreamAsync(cancellationToken);
         using var streamReader = new StreamReader(stream);
         while (streamReader.EndOfStream is false)
         {
-            var line = await streamReader.ReadLineAsync();
+            var line = await streamReader.ReadLineAsync(cancellationToken);
 
             if (string.IsNullOrEmpty(line))
             {
@@ -82,7 +83,7 @@ public class OpenAIClient : IOpenAIClient
             }
             catch (Exception)
             {
-                line += await streamReader.ReadToEndAsync();
+                line += await streamReader.ReadToEndAsync(cancellationToken);
                 createChatCompletionResponse = JsonSerializer.Deserialize<CreateChatCompletionResponse>(line);
             }
 
@@ -94,22 +95,22 @@ public class OpenAIClient : IOpenAIClient
     }
 
     /// <inheritdoc />
-    public async Task<CreateCompletionResponse?> CreateCompletion(CreateCompletionRequest request)
+    public async Task<CreateCompletionResponse?> CreateCompletion(CreateCompletionRequest request, CancellationToken cancellationToken = default)
     {
-        return await _httpClient.Post<CreateCompletionResponse>($"/{ApiVersion}/completions", request);
+        return await _httpClient.Post<CreateCompletionResponse>($"/{ApiVersion}/completions", request, cancellationToken);
     }
 
     /// <inheritdoc />
-    public async IAsyncEnumerable<CreateCompletionResponse> CreateCompletionAsStream(CreateCompletionRequest request)
+    public async IAsyncEnumerable<CreateCompletionResponse> CreateCompletionAsStream(CreateCompletionRequest request, [EnumeratorCancellation] CancellationToken cancellationToken = default)
     {
         request.Stream = true;
 
-        using var httpResponseMessage = await _httpClient.PostAsStream($"/{ApiVersion}/completions", request);
-        await using var stream = await httpResponseMessage.Content.ReadAsStreamAsync();
+        using var httpResponseMessage = await _httpClient.PostAsStream($"/{ApiVersion}/completions", request, cancellationToken);
+        await using var stream = await httpResponseMessage.Content.ReadAsStreamAsync(cancellationToken);
         using var streamReader = new StreamReader(stream);
         while (streamReader.EndOfStream is false)
         {
-            var line = await streamReader.ReadLineAsync();
+            var line = await streamReader.ReadLineAsync(cancellationToken);
 
             if (string.IsNullOrEmpty(line))
             {
@@ -132,7 +133,7 @@ public class OpenAIClient : IOpenAIClient
             }
             catch (Exception)
             {
-                line += await streamReader.ReadToEndAsync();
+                line += await streamReader.ReadToEndAsync(cancellationToken);
                 createCompletionResponse = JsonSerializer.Deserialize<CreateCompletionResponse>(line);
             }
 
@@ -144,108 +145,108 @@ public class OpenAIClient : IOpenAIClient
     }
 
     /// <inheritdoc />
-    public async Task<CreateEditResponse?> CreateEdit(CreateEditRequest request)
+    public async Task<CreateEditResponse?> CreateEdit(CreateEditRequest request, CancellationToken cancellationToken = default)
     {
-        return await _httpClient.Post<CreateEditResponse>($"/{ApiVersion}/edits", request);
+        return await _httpClient.Post<CreateEditResponse>($"/{ApiVersion}/edits", request, cancellationToken);
     }
 
     /// <inheritdoc />
-    public async Task<CreateImageResponse?> CreateImage(CreateImageRequest request)
+    public async Task<CreateImageResponse?> CreateImage(CreateImageRequest request, CancellationToken cancellationToken = default)
     {
-        return await _httpClient.Post<CreateImageResponse>($"/{ApiVersion}/images/generations", request);
+        return await _httpClient.Post<CreateImageResponse>($"/{ApiVersion}/images/generations", request, cancellationToken);
     }
 
     /// <inheritdoc />
-    public async Task<CreateImageResponse?> CreateImageEdit(CreateImageEditRequest request)
-    {
-        var multipartFormDataContent = request.ToMultipartFormDataContent();
-        return await _httpClient.Post<CreateImageResponse>($"/{ApiVersion}/images/edits", multipartFormDataContent);
-    }
-
-    /// <inheritdoc />
-    public async Task<CreateImageResponse?> CreateImageVariation(CreateImageVariationRequest request)
+    public async Task<CreateImageResponse?> CreateImageEdit(CreateImageEditRequest request, CancellationToken cancellationToken = default)
     {
         var multipartFormDataContent = request.ToMultipartFormDataContent();
-        return await _httpClient.Post<CreateImageResponse>($"/{ApiVersion}/images/variations", multipartFormDataContent);
+        return await _httpClient.Post<CreateImageResponse>($"/{ApiVersion}/images/edits", multipartFormDataContent, cancellationToken);
     }
 
     /// <inheritdoc />
-    public async Task<CreateEmbeddingsResponse?> CreateEmbeddings(CreateEmbeddingsRequest request)
-    {
-        return await _httpClient.Post<CreateEmbeddingsResponse>($"/{ApiVersion}/embeddings", request);
-    }
-
-    /// <inheritdoc />
-    public async Task<ListFilesResponse?> ListFiles()
-    {
-        return await _httpClient.GetFromJsonAsync<ListFilesResponse?>($"/{ApiVersion}/files");
-    }
-
-    /// <inheritdoc />
-    public async Task<FileResponse?> UploadFile(UploadFileRequest request)
+    public async Task<CreateImageResponse?> CreateImageVariation(CreateImageVariationRequest request, CancellationToken cancellationToken = default)
     {
         var multipartFormDataContent = request.ToMultipartFormDataContent();
-        return await _httpClient.Post<FileResponse?>($"/{ApiVersion}/files", multipartFormDataContent);
+        return await _httpClient.Post<CreateImageResponse>($"/{ApiVersion}/images/variations", multipartFormDataContent, cancellationToken);
     }
 
     /// <inheritdoc />
-    public async Task<DeleteFileResponse?> DeleteFile(string fileId)
+    public async Task<CreateEmbeddingsResponse?> CreateEmbeddings(CreateEmbeddingsRequest request, CancellationToken cancellationToken = default)
     {
-        return await _httpClient.Delete<DeleteFileResponse?>($"/{ApiVersion}/files/{fileId}");
+        return await _httpClient.Post<CreateEmbeddingsResponse>($"/{ApiVersion}/embeddings", request, cancellationToken);
     }
 
     /// <inheritdoc />
-    public async Task<FileResponse?> RetrieveFile(string fileId)
+    public async Task<ListFilesResponse?> ListFiles(CancellationToken cancellationToken = default)
     {
-        return await _httpClient.Get<FileResponse?>($"/{ApiVersion}/files/{fileId}");
+        return await _httpClient.GetFromJsonAsync<ListFilesResponse?>($"/{ApiVersion}/files", cancellationToken);
     }
 
     /// <inheritdoc />
-    public async Task<string?> RetrieveFileContent(string fileId)
+    public async Task<FileResponse?> UploadFile(UploadFileRequest request, CancellationToken cancellationToken = default)
     {
-        return await _httpClient.Get<string?>($"/{ApiVersion}/files/{fileId}/content");
+        var multipartFormDataContent = request.ToMultipartFormDataContent();
+        return await _httpClient.Post<FileResponse?>($"/{ApiVersion}/files", multipartFormDataContent, cancellationToken);
     }
 
     /// <inheritdoc />
-    public async Task<FineTuneResponse?> CreateFineTune(CreateFineTuneRequest request)
+    public async Task<DeleteFileResponse?> DeleteFile(string fileId, CancellationToken cancellationToken = default)
     {
-        return await _httpClient.Post<FineTuneResponse?>($"/{ApiVersion}/fine-tunes", request);
+        return await _httpClient.Delete<DeleteFileResponse?>($"/{ApiVersion}/files/{fileId}", cancellationToken);
     }
 
     /// <inheritdoc />
-    public async Task<ListFineTunesResponse?> ListFineTunes()
+    public async Task<FileResponse?> RetrieveFile(string fileId, CancellationToken cancellationToken = default)
     {
-        return await _httpClient.Get<ListFineTunesResponse?>($"/{ApiVersion}/fine-tunes");
+        return await _httpClient.Get<FileResponse?>($"/{ApiVersion}/files/{fileId}", cancellationToken);
     }
 
     /// <inheritdoc />
-    public async Task<FineTuneResponse?> RetrieveFineTune(string fineTuneId)
+    public async Task<string?> RetrieveFileContent(string fileId, CancellationToken cancellationToken = default)
     {
-        return await _httpClient.Get<FineTuneResponse?>($"/{ApiVersion}/fine-tunes/{fineTuneId}");
+        return await _httpClient.Get<string?>($"/{ApiVersion}/files/{fileId}/content", cancellationToken);
     }
 
     /// <inheritdoc />
-    public async Task<FineTuneResponse?> CancelFineTune(string fineTuneId)
+    public async Task<FineTuneResponse?> CreateFineTune(CreateFineTuneRequest request, CancellationToken cancellationToken = default)
     {
-        return await _httpClient.Post<FineTuneResponse?>($"/{ApiVersion}/fine-tunes/{fineTuneId}/cancel", null);
+        return await _httpClient.Post<FineTuneResponse?>($"/{ApiVersion}/fine-tunes", request, cancellationToken);
     }
 
     /// <inheritdoc />
-    public async Task<ListFineTuneEventsResponse?> ListFineTuneEvents(string fineTuneId, bool? stream = null)
+    public async Task<ListFineTunesResponse?> ListFineTunes(CancellationToken cancellationToken = default)
+    {
+        return await _httpClient.Get<ListFineTunesResponse?>($"/{ApiVersion}/fine-tunes", cancellationToken);
+    }
+
+    /// <inheritdoc />
+    public async Task<FineTuneResponse?> RetrieveFineTune(string fineTuneId, CancellationToken cancellationToken = default)
+    {
+        return await _httpClient.Get<FineTuneResponse?>($"/{ApiVersion}/fine-tunes/{fineTuneId}", cancellationToken);
+    }
+
+    /// <inheritdoc />
+    public async Task<FineTuneResponse?> CancelFineTune(string fineTuneId, CancellationToken cancellationToken = default)
+    {
+        return await _httpClient.Post<FineTuneResponse?>($"/{ApiVersion}/fine-tunes/{fineTuneId}/cancel", null, cancellationToken);
+    }
+
+    /// <inheritdoc />
+    public async Task<ListFineTuneEventsResponse?> ListFineTuneEvents(string fineTuneId, bool? stream = null, CancellationToken cancellationToken = default)
     {
         var queryParameters = stream is not null ? $"?stream={stream}" : string.Empty;
-        return await _httpClient.Get<ListFineTuneEventsResponse?>($"/{ApiVersion}/fine-tunes/{fineTuneId}/events{queryParameters}");
+        return await _httpClient.Get<ListFineTuneEventsResponse?>($"/{ApiVersion}/fine-tunes/{fineTuneId}/events{queryParameters}", cancellationToken);
     }
 
     /// <inheritdoc />
-    public async Task<DeleteFineTuneResponse?> DeleteFineTune(string model)
+    public async Task<DeleteFineTuneResponse?> DeleteFineTune(string model, CancellationToken cancellationToken = default)
     {
-        return await _httpClient.Delete<DeleteFineTuneResponse?>($"/{ApiVersion}/models/{model}");
+        return await _httpClient.Delete<DeleteFineTuneResponse?>($"/{ApiVersion}/models/{model}", cancellationToken);
     }
 
     /// <inheritdoc />
-    public async Task<CreateModerationResponse?> CreateModeration(CreateModerationRequest request)
+    public async Task<CreateModerationResponse?> CreateModeration(CreateModerationRequest request, CancellationToken cancellationToken = default)
     {
-        return await _httpClient.Post<CreateModerationResponse?>($"/{ApiVersion}/moderations", request);
+        return await _httpClient.Post<CreateModerationResponse?>($"/{ApiVersion}/moderations", request, cancellationToken);
     }
 }
