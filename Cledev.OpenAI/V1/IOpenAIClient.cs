@@ -1,4 +1,5 @@
-﻿using Cledev.OpenAI.V1.Contracts.Chats;
+﻿using Cledev.OpenAI.V1.Contracts.Audio;
+using Cledev.OpenAI.V1.Contracts.Chats;
 using Cledev.OpenAI.V1.Contracts.Completions;
 using Cledev.OpenAI.V1.Contracts.Edits;
 using Cledev.OpenAI.V1.Contracts.Embeddings;
@@ -7,7 +8,6 @@ using Cledev.OpenAI.V1.Contracts.FineTunes;
 using Cledev.OpenAI.V1.Contracts.Images;
 using Cledev.OpenAI.V1.Contracts.Models;
 using Cledev.OpenAI.V1.Contracts.Moderations;
-using System.Runtime.CompilerServices;
 
 namespace Cledev.OpenAI.V1;
 
@@ -26,22 +26,6 @@ public interface IOpenAIClient
     Task<ModelResponse?> RetrieveModel(string id, CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// Creates a chat completion for the provided messages and parameters.
-    /// </summary>
-    /// <param name="request">The create chat completion request.</param>
-    /// <param name="cancellationToken">The cancellation token.</param>
-    /// <returns>The create chat completion response.</returns>
-    Task<CreateCompletionResponse?> CreateChatCompletion(CreateChatCompletionRequest request, CancellationToken cancellationToken = default);
-
-    /// <summary>
-    /// Creates a chat completion for the provided messages and parameters as stream.
-    /// </summary>
-    /// <param name="request">The create chat completion request.</param>
-    /// <param name="cancellationToken">The cancellation token.</param>
-    /// <returns>The create chat completion response.</returns>
-    IAsyncEnumerable<CreateChatCompletionResponse> CreateChatCompletionAsStream(CreateChatCompletionRequest request, CancellationToken cancellationToken = default);
-
-    /// <summary>
     /// Creates a completion for the provided prompt and parameters.
     /// </summary>
     /// <param name="request">The create completion request.</param>
@@ -56,6 +40,22 @@ public interface IOpenAIClient
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns>The create completion response.</returns>
     IAsyncEnumerable<CreateCompletionResponse> CreateCompletionAsStream(CreateCompletionRequest request, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Creates a chat completion for the provided messages and parameters.
+    /// </summary>
+    /// <param name="request">The create chat completion request.</param>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <returns>The create chat completion response.</returns>
+    Task<CreateCompletionResponse?> CreateChatCompletion(CreateChatCompletionRequest request, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Creates a chat completion for the provided messages and parameters as stream.
+    /// </summary>
+    /// <param name="request">The create chat completion request.</param>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <returns>The create chat completion response.</returns>
+    IAsyncEnumerable<CreateChatCompletionResponse> CreateChatCompletionAsStream(CreateChatCompletionRequest request, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Creates a new edit for the provided input, instruction, and parameters.
@@ -96,6 +96,22 @@ public interface IOpenAIClient
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns>The create embeddings response.</returns>
     Task<CreateEmbeddingsResponse?> CreateEmbeddings(CreateEmbeddingsRequest request, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Transcribes audio into the input language.
+    /// </summary>
+    /// <param name="request">The create audio transcription request.</param>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <returns>The create audio response.</returns>
+    Task<CreateAudioResponse?> CreateAudioTranscription(CreateAudioTranscriptionRequest request, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Translates audio into into English.
+    /// </summary>
+    /// <param name="request">The create audio translation request.</param>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <returns>The create audio response.</returns>
+    Task<CreateAudioResponse?> CreateAudioTranslation(CreateAudioTranslationRequest request, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Returns a list of files that belong to the user's organization.
