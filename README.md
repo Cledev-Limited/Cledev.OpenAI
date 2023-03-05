@@ -75,3 +75,5 @@ services.AddOpenAIClient(options =>
 ## Usage
 
 Inject `IOpenAIClient` interface into your service
+
+Please, have a look at the [Blazor Server Playground](https://github.com/lucabriguglia/Cledev.OpenAI.Playground) for examples on how to use the client.
