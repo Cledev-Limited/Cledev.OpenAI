@@ -121,14 +121,14 @@ async Task TestCreateAudioTranscription()
     const string fileName = "YOUR_RECORDING.m4a";
     var fileBytes = await File.ReadAllBytesAsync($"Data/{fileName}");
 
-    var request = new CreateAudioTranscriptionRequest
+    var request = new CreateAudioTranslationRequest
     {
         Model = AudioModel.Whisper1.ToStringModel(),
         File = fileBytes,
         FileName = fileName
     };
 
-    var response = await client.CreateAudioTranscription(request);
+    var response = await client.CreateAudioTranslation(request);
 
     Console.Write(response?.Text);
 }

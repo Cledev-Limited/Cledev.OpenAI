@@ -181,6 +181,7 @@ public class OpenAIClient : IOpenAIClient
     public async Task<CreateAudioResponse?> CreateAudioTranscription(CreateAudioTranscriptionRequest request, CancellationToken cancellationToken = default)
     {
         var multipartFormDataContent = request.ToMultipartFormDataContent();
+        multipartFormDataContent.AddOtherOptionsFrom(request);
         return await _httpClient.Post<CreateAudioResponse>($"/{ApiVersion}/audio/transcriptions", multipartFormDataContent, cancellationToken);
     }
 
