@@ -68,8 +68,8 @@ var client = serviceProvider.GetRequiredService<IOpenAIClient>();
 
 //Console.WriteLine($"{JsonSerializer.Serialize(response, jsonSerializerOptions)}");
 
-await TestCreateCompletionAsStream();
-//await TestCreateChatCompletionAsStream();
+//await TestCreateCompletionAsStream();
+await TestCreateChatCompletionAsStream();
 //await TestCreateAudioTranscription();
 
 Console.ReadKey();
