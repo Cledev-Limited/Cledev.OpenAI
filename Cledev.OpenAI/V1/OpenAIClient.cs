@@ -56,42 +56,9 @@ public class OpenAIClient : IOpenAIClient
     {
         request.Stream = true;
 
-        using var httpResponseMessage = await _httpClient.PostAsStream($"/{ApiVersion}/completions", request, cancellationToken);
-        await using var stream = await httpResponseMessage.Content.ReadAsStreamAsync(cancellationToken);
-        using var streamReader = new StreamReader(stream);
-        while (streamReader.EndOfStream is false)
+        await foreach (var completion in CreateAsStream<CreateCompletionRequest, CreateCompletionResponse>($"/{ApiVersion}/completions", request, cancellationToken))
         {
-            var line = await streamReader.ReadLineAsync(cancellationToken);
-
-            if (string.IsNullOrEmpty(line))
-            {
-                continue;
-            }
-
-            var dataPosition = line.IndexOf("data: ", StringComparison.Ordinal);
-            line = dataPosition != 0 ? line : line["data: ".Length..];
-
-            if (line.StartsWith("[DONE]"))
-            {
-                break;
-            }
-
-            CreateCompletionResponse? createCompletionResponse;
-
-            try
-            {
-                createCompletionResponse = JsonSerializer.Deserialize<CreateCompletionResponse>(line);
-            }
-            catch (Exception)
-            {
-                line += await streamReader.ReadToEndAsync(cancellationToken);
-                createCompletionResponse = JsonSerializer.Deserialize<CreateCompletionResponse>(line);
-            }
-
-            if (createCompletionResponse is not null) 
-            {
-                yield return createCompletionResponse;
-            }
+            yield return completion;
         }
     }
 
@@ -106,42 +73,9 @@ public class OpenAIClient : IOpenAIClient
     {
         request.Stream = true;
 
-        using var httpResponseMessage = await _httpClient.PostAsStream($"/{ApiVersion}/chat/completions", request, cancellationToken);
-        await using var stream = await httpResponseMessage.Content.ReadAsStreamAsync(cancellationToken);
-        using var streamReader = new StreamReader(stream);
-        while (streamReader.EndOfStream is false)
+        await foreach (var chatCompletion in CreateAsStream<CreateChatCompletionRequest, CreateChatCompletionResponse>($"/{ApiVersion}/chat/completions", request, cancellationToken))
         {
-            var line = await streamReader.ReadLineAsync(cancellationToken);
-
-            if (string.IsNullOrEmpty(line))
-            {
-                continue;
-            }
-
-            var dataPosition = line.IndexOf("data: ", StringComparison.Ordinal);
-            line = dataPosition != 0 ? line : line["data: ".Length..];
-
-            if (line.StartsWith("[DONE]"))
-            {
-                break;
-            }
-
-            CreateChatCompletionResponse? createChatCompletionResponse;
-
-            try
-            {
-                createChatCompletionResponse = JsonSerializer.Deserialize<CreateChatCompletionResponse>(line);
-            }
-            catch (Exception)
-            {
-                line += await streamReader.ReadToEndAsync(cancellationToken);
-                createChatCompletionResponse = JsonSerializer.Deserialize<CreateChatCompletionResponse>(line);
-            }
-
-            if (createChatCompletionResponse is not null)
-            {
-                yield return createChatCompletionResponse;
-            }
+            yield return chatCompletion;
         }
     }
 
@@ -264,5 +198,46 @@ public class OpenAIClient : IOpenAIClient
     public async Task<CreateModerationResponse?> CreateModeration(CreateModerationRequest request, CancellationToken cancellationToken = default)
     {
         return await _httpClient.Post<CreateModerationResponse?>($"/{ApiVersion}/moderations", request, cancellationToken);
+    }
+
+    private async IAsyncEnumerable<TResponse> CreateAsStream<TRequest, TResponse>(string requestUri, TRequest request, [EnumeratorCancellation] CancellationToken cancellationToken = default)
+    {
+        using var httpResponseMessage = await _httpClient.PostAsStream(requestUri, request!, cancellationToken);
+        await using var stream = await httpResponseMessage.Content.ReadAsStreamAsync(cancellationToken);
+        using var streamReader = new StreamReader(stream);
+        while (streamReader.EndOfStream is false)
+        {
+            var line = await streamReader.ReadLineAsync(cancellationToken);
+
+            if (string.IsNullOrEmpty(line))
+            {
+                continue;
+            }
+
+            var dataPosition = line.IndexOf("data: ", StringComparison.Ordinal);
+            line = dataPosition != 0 ? line : line["data: ".Length..];
+
+            if (line.StartsWith("[DONE]"))
+            {
+                break;
+            }
+
+            TResponse? createCompletionResponse;
+
+            try
+            {
+                createCompletionResponse = JsonSerializer.Deserialize<TResponse>(line);
+            }
+            catch (Exception)
+            {
+                line += await streamReader.ReadToEndAsync(cancellationToken);
+                createCompletionResponse = JsonSerializer.Deserialize<TResponse>(line);
+            }
+
+            if (createCompletionResponse is not null)
+            {
+                yield return createCompletionResponse;
+            }
+        }
     }
 }
