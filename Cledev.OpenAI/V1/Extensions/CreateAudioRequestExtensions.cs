@@ -33,7 +33,7 @@ internal static class CreateAudioRequestExtensions
 
     public static bool HasJsonResponseFormat(this CreateAudioRequestBase request)
     {
-        return request.ResponseFormat == AudioResponseFormat.Json ||
-               request.ResponseFormat == AudioResponseFormat.VerboseJson;
+        return request.ResponseFormat == AudioResponseFormat.Json.ToStringFormat() ||
+               request.ResponseFormat == AudioResponseFormat.VerboseJson.ToStringFormat();
     }
 }
