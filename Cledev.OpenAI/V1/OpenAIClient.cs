@@ -12,7 +12,7 @@ using Cledev.OpenAI.V1.Contracts.FineTunes;
 using Cledev.OpenAI.V1.Contracts.Images;
 using Cledev.OpenAI.V1.Contracts.Models;
 using Cledev.OpenAI.V1.Contracts.Moderations;
-using Cledev.OpenAI.V1.Enums;
+using Cledev.OpenAI.V1.Extensions;
 using Microsoft.Extensions.Options;
 
 namespace Cledev.OpenAI.V1;
@@ -244,8 +244,7 @@ public class OpenAIClient : IOpenAIClient
 
     private async Task<CreateAudioResponse?> PostCreateAudioRequest(string requestUri, CreateAudioRequestBase request, HttpContent multipartFormDataContent, CancellationToken cancellationToken)
     {
-        if (request.ResponseFormat == AudioResponseFormat.Json.ToStringFormat() ||
-            request.ResponseFormat == AudioResponseFormat.VerboseJson.ToStringFormat())
+        if (request.HasJsonResponseFormat())
         {
             return await _httpClient.Post<CreateAudioResponse?>(requestUri, multipartFormDataContent, cancellationToken);
         }

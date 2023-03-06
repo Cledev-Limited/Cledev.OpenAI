@@ -1,4 +1,7 @@
-﻿namespace Cledev.OpenAI.V1.Contracts.Audio;
+﻿using Cledev.OpenAI.V1.Contracts.Audio;
+using Cledev.OpenAI.V1.Helpers;
+
+namespace Cledev.OpenAI.V1.Extensions;
 
 internal static class CreateAudioRequestExtensions
 {
@@ -28,13 +31,9 @@ internal static class CreateAudioRequestExtensions
         return multipartFormDataContent;
     }
 
-    internal static MultipartFormDataContent AddOtherOptionsFrom(this MultipartFormDataContent multipartFormDataContent, CreateAudioTranscriptionRequest request)
+    public static bool HasJsonResponseFormat(this CreateAudioRequestBase request)
     {
-        if (request.Language is not null)
-        {
-            multipartFormDataContent.Add(new StringContent(request.Language!), "language");
-        }
-
-        return multipartFormDataContent;
+        return request.ResponseFormat == AudioResponseFormat.Json ||
+               request.ResponseFormat == AudioResponseFormat.VerboseJson;
     }
 }

@@ -6,7 +6,8 @@ using Cledev.OpenAI.V1.Contracts.Audio;
 using Cledev.OpenAI.V1.Contracts.Chats;
 using Cledev.OpenAI.V1.Contracts.Completions;
 using Cledev.OpenAI.V1.Contracts.Moderations;
-using Cledev.OpenAI.V1.Enums;
+using Cledev.OpenAI.V1.Helpers;
+using Cledev.OpenAI.V1.Helpers.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using static System.Net.Mime.MediaTypeNames;
@@ -78,7 +79,7 @@ async Task TestCreateCompletionAsStream()
 {
     var request = new CreateCompletionRequest
     {
-        Model = CompletionsModel.TextDavinciV3.ToStringModel(),
+        Model = CompletionsModel.TextDavinciV3,
         Stream = true,
         Prompt = "Please write a 1000 word assay about differences between functional programming and object oriented programming",
         MaxTokens = 500
@@ -96,7 +97,7 @@ async Task TestCreateChatCompletionAsStream()
 {
     var request = new CreateChatCompletionRequest
     {
-        Model = ChatModel.Gpt35Turbo.ToStringModel(),
+        Model = ChatModel.Gpt35Turbo,
         Stream = true,
         MaxTokens = 500,
         Messages = new List<ChatCompletionMessage>
@@ -123,10 +124,10 @@ async Task TestCreateAudioTranscription()
 
     var request = new CreateAudioTranslationRequest
     {
-        Model = AudioModel.Whisper1.ToStringModel(),
+        Model = AudioModel.Whisper1,
         File = fileBytes,
         FileName = fileName,
-        ResponseFormat = AudioResponseFormat.VerboseJson.ToStringFormat()
+        ResponseFormat = AudioResponseFormat.VerboseJson
     };
 
     var response = await client.CreateAudioTranslation(request);

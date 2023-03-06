@@ -1,4 +1,6 @@
-﻿namespace Cledev.OpenAI.V1.Contracts.Images;
+﻿using Cledev.OpenAI.V1.Contracts.Images;
+
+namespace Cledev.OpenAI.V1.Extensions;
 
 internal static class CreateImageRequestsExtensions
 {

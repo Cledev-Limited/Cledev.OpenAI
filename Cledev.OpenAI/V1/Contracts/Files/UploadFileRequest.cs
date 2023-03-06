@@ -1,6 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
-namespace Cledev.OpenAI.V1.Contracts.Files;
+﻿namespace Cledev.OpenAI.V1.Contracts.Files;
 
 /// <summary>
 /// Upload a file that contains document(s) to be used across various endpoints/features. Currently, the size of all the files uploaded by one organization can be up to 1 GB. Please contact us if you need to increase the storage limit.

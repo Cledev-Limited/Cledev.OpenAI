@@ -1,4 +1,6 @@
-﻿namespace Cledev.OpenAI.V1.Contracts.Files;
+﻿using Cledev.OpenAI.V1.Contracts.Files;
+
+namespace Cledev.OpenAI.V1.Extensions;
 
 internal static class UploadFileRequestExtensions
 {
