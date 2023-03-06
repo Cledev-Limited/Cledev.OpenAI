@@ -26,6 +26,12 @@ internal static class HttpClientExtensions
         return await response.Content.ReadFromJsonAsync<T?>(cancellationToken: cancellationToken);
     }
 
+    internal static async Task<string> Post(this HttpClient httpClient, string requestUri, HttpContent? content, CancellationToken cancellationToken = default)
+    {
+        var response = await httpClient.PostAsync(requestUri, content, cancellationToken);
+        return await response.Content.ReadAsStringAsync(cancellationToken: cancellationToken);
+    }
+
     internal static async Task<HttpResponseMessage> PostAsStream(this HttpClient httpClient, string requestUri, object request, CancellationToken cancellationToken = default)
     {
         var jsonSerializerOptions = new JsonSerializerOptions { DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault };

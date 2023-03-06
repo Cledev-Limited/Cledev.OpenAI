@@ -12,6 +12,7 @@ using Cledev.OpenAI.V1.Contracts.FineTunes;
 using Cledev.OpenAI.V1.Contracts.Images;
 using Cledev.OpenAI.V1.Contracts.Models;
 using Cledev.OpenAI.V1.Contracts.Moderations;
+using Cledev.OpenAI.V1.Enums;
 using Microsoft.Extensions.Options;
 
 namespace Cledev.OpenAI.V1;
@@ -116,14 +117,14 @@ public class OpenAIClient : IOpenAIClient
     {
         var multipartFormDataContent = request.ToMultipartFormDataContent();
         multipartFormDataContent.AddOtherOptionsFrom(request);
-        return await _httpClient.Post<CreateAudioResponse>("audio/transcriptions", multipartFormDataContent, cancellationToken);
+        return await PostCreateAudioRequest("audio/transcriptions", request, multipartFormDataContent, cancellationToken);
     }
 
     /// <inheritdoc />
     public async Task<CreateAudioResponse?> CreateAudioTranslation(CreateAudioTranslationRequest request, CancellationToken cancellationToken = default)
     {
         var multipartFormDataContent = request.ToMultipartFormDataContent();
-        return await _httpClient.Post<CreateAudioResponse>("audio/translations", multipartFormDataContent, cancellationToken);
+        return await PostCreateAudioRequest("audio/translations", request, multipartFormDataContent, cancellationToken);
     }
 
     /// <inheritdoc />
@@ -239,5 +240,19 @@ public class OpenAIClient : IOpenAIClient
                 yield return createCompletionResponse;
             }
         }
+    }
+
+    private async Task<CreateAudioResponse?> PostCreateAudioRequest(string requestUri, CreateAudioRequestBase request, HttpContent multipartFormDataContent, CancellationToken cancellationToken)
+    {
+        if (request.ResponseFormat == AudioResponseFormat.Json.ToStringFormat() ||
+            request.ResponseFormat == AudioResponseFormat.VerboseJson.ToStringFormat())
+        {
+            return await _httpClient.Post<CreateAudioResponse?>(requestUri, multipartFormDataContent, cancellationToken);
+        }
+
+        return new CreateAudioResponse
+        {
+            Text = await _httpClient.Post(requestUri, multipartFormDataContent, cancellationToken)
+        };
     }
 }

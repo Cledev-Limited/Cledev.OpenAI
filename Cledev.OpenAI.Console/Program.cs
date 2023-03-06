@@ -125,10 +125,11 @@ async Task TestCreateAudioTranscription()
     {
         Model = AudioModel.Whisper1.ToStringModel(),
         File = fileBytes,
-        FileName = fileName
+        FileName = fileName,
+        ResponseFormat = AudioResponseFormat.VerboseJson.ToStringFormat()
     };
 
     var response = await client.CreateAudioTranslation(request);
 
-    Console.Write(response?.Text);
+    Console.Write($"{JsonSerializer.Serialize(response, jsonSerializerOptions)}");
 }
