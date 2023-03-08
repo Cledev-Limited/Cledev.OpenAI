@@ -3,7 +3,7 @@
 namespace Cledev.OpenAI.V1.Contracts.Chats;
 
 /// <summary>
-/// Creates a completion for the provided prompt and parameters.
+/// Given a chat conversation, the model will return a chat completion response.
 /// </summary>
 public class CreateChatCompletionRequest
 {

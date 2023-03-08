@@ -66,7 +66,8 @@ var client = serviceProvider.GetRequiredService<IOpenAIClient>();
 //Console.WriteLine($"{JsonSerializer.Serialize(response, jsonSerializerOptions)}");
 
 //await TestCreateCompletionAsStream();
-await TestCreateChatCompletionAsStream();
+//await TestCreateChatCompletionAsStream();
+await TestCreateChatCompletion();
 //await TestCreateAudioTranscription();
 
 Console.ReadKey();
@@ -111,6 +112,26 @@ async Task TestCreateChatCompletionAsStream()
     {
         Console.Write(completion.Choices[0].Message?.Content);
     }
+}
+
+async Task TestCreateChatCompletion()
+{
+    var request = new CreateChatCompletionRequest
+    {
+        Model = ChatModel.Gpt35Turbo.ToStringModel(),
+        MaxTokens = 500,
+        Messages = new List<ChatCompletionMessage>
+        {
+            new("system", "You are a helpful assistant."),
+            new("user", "Who won the world series in 2020?"),
+            new("assistant", "The Los Angeles Dodgers won the World Series in 2020."),
+            new("user", "Where was it played?")
+        }
+    };
+
+    var completion = await client.CreateChatCompletion(request);
+
+    Console.Write($"{JsonSerializer.Serialize(completion, jsonSerializerOptions)}");
 }
 
 async Task TestCreateAudioTranscription()

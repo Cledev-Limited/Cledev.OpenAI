@@ -47,7 +47,7 @@ public interface IOpenAIClient
     /// <param name="request">The create chat completion request.</param>
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns>The create chat completion response.</returns>
-    Task<CreateCompletionResponse?> CreateChatCompletion(CreateChatCompletionRequest request, CancellationToken cancellationToken = default);
+    Task<CreateChatCompletionResponse?> CreateChatCompletion(CreateChatCompletionRequest request, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Creates a chat completion for the provided messages and parameters as stream.

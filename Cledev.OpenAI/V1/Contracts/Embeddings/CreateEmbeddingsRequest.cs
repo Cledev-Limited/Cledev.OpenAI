@@ -23,7 +23,7 @@ public class CreateEmbeddingsRequest
 
     /// <summary>
     /// <para>Optional.</para>
-    /// <para>A unique identifier representing your end-user, which can help OpenAI to monitor and detect abuse. </para>
+    /// <para>A unique identifier representing your end-user, which can help OpenAI to monitor and detect abuse.</para>
     /// </summary>
     [JsonPropertyName("user")]
     public string? User { get; set; }

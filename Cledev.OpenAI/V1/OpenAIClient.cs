@@ -64,9 +64,9 @@ public class OpenAIClient : IOpenAIClient
     }
 
     /// <inheritdoc />
-    public async Task<CreateCompletionResponse?> CreateChatCompletion(CreateChatCompletionRequest request, CancellationToken cancellationToken = default)
+    public async Task<CreateChatCompletionResponse?> CreateChatCompletion(CreateChatCompletionRequest request, CancellationToken cancellationToken = default)
     {
-        return await _httpClient.Post<CreateCompletionResponse>("chat/completions", request, cancellationToken);
+        return await _httpClient.Post<CreateChatCompletionResponse>("chat/completions", request, cancellationToken);
     }
 
     /// <inheritdoc />
