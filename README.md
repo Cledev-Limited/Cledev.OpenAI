@@ -72,6 +72,8 @@ services.AddOpenAIClient(options =>
  });
 ```
 
+**Important**: use environment variables to load the OpenAI API key, do not hardcode it in the source code.
+
 ## Usage
 
 Inject `IOpenAIClient` interface into your service
