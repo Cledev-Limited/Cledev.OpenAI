@@ -161,6 +161,9 @@ var response = await client.CreateImage(Request);
 
 Please, have a look at the [Blazor Server Playground](https://github.com/lucabriguglia/Cledev.OpenAI.Playground) for more examples on how to use the client.
 
+### Index
+<img src="https://user-images.githubusercontent.com/8679253/224510037-9cd0eeb8-60cf-4253-bf34-1d8dceadb870.png" width="500" />
+
 #### ChapGPT
 <img src="https://user-images.githubusercontent.com/8679253/224492316-a7649f5e-3baa-4217-946c-ab9200293b80.png" width="500" />
 
