@@ -1,4 +1,4 @@
-# Cledev.OpenAI _(Beta)_
+# Cledev.OpenAI
 Unofficial .NET SDK for OpenAI with a [Blazor Server Playground](https://github.com/lucabriguglia/Cledev.OpenAI.Playground)
 
 [![Main](https://github.com/lucabriguglia/Cledev.OpenAI/actions/workflows/main.yml/badge.svg)](https://github.com/lucabriguglia/Cledev.OpenAI/actions/workflows/main.yml)
