@@ -172,3 +172,6 @@ Please, have a look at the [Blazor Server Playground](https://github.com/lucabri
 
 #### Create Image
 <img src="https://user-images.githubusercontent.com/8679253/224492443-e86c6ee3-cbf6-43ed-a36d-71b6b3300ea2.png" width="500" />
+
+### Audio Translation
+<img src="https://user-images.githubusercontent.com/8679253/224505129-70390f93-3c60-47da-8e1d-9104fccca6ad.png" width="500" />
