@@ -24,7 +24,7 @@ jobs:
     - name: Build solution
       run: dotnet build --configuration Release --no-restore
     - name: Run tests
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test --verbosity normal
     - name: Publish packages
       if: ${{ github.ref == 'refs/heads/main' }}
       run: dotnet nuget push **/*.nupkg --no-symbols --source 'https://api.nuget.org/v3/index.json' --api-key ${{secrets.NUGET_API_KEY}} --skip-duplicate
