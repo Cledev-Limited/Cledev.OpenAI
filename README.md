@@ -15,8 +15,10 @@ Install-Package Cledev.OpenAI
   - Retrieve Model
 - **Completions**
   - Create Completion
-- **Chat**
+- **ChatGPT**
   - Create Chat Completion
+- **ChatGPT-4**
+  - _(coming soon)_
 - **Edits**
   - Create Edit
 - **Images**
