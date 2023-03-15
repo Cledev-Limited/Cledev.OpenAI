@@ -45,8 +45,12 @@ public enum ModerationModel
 
 public enum ChatModel
 {
-    Gpt35Turbo,
-    Gpt35Turbo0301
+    Gpt_35_Turbo,
+    Gpt_35_Turbo_0301,
+    Gpt_4,
+    Gpt_4_0314,
+    Gpt_4_32K,
+    Gpt_4_32K_0314
 }
 
 public enum AudioModel
@@ -123,8 +127,12 @@ public static class ModelHelpersExtensions
     {
         return chatModel switch
         {
-            ChatModel.Gpt35Turbo => "gpt-3.5-turbo",
-            ChatModel.Gpt35Turbo0301 => "gpt-3.5-turbo-0301",
+            ChatModel.Gpt_35_Turbo => "gpt-3.5-turbo",
+            ChatModel.Gpt_35_Turbo_0301 => "gpt-3.5-turbo-0301",
+            ChatModel.Gpt_4 => "gpt-4",
+            ChatModel.Gpt_4_0314 => "gpt-4-0314",
+            ChatModel.Gpt_4_32K => "gpt-4-32k",
+            ChatModel.Gpt_4_32K_0314 => "gpt-4-32k-0314",
             _ => throw new ArgumentOutOfRangeException(nameof(chatModel), chatModel, null)
         };
     }
