@@ -94,7 +94,7 @@ async Task TestCreateChatCompletionAsStream()
 {
     var request = new CreateChatCompletionRequest
     {
-        Model = ChatModel.Gpt35Turbo.ToStringModel(),
+        Model = ChatModel.Gpt_35_Turbo.ToStringModel(),
         Stream = true,
         MaxTokens = 500,
         Messages = new List<ChatCompletionMessage>
@@ -118,7 +118,7 @@ async Task TestCreateChatCompletion()
 {
     var request = new CreateChatCompletionRequest
     {
-        Model = ChatModel.Gpt35Turbo.ToStringModel(),
+        Model = ChatModel.Gpt_35_Turbo.ToStringModel(),
         MaxTokens = 500,
         Messages = new List<ChatCompletionMessage>
         {
