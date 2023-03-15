@@ -45,6 +45,13 @@ Install-Package Cledev.OpenAI
 - **Moderations**
   - Create Moderation
 
+## Utilities
+
+- **Azure OpenAI Support**
+  - _(coming soon)_
+- **Tokenizer**
+  - _(coming soon)_
+  
 ## Configuration
 
 ### Option 1
