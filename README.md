@@ -49,8 +49,6 @@ Install-Package Cledev.OpenAI
 
 - **Azure OpenAI Support**
   - _(coming soon)_
-- **Tokenizer**
-  - _(coming soon)_
   
 ## Configuration
 
