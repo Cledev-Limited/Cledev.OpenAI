@@ -12,8 +12,6 @@ public enum CompletionsModel
     TextDavinciV1,
     TextDavinciV2,
     TextDavinciV3,
-    CodeCushmanV1,
-    CodeDavinciV2,
     CurieInstructBeta,
     DavinciInstructBeta
 }
@@ -74,8 +72,6 @@ public static class ModelHelpersExtensions
             CompletionsModel.TextDavinciV1 => "text-davinci-001",
             CompletionsModel.TextDavinciV2 => "text-davinci-002",
             CompletionsModel.TextDavinciV3 => "text-davinci-003",
-            CompletionsModel.CodeCushmanV1 => "code-cushman-001",
-            CompletionsModel.CodeDavinciV2 => "code-davinci-002",
             CompletionsModel.CurieInstructBeta => "curie-instruct-beta",
             CompletionsModel.DavinciInstructBeta => "davinci-instruct-beta",
             _ => throw new ArgumentOutOfRangeException(nameof(completionsModel), completionsModel, null)
