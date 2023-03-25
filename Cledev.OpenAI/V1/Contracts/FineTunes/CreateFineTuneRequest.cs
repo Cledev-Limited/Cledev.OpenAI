@@ -68,7 +68,7 @@ public class CreateFineTuneRequest
     /// <para>In order to compute classification metrics, you must provide a validation_file. Additionally, you must specify classification_n_classes for multiclass classification or classification_positive_class for binary classification.</para>
     /// </summary>
     [JsonPropertyName("compute_classification_metrics")]
-    public bool? ComputeClassificationMetrics { get; set; }
+    public bool ComputeClassificationMetrics { get; set; }
 
     /// <summary>
     /// <para>Optional (Defaults to null).</para>
