@@ -190,9 +190,9 @@ public class OpenAIClient : IOpenAIClient
     }
 
     /// <inheritdoc />
-    public async Task<DeleteFineTuneResponse?> DeleteFineTune(string model, CancellationToken cancellationToken = default)
+    public async Task<DeleteFineTunedModelResponse?> DeleteFineTunedModel(string model, CancellationToken cancellationToken = default)
     {
-        return await _httpClient.Delete<DeleteFineTuneResponse?>($"models/{model}", cancellationToken);
+        return await _httpClient.Delete<DeleteFineTunedModelResponse?>($"models/{model}", cancellationToken);
     }
 
     /// <inheritdoc />

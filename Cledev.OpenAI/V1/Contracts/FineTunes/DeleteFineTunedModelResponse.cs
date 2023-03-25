@@ -2,7 +2,7 @@
 
 namespace Cledev.OpenAI.V1.Contracts.FineTunes;
 
-public record DeleteFineTuneResponse : ResponseBase
+public record DeleteFineTunedModelResponse : ResponseBase
 {
     [JsonPropertyName("id")]
     public string Id { get; set; } = null!;

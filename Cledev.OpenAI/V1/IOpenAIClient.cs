@@ -205,7 +205,7 @@ public interface IOpenAIClient
     /// <param name="model">The model to delete.</param>
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns>The delete fine tune model response.</returns>
-    Task<DeleteFineTuneResponse?> DeleteFineTune(string model, CancellationToken cancellationToken = default);
+    Task<DeleteFineTunedModelResponse?> DeleteFineTunedModel(string model, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Classifies if text violates OpenAI's Content Policy.
