@@ -13,6 +13,7 @@ using Cledev.OpenAI.V1.Contracts.Images;
 using Cledev.OpenAI.V1.Contracts.Models;
 using Cledev.OpenAI.V1.Contracts.Moderations;
 using Cledev.OpenAI.V1.Extensions;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
 namespace Cledev.OpenAI.V1;
@@ -23,14 +24,20 @@ public class OpenAIClient : IOpenAIClient
 
     private readonly HttpClient _httpClient;
 
-    public OpenAIClient(HttpClient httpClient, IOptions<Settings> options)
+    [ActivatorUtilitiesConstructor]
+    public OpenAIClient(HttpClient httpClient, IOptions<Settings> settings)
+        : this(settings.Value, httpClient)
     {
-        _httpClient = httpClient;
+    }
+    
+    public OpenAIClient(Settings settings, HttpClient? httpClient = null)
+    {
+        _httpClient = httpClient ?? new HttpClient();
         _httpClient.BaseAddress = new Uri($"https://api.openai.com/{ApiVersion}/");
-        _httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {options.Value.ApiKey}");
-        if (string.IsNullOrEmpty(options.Value.Organization) is false)
+        _httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {settings.ApiKey}");
+        if (string.IsNullOrEmpty(settings.Organization) is false)
         {
-            _httpClient.DefaultRequestHeaders.Add("OpenAI-Organization", $"{options.Value.Organization}");
+            _httpClient.DefaultRequestHeaders.Add("OpenAI-Organization", $"{settings.Organization}");
         }
     }
 
